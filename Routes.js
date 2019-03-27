@@ -3,6 +3,7 @@ import { Router, Scene } from "react-native-router-flux";
 import Login from "./components/Login/Login";
 import Register from "./components/Login/Register";
 import Home from "./components/Main/Home";
+import ClassList from "./components/Main/ClassList";
 
 const Routes = () => (
   <Router>
@@ -23,9 +24,15 @@ const Routes = () => (
         component={Home}
         navigationBarStyle={{ backgroundColor: "#2aa9d2" }}
         hideNavBar
-        initial
       />
       
+      <Scene
+        key="classList"
+        component={ClassList}
+        navigationBarStyle={{ backgroundColor: "#2aa9d2" }}
+        hideNavBar
+        initial
+      />
     </Scene>
   </Router>
 );
