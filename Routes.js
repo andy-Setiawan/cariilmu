@@ -4,6 +4,8 @@ import Login from "./components/Login/Login";
 import Register from "./components/Login/Register";
 import Home from "./components/Main/Home";
 import ClassList from "./components/Main/ClassList";
+import Schedule from "./components/Main/Schedule";
+import ClassDetail from "./components/Main/ClassDetail";
 
 const Routes = () => (
   <Router>
@@ -25,16 +27,10 @@ const Routes = () => (
         navigationBarStyle={{ backgroundColor: "#2aa9d2" }}
         hideNavBar
       />
-      
-      <Scene
-        key="classList"
-        component={ClassList}
-        navigationBarStyle={{ backgroundColor: "#2aa9d2" }}
-        hideNavBar
-        initial
-      />
+      <Scene key="classList" component={ClassList} hideNavBar />
+      <Scene key="schedule" component={Schedule} hideNavBar initial/>
+      <Scene key="classdetail" component={ClassDetail} hideNavBar/>
     </Scene>
   </Router>
 );
 export default Routes;
-
