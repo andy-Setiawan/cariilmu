@@ -8,12 +8,15 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-community/viewpager": "^1.1.5",
     "native-base": "^2.12.1",
     "react": "16.8.3",
     "react-native": "0.59.1",
     "react-native-elements": "^1.1.0",
     "react-native-responsive-screen": "^1.2.1",
-    "react-native-router-flux": "^4.0.6"
+    "react-native-router-flux": "^4.0.6",
+    "react-native-swiper": "^1.5.14",
+    "react-native-swiper-flatlist": "^1.0.9"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
