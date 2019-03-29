@@ -6,6 +6,7 @@ import Home from "./components/Main/Home";
 import ClassList from "./components/Main/ClassList";
 import Schedule from "./components/Main/Schedule";
 import ClassDetail from "./components/Main/ClassDetail";
+import OnBoarding from "./components/Intro/OnBoarding";
 
 const Routes = () => (
   <Router>
@@ -28,8 +29,9 @@ const Routes = () => (
         hideNavBar
       />
       <Scene key="classList" component={ClassList} hideNavBar />
-      <Scene key="schedule" component={Schedule} hideNavBar initial/>
+      <Scene key="schedule" component={Schedule} hideNavBar/>
       <Scene key="classdetail" component={ClassDetail} hideNavBar/>
+      <Scene key="onboarding" component={OnBoarding} hideNavBar initial/>
     </Scene>
   </Router>
 );
