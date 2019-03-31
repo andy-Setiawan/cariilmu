@@ -2,17 +2,14 @@ import React, { Component } from "react";
 import {
   Text,
   View,
-  StyleSheet,
   TouchableOpacity,
-  Image,
-  ScrollView
+  ScrollView,
+  ImageBackground
 } from "react-native";
 import { Icon } from "native-base";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp
-} from "react-native-responsive-screen";
+import { styles, detail } from "../Style.js";
 import ClassBanner from "../../assets/images/languageClass.png";
+import { Actions } from "react-native-router-flux";
 
 export default class ClassDetail extends Component {
   constructor(props) {
@@ -34,130 +31,51 @@ export default class ClassDetail extends Component {
     return (
       <ScrollView style={styles.container}>
         <View style={styles.bannerContainer}>
-          <Image
+          <ImageBackground
             source={ClassBanner}
             alt=""
-            style={{ width: wp("100%"), height: hp("40%") }}
+            style={detail.bannerImage}
           />
+          <View style={detail.bannerBox}>
+            <Icon
+              type="FontAwesome"
+              name="arrow-left"
+              style={{ color: "#fafafa" }}
+              onPress={() => Actions.pop()}
+            />
+            <Text style={detail.bannerClass}>{this.state.className}</Text>
+            <Text style={detail.bannerFee}>{this.state.Fee}</Text>
+            <Text style={detail.bannerMentor}>
+              By: {this.state.classMentor}
+            </Text>
+          </View>
         </View>
-        <View style={styles.descriptionContainer}>
-          <View style={styles.classNameBox}>
-            <Text style={styles.classNameText}>{this.state.className}</Text>
-            <Text style={styles.feeText}>{this.state.Fee}</Text>
-            <Text style={styles.mentorText}>By: {this.state.classMentor}</Text>
+
+        <View style={detail.description}>
+          <Text style={styles.descriptionText}>{this.state.classDesc}</Text>
+        </View>
+        <View style={detail.dateContainer}>
+          <View style={detail.dateBox}>
+            <Icon style={{ fontSize: 20 }} type="FontAwesome" name="calendar" />
+            <Text style={detail.dateText}>{this.state.date}</Text>
           </View>
-          <View style={styles.descriptionBox}>
-            <Text style={styles.descriptionText}>{this.state.classDesc}</Text>
+          <View style={detail.dateBox}>
+            <Icon style={{ fontSize: 20 }} type="FontAwesome" name="clock-o" />
+            <Text style={detail.dateText}>{this.state.time}</Text>
           </View>
-          <View style={styles.scheduleContainer}>
-            <View style={styles.dateBox}>
-              <Icon
-                style={styles.scheduleIcon}
-                type="FontAwesome"
-                name="calendar"
-              />
-              <Text style={styles.scheduleText}>{this.state.date}</Text>
-            </View>
-            <View style={styles.dateBox}>
-              <Icon
-                style={styles.scheduleIcon}
-                type="FontAwesome"
-                name="clock-o"
-              />
-              <Text style={styles.scheduleText}>{this.state.time}</Text>
-            </View>
-            <View style={styles.dateBox}>
-              <Icon
-                style={styles.scheduleIcon}
-                type="MaterialIcons"
-                name="location-on"
-              />
-              <Text style={styles.scheduleText}>{this.state.location}</Text>
-            </View>
+          <View style={detail.dateBox}>
+            <Icon
+              style={{ fontSize: 20 }}
+              type="MaterialIcons"
+              name="location-on"
+            />
+            <Text style={detail.dateText}>{this.state.location}</Text>
           </View>
-          <TouchableOpacity style={styles.enrollBox}>
-            <Text style={styles.enrollButton}>ENROLL</Text>
+          <TouchableOpacity onPress={() => Actions.login()}>
+            <Text style={styles.button}>ENROLL</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFFFFF"
-  },
-
-  classNameBox: {
-    marginTop: -125,
-    marginLeft: 20
-  },
-
-  classNameText: {
-    color: "#FFFFFF",
-    fontSize: 35,
-    fontWeight: "400"
-  },
-
-  feeText: {
-    color: "#FFFFFF",
-    fontSize: 20,
-    fontWeight: "600",
-    lineHeight: 30
-  },
-
-  mentorText: {
-    color: "#FFFFFF",
-    fontSize: 15,
-    fontWeight: "800",
-    lineHeight: 30
-  },
-
-  descriptionBox: {
-    marginTop: 40,
-    paddingBottom: 20,
-    borderBottomWidth: 1,
-    borderColor: "#dadddf"
-  },
-
-  descriptionText: {
-    marginHorizontal: 20
-  },
-
-  scheduleContainer: {
-    marginTop: 20
-  },
-
-  dateBox: {
-    marginTop: 10,
-    flexDirection: "row",
-    paddingHorizontal: 20
-  },
-
-  scheduleIcon: {
-    fontSize: 20
-  },
-
-  scheduleText: {
-    fontSize: 12,
-    marginLeft: 15
-  },
-
-  enrollBox:{
-      marginTop:40,
-    paddingHorizontal:20,
-  },
-
-    enrollButton:{
-    backgroundColor: "#FFA45C",
-    borderRadius: 10,
-    color: "#FFFFFF",
-    height: 40,
-    textAlign:"center",
-    fontSize:15,
-    fontWeight:"600",
-    paddingTop:10,
-  }
-});

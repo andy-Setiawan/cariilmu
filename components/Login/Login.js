@@ -1,94 +1,63 @@
 import React, { Component } from "react";
-import { Text, TextInput, View, StyleSheet,TouchableOpacity, Image} from "react-native";
-import Logo from '../../assets/images/cariilmu_light.png'
+import { Text, View, TouchableOpacity, Image } from "react-native";
+import { styles, login } from "../Style.js";
+import Logo from "../../assets/images/cariilmu_light.png";
+import Reinput from "reinput";
+import { Icon } from "native-base";
+import { Actions } from "react-native-router-flux";
 
 export default class Login extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.topContainer}>
-        <Image style={styles.logoIcon} source={Logo} alt={Logo} />
-          <Text style={styles.loginText}>Login to continue</Text>
+      <View style={{ ...styles.container, backgroundColor: "#eee" }}>
+        <View style={login.topContainer}>
+          <Icon
+            type="FontAwesome"
+            name="arrow-left"
+            style={{ color: "#fafafa" }}
+            onPress={()=>Actions.pop()}
+          />
+          <View style={login.logoBox}>
+            <Image style={login.logo} source={Logo} alt={Logo} />
+            <Text style={login.loginText}>Login to continue</Text>
+          </View>
         </View>
-        <View style={styles.bottomContainer}>
-          <View style={styles.loginBox}>
-            <TextInput style={styles.loginInput} placeholder="Username" 
-            placeholderTextColor="#2aa9d2"/>
-            <TextInput style={styles.loginInput}placeholder="Password" 
-            placeholderTextColor="#2aa9d2"/>
+        <View style={login.bottomContainer}>
+          <View style={login.loginBox}>
+            <Reinput
+              label="Username"
+              labelActiveColor="#4f9da6"
+              labelColor="#4f9da6"
+              labelActiveScale={1}
+              underlineActiveColor="#4f9da6"
+              underlineColor="#4f9da6"
+              returnKeyType="next"
+              onSubmitEditing={() => this.password.focus()}
+              autoCapitalize="none"
+              autoCorrect={false}
+            />
+            <Reinput
+              label="Password"
+              labelActiveColor="#4f9da6"
+              labelColor="#4f9da6"
+              labelActiveScale={1}
+              underlineActiveColor="#4f9da6"
+              underlineColor="#4f9da6"
+              returnKeyType="done"
+              ref={input => (this.password = input)}
+              autoCapitalize="none"
+              autoCorrect={false}
+              textSecureEntry
+            />
             <TouchableOpacity>
-            <Text style={styles.loginButton}>LOGIN</Text>
+              <Text style={{ ...styles.button, marginBottom: -20 }}>
+                SIGN IN
+              </Text>
             </TouchableOpacity>
           </View>
-          <Text style={styles.registerText}>Register</Text>
+            <Text style={login.signupText} onPress={() => Actions.signup()}>SIGN UP</Text>
         </View>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column"
-  },
-
-  topContainer: {
-    flex: 8,
-    backgroundColor: "#2aa9d2",
-    alignItems:"center",
-  },
-
-  logoIcon:{
-    height:150,
-    width:150
-  },
-
-  loginText:{
-    marginTop:20,
-    color:"#FFFFFF",
-    fontWeight:"500",
-    fontSize:20
-  },
-
-  bottomContainer: {
-    flex: 12,
-    paddingHorizontal:25,
-    marginTop:-40
-  },
-
-  loginBox:{
-    backgroundColor:"#FFFFFF",
-    paddingHorizontal:30,
-    paddingTop:20,
-    borderRadius:5,
-    
-  },
-  
-  loginInput:{
-    color:"#2aa9d2",
-    borderBottomWidth:1,
-    borderColor:"#e8ecf1",
-    marginTop:20,
-  },
-
-  loginButton:{
-    backgroundColor:"#FFA45C",
-    color:"#FFFFFF",
-    height:60,
-    marginTop:60,
-    marginBottom:-20,
-    borderRadius:10,
-    paddingVertical:20,
-    fontWeight:"500",
-    textAlign:"center",
-  },
-
-  registerText:{
-    marginTop:60,
-    textAlign:"center",
-    fontSize:17,
-    fontWeight:"500"
-  }
-});
-

@@ -6,7 +6,7 @@ import {
 } from "react-native-responsive-screen";
 import { Icon } from "native-base";
 
-export default class Schedule extends Component {
+export default class StudentSchedule extends Component {
   constructor(props) {
     super(props);
 
