@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity
 } from "react-native";
+import {Actions} from 'react-native-router-flux';
 import SwiperFlatList from "react-native-swiper-flatlist";
 import onBoarding01 from "../../assets/images/onBoarding01.png";
 import onBoarding02 from "../../assets/images/onBoarding02.png";
@@ -16,13 +17,11 @@ const OnBoarding = () => {
   return (
     <View style={styles.container}>
       <SwiperFlatList
-        index={0}
         showPagination
         paginationActiveColor="#FFA45C"
         paginationStyle={styles.pageStyle}
       >
         <View style={styles.child}>
-          <Text style={styles.skipText}>SKIP</Text>
           <View style={styles.imageBox}>
             <Image source={onBoarding01} alt="" />
           </View>
@@ -32,7 +31,6 @@ const OnBoarding = () => {
           </Text>
         </View>
         <View style={styles.child}>
-          <Text style={styles.skipText}>SKIP</Text>
           <View style={styles.imageBox}>
             <Image source={onBoarding02} alt="" />
           </View>
@@ -42,7 +40,6 @@ const OnBoarding = () => {
           </Text>
         </View>
         <View style={styles.child}>
-          <Text style={styles.skipText}>SKIP</Text>
           <View style={styles.imageBox}>
             <Image source={onBoarding03} alt="" />
           </View>
@@ -51,7 +48,7 @@ const OnBoarding = () => {
             Jadilah bagian dari network cariilmu dan dapatkan sertifikasi atau
             pendapatan tambahan
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=> Actions.home()}>
             <Text style={styles.startButton}>START</Text>
           </TouchableOpacity>
         </View>
@@ -63,6 +60,7 @@ const OnBoarding = () => {
 export default OnBoarding;
 
 export const { width, height } = Dimensions.get("window");
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -72,19 +70,11 @@ const styles = StyleSheet.create({
   child: {
     padding: 20,
     height,
-    width
-  },
-
-  skipText: {
-    color: "#FFA45C",
-    fontSize: 20,
-    fontWeight: "500",
-    textAlign: "right",
-    marginTop: 10
+    width,
   },
 
   imageBox: {
-    marginTop: 60,
+    marginTop: 80,
     alignItems: "center"
   },
 
