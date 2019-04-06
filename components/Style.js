@@ -78,7 +78,6 @@ export const home = StyleSheet.create({
   },
 
   bannerImage: {
-    backgroundColor: "#fafafa",
     width: width * 0.3,
     height: width * 0.3
   },

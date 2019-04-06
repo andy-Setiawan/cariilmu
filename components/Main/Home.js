@@ -78,7 +78,7 @@ class Home extends Component {
                   <Text style={home.join}>JOIN US!!</Text>
                 </TouchableOpacity>
               </View>
-              <View style={home.bannerImage} />
+              <Image style={home.bannerImage} source={require("../../assets/images/home_banner.png")} />
             </View>
             <View style={home.category}>
               <Text style={home.categoryText}>CATEGORY</Text>
