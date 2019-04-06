@@ -1,4 +1,8 @@
-import { GET_OPEN_CLASS, GET_CATEGORY } from "../Type/ActionType";
+import {
+  GET_OPEN_CLASS,
+  GET_CATEGORY,
+  GET_CLASS_LIST
+} from "../Type/ActionType";
 import axios from "axios";
 
 const url = "http://cari-ilmu.herokuapp.com";
@@ -19,6 +23,17 @@ export const Get_Category = () => {
     axios.get(`${url}/category`).then(response => {
       dispatch({
         type: GET_CATEGORY,
+        payload: response.data.data
+      });
+    });
+  };
+};
+
+export const Get_Class_List = classId => {
+  return dispatch => {
+    axios.get(`${url}/category/${classId}/class`).then(response => {
+      dispatch({
+        type: GET_CLASS_LIST,
         payload: response.data.data
       });
     });

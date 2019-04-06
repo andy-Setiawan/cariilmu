@@ -3,58 +3,17 @@ import { Text, View, ScrollView, Image, TouchableOpacity } from "react-native";
 import { Icon } from "native-base";
 import { styles, list } from "../Style.js";
 import { Actions } from "react-native-router-flux";
+import { connect } from "react-redux";
+import { Get_Class_List } from "../Action/pubActions";
 
 import IcLanguage from "../../assets/images/ic_languageClass.png";
-import IcMusic from "../../assets/images/ic_musicClass.png";
-import IcDesign from "../../assets/images/ic_designClass.png";
-import IcComputer from "../../assets/images/ic_computerClass.png";
-import IcOther from "../../assets/images/ic_otherClass.png";
 
-export default class ClassList extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      list: [
-        {
-          className: "Kelas Desain Logo",
-          mentorName: "Rama Soepang",
-          date: "Wednesday, March 27, 2019",
-          time: "15:00 - 18.00",
-          image: IcDesign
-        },
-        {
-          className: "Kelas Desain Banner",
-          mentorName: "Rama Soepang",
-          time: "15:00 - 18.00",
-          date: "Wednesday, March 27, 2019",
-          image: IcMusic
-        },
-        {
-          className: "Kelas CSS",
-          mentorName: "Rama Soepang",
-          time: "15:00 - 18.00",
-          date: "Wednesday, March 27, 2019",
-          image: IcComputer
-        },
-        {
-          className: "Kelas CorelDraw",
-          mentorName: "Rama Soepang",
-          time: "15:00 - 18.00",
-          date: "Wednesday, March 27, 2019",
-          image: IcOther
-        },
-        {
-          className: "Kelas Adobe",
-          mentorName: "Rama Soepang",
-          time: "15:00 - 18.00",
-          date: "Wednesday, March 27, 2019",
-          image: IcLanguage
-        }
-      ]
-    };
+class ClassList extends Component {
+  componentDidMount() {
+    this.props.Get_Class_List(this.props.classId);
   }
   render() {
+    console.log(this.props);
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -64,7 +23,7 @@ export default class ClassList extends Component {
             style={{ color: "#fafafa" }}
             onPress={() => Actions.pop()}
           />
-          <Text style={styles.headerText}>DESIGN</Text>
+          <Text style={styles.headerText}>{this.props.className}</Text>
           <Icon
             type="MaterialCommunityIcons"
             name="account-circle"
@@ -75,21 +34,24 @@ export default class ClassList extends Component {
         <ScrollView style={list.container}>
           <Text style={list.class}>CLASS</Text>
           <View style={list.classBox}>
-            {this.state.list.map((data, i) => {
+            {this.props.classData.classList.map((data, i) => {
               return (
-                <TouchableOpacity key={i} onPress={() => Actions.classDetail()}>
+                <TouchableOpacity
+                  key={data._id}
+                  onPress={() => Actions.classDetail()}
+                >
                   <View style={list.classList}>
-                    <Image source={data.image} style={styles.classIcon} />
+                    <Image source={IcLanguage} style={styles.classIcon} />
                     <View style={list.classTextBox}>
-                      <Text style={list.classname}>{data.className}</Text>
-                      <Text>{data.mentorName}</Text>
+                      <Text style={list.classname}>{data.name}</Text>
+                      <Text>{data.mentor.name}</Text>
                       <View style={list.dateTimeBox}>
                         <Icon
                           type="FontAwesome"
                           name="calendar"
                           style={list.iconDateTime}
                         />
-                        <Text style={list.dateTimeText}>{data.date}</Text>
+                        <Text style={list.dateTimeText}>{data.schedule}</Text>
                       </View>
                       <View style={list.dateTimeBox}>
                         <Icon
@@ -97,7 +59,9 @@ export default class ClassList extends Component {
                           name="clock-o"
                           style={list.iconDateTime}
                         />
-                        <Text style={list.dateTimeText}>{data.time}</Text>
+                        <Text style={list.dateTimeText}>
+                          {data.durationInMinutes}
+                        </Text>
                       </View>
                     </View>
                     <Icon
@@ -115,3 +79,20 @@ export default class ClassList extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  classData: state.homeReducer
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    Get_Class_List: classId => {
+      dispatch(Get_Class_List(classId));
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ClassList);

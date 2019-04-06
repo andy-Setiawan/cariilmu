@@ -1,8 +1,9 @@
-import { ADD_TASK, GET_OPEN_CLASS, GET_CATEGORY } from "../Type/ActionType";
+import { ADD_TASK, GET_OPEN_CLASS, GET_CATEGORY, GET_CLASS_LIST } from "../Type/ActionType";
 
 const initialState = {
   openClass: [],
-  category: []
+  category: [],
+  classList:[],
 };
 
 export default (state = initialState, action) => {
@@ -13,6 +14,8 @@ export default (state = initialState, action) => {
       return { ...state, openClass: action.payload };
     case GET_CATEGORY:
       return { ...state, category: action.payload };
+    case GET_CLASS_LIST:
+    return { ...state, classList: action.payload };
     default:
       return state;
   }

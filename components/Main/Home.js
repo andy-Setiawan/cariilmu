@@ -74,7 +74,7 @@ class Home extends Component {
                       /> */}
                         <Text
                           style={home.categoryListText}
-                          onPress={() => Actions.classList()}
+                          onPress={() => Actions.classList({className:list.name, classId:list._id})}
                         >
                           {list.name}
                         </Text>
