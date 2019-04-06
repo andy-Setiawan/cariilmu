@@ -52,7 +52,7 @@ export default class ClassDetail extends Component {
         </View>
 
         <View style={detail.description}>
-          <Text style={styles.descriptionText}>{this.state.classDesc}</Text>
+          <Text style={detail.descriptionText}>{this.state.classDesc}</Text>
         </View>
         <View style={detail.dateContainer}>
           <View style={detail.dateBox}>
@@ -71,7 +71,7 @@ export default class ClassDetail extends Component {
             />
             <Text style={detail.dateText}>{this.state.location}</Text>
           </View>
-          <TouchableOpacity onPress={() => Actions.login()}>
+          <TouchableOpacity onPress={() => Actions.signin()}>
             <Text style={styles.button}>ENROLL</Text>
           </TouchableOpacity>
         </View>

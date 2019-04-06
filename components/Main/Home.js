@@ -2,30 +2,17 @@ import React, { Component } from "react";
 import { Text, View, ScrollView, Image, TouchableOpacity } from "react-native";
 import { styles, home } from "../Style.js";
 import { Actions } from "react-native-router-flux";
+import { connect } from "react-redux";
+import {Get_Open_Class} from "../Action/pubActions"
 import IconDesignClass from "../../assets/images/ic_designClass.png";
 import { Icon, Drawer } from "native-base";
 import StudentDrawer from "../Student/StudentDrawer";
 
-export default class Home extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      list: [
-        {
-          className: "Kelas Desain",
-          mentorName: "Rama Soepang",
-          fee: "Rp 30.000",
-          date: "Wednesday, March 27, 2019"
-        },
-        {
-          className: "Kelas Desain",
-          mentorName: "Rama Soepang",
-          fee: "Rp 30.000",
-          date: "Wednesday, March 27, 2019"
-        }
-      ],
-
       category: [
         {
           name: "COMPUTER",
@@ -51,6 +38,10 @@ export default class Home extends Component {
 
   openDrawer() {
     this._drawer._root.open();
+  }
+
+  componentDidMount(){
+    this.props.Get_Open_Class()
   }
 
   render() {
@@ -103,19 +94,22 @@ export default class Home extends Component {
                 })}
               </View>
               <Text style={home.categoryText}>NEW CLASSES</Text>
-              {this.state.list.map((list, i) => {
+              {this.props.classData.openClass.map((list, i) => {
                 return (
-                  <TouchableOpacity key={i} onPress={() => Actions.classDetail()}>
+                  <TouchableOpacity
+                    key={list._id}
+                    onPress={() => Actions.classDetail()}
+                  >
                     <View style={home.classBox}>
                       <Image
                         source={IconDesignClass}
                         style={styles.classIcon}
                       />
                       <View style={home.classText}>
-                        <Text style={home.classnameText}>{list.className}</Text>
-                        <Text>{list.mentorName}</Text>
+                        <Text style={home.classnameText}>{list.name}</Text>
+                        <Text>{list.status}</Text>
                         <Text>{list.fee}</Text>
-                        <Text>{list.date}</Text>
+                        <Text>{list.schedule}</Text>
                       </View>
                       <Icon
                         type="MaterialIcons"
@@ -134,3 +128,14 @@ export default class Home extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  classData: state.homeReducer
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    Get_Open_Class : () => {dispatch(Get_Open_Class())}
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

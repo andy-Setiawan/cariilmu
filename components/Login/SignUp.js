@@ -4,8 +4,27 @@ import { styles, register } from "../Style.js";
 import { Icon } from "native-base";
 import Reinput from "reinput";
 import { Actions } from "react-native-router-flux";
+import { connect } from 'react-redux'
+import {Sign_Up} from "../Action/authActions"
 
-export default class SignUp extends Component {
+class SignUp extends Component {
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       name:"",
+       username:"",
+       email:"",
+       password:""
+    }
+  }
+  
+  
+  signUp = () => {
+    const {name, username, email, password} = this.state
+    this.props.Sign_Up(name, username, email, password)
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -43,6 +62,7 @@ export default class SignUp extends Component {
                 onSubmitEditing={() => this.username.focus()}
                 autoCapitalize="none"
                 autoCorrect={false}
+                onChangeText={name => this.setState({name})}
               />
               <Reinput
                 label="Username"
@@ -56,6 +76,7 @@ export default class SignUp extends Component {
                 onSubmitEditing={() => this.email.focus()}
                 autoCapitalize="none"
                 autoCorrect={false}
+                onChangeText={username => this.setState({ username })}
               />
               <Reinput
                 label="E-Mail"
@@ -70,6 +91,7 @@ export default class SignUp extends Component {
                 onSubmitEditing={() => this.password.focus()}
                 autoCapitalize="none"
                 autoCorrect={false}
+                onChangeText={email => this.setState({email})}
               />
               <Reinput
                 label="Password"
@@ -83,7 +105,8 @@ export default class SignUp extends Component {
                 onSubmitEditing={() => this.confirm.focus()}
                 autoCapitalize="none"
                 autoCorrect={false}
-                textSecureEntry
+                secureTextEntry
+                onChangeText={password => this.setState({password})}
               />
               <Reinput
                 label="Confirm Password"
@@ -94,12 +117,12 @@ export default class SignUp extends Component {
                 underlineColor="#4f9da6"
                 returnKeyType="next"
                 ref={input => (this.confirm = input)}
-                onSubmitEditing={() => this.phone.focus()}
+                // onSubmitEditing={() => this.phone.focus()}
                 autoCapitalize="none"
                 autoCorrect={false}
-                textSecureEntry
+                secureTextEntry
               />
-              <Reinput
+              {/* <Reinput
                 label="Phonenumber"
                 labelActiveColor="#4f9da6"
                 labelColor="#4f9da6"
@@ -111,8 +134,8 @@ export default class SignUp extends Component {
                 keyboardType="phone-pad"
                 autoCapitalize="none"
                 autoCorrect={false}
-              />
-              <TouchableOpacity onPress={() => Actions.login()}>
+              /> */}
+              <TouchableOpacity onPress={this.signUp}>
                 <Text style={{ ...styles.button, marginTop: 30 }}>SIGN UP</Text>
               </TouchableOpacity>
             </View>
@@ -122,3 +145,12 @@ export default class SignUp extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    Sign_Up : (name, username, email, password) => dispatch(Sign_Up(name, username, email, password))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(SignUp)
+

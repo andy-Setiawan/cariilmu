@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, ScrollView, Image } from "react-native";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp
-} from "react-native-responsive-screen";
+import { Text, View, ScrollView, Image, TouchableOpacity } from "react-native";
 import { Icon } from "native-base";
+import { styles, list } from "../Style.js";
+import { Actions } from "react-native-router-flux";
 
 import IcLanguage from "../../assets/images/ic_languageClass.png";
 import IcMusic from "../../assets/images/ic_musicClass.png";
@@ -58,117 +56,62 @@ export default class ClassList extends Component {
   }
   render() {
     return (
-      <ScrollView style={styles.container}>
-        <View style={styles.headerContainer}>
-          <Text style={styles.categoryText}>CLASS</Text>
-          <View style={styles.classBox}>
-            {this.state.list.map((list, i) => {
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Icon
+            type="FontAwesome"
+            name="arrow-left"
+            style={{ color: "#fafafa" }}
+            onPress={() => Actions.pop()}
+          />
+          <Text style={styles.headerText}>DESIGN</Text>
+          <Icon
+            type="MaterialCommunityIcons"
+            name="account-circle"
+            style={{ color: "#fafafa" }}
+            onPress={() => Actions.signup()}
+          />
+        </View>
+        <ScrollView style={list.container}>
+          <Text style={list.class}>CLASS</Text>
+          <View style={list.classBox}>
+            {this.state.list.map((data, i) => {
               return (
-                <View style={styles.classList} key={i}>
-                  <Image
-                    source={list.image}
-                    style={{
-                      width: wp("18%"),
-                      height: hp("11%"),
-                      borderRadius: 50,
-                      marginLeft: 10
-                    }}
-                  />
-                  <View style={styles.classText}>
-                    <Text style={styles.classnameText}>{list.className}</Text>
-                    <Text style={styles.nameText}>{list.mentorName}</Text>
-                    <View style={styles.dateTimeBox}>
-                      <Icon
-                        type="FontAwesome"
-                        name="calendar"
-                        style={styles.iconDateTime}
-                      />
-                      <Text style={styles.dateTimeText}>{list.date}</Text>
+                <TouchableOpacity key={i} onPress={() => Actions.classDetail()}>
+                  <View style={list.classList}>
+                    <Image source={data.image} style={styles.classIcon} />
+                    <View style={list.classTextBox}>
+                      <Text style={list.classname}>{data.className}</Text>
+                      <Text>{data.mentorName}</Text>
+                      <View style={list.dateTimeBox}>
+                        <Icon
+                          type="FontAwesome"
+                          name="calendar"
+                          style={list.iconDateTime}
+                        />
+                        <Text style={list.dateTimeText}>{data.date}</Text>
+                      </View>
+                      <View style={list.dateTimeBox}>
+                        <Icon
+                          type="FontAwesome"
+                          name="clock-o"
+                          style={list.iconDateTime}
+                        />
+                        <Text style={list.dateTimeText}>{data.time}</Text>
+                      </View>
                     </View>
-                    <View style={styles.dateTimeBox}>
-                      <Icon
-                        type="FontAwesome"
-                        name="clock-o"
-                        style={styles.iconDateTime}
-                      />
-                      <Text style={styles.dateTimeText}>{list.time}</Text>
-                    </View>
+                    <Icon
+                      type="MaterialIcons"
+                      name="navigate-next"
+                      style={{ position: "absolute", right: 0 }}
+                    />
                   </View>
-                  <View style={styles.arrow} />
-                </View>
+                </TouchableOpacity>
               );
             })}
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
     );
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column",
-    backgroundColor:"#FFFFFF"
-  },
-
-  navBar: {
-    flex: 1,
-    backgroundColor: "green"
-  },
-
-  categoryText: {
-    fontSize: 18,
-    fontWeight: "500",
-    marginHorizontal: 20,
-    marginTop: 15
-  },
-
-  classBox: {
-    flexDirection: "column",
-  },
-
-  classList: {
-    marginTop: 1,
-    backgroundColor: "#FFFFFF",
-    width: wp("100%"),
-    height: hp("15%"),
-    borderBottomWidth:1,
-    borderColor:"#dadddf",
-    flexDirection: "row",
-    flex: 1,
-    alignItems: "center"
-  },
-
-  classIcon: {
-    width: wp("18%"),
-    height: hp("11%"),
-    backgroundColor: "black",
-    borderRadius: 50,
-    marginLeft: 10
-  },
-
-  classText: {
-    marginLeft: 15
-  },
-
-  classnameText: {
-    color: "#1cb3c8",
-    fontWeight: "bold",
-    fontSize: 15,
-  },
-
-  dateTimeBox: {
-    flexDirection: "row",
-    fontSize:12,
-    marginTop:5,
-  },
-
-  iconDateTime: {
-    fontSize: 20
-  },
-
-  dateTimeText: {
-      marginLeft:10
-  }
-});
-

@@ -72,7 +72,8 @@ export const home = StyleSheet.create({
   },
 
   midText: {
-    fontSize: 12
+    fontSize: 12,
+    textAlign:"justify"
   },
 
   bannerImage: {
@@ -175,7 +176,7 @@ export const login = StyleSheet.create({
   },
 
   bottomContainer: {
-    flex: 2,
+    flex: 1,
     paddingHorizontal: 25,
     marginTop: -40
   },
@@ -200,11 +201,20 @@ export const login = StyleSheet.create({
     backgroundColor: "#fafafa",
     paddingHorizontal: 30,
     paddingTop: 20,
+    height: height * 0.4,
     borderRadius: 5
   },
 
+  loginButton: {
+    position: "absolute",
+    bottom: height * 0.125,
+    width: width * 0.75,
+    right: width * 0.125
+
+  },
+
   signupText: {
-    marginTop: 50,
+    marginTop: height *0.125,
     textAlign: "center",
     fontWeight: "500"
   }
@@ -281,10 +291,15 @@ export const detail = StyleSheet.create({
     borderBottomColor: "#eee"
   },
 
+
+  descriptionText: {
+    textAlign:"justify"
+  },
+
   dateContainer: {
     paddingHorizontal: 20,
-    paddingTop:10,
-    paddingBottom:20,
+    paddingTop: 10,
+    paddingBottom: 20
   },
 
   dateBox: {
@@ -293,7 +308,90 @@ export const detail = StyleSheet.create({
   },
 
   dateText: {
-    marginLeft: 20,
+    marginLeft: 20
   }
 });
 
+export const onBoarding = StyleSheet.create({
+  child: {
+    padding: 20,
+    height,
+    width,
+    alignItems: "center"
+  },
+
+  imageBox: {
+    marginTop: height * 0.15
+  },
+
+  title: {
+    fontSize: 20,
+    fontWeight: "900",
+    color: "#000000",
+    marginTop: 50
+  },
+
+  descText: {
+    fontSize: 15,
+    textAlign: "center",
+    color: "#000000",
+    marginTop: 20,
+    marginHorizontal: 40,
+    flexWrap: "wrap"
+  },
+
+  page: {
+    marginBottom: height * 0.2
+  },
+
+  startBox: {
+    position: "absolute",
+    bottom: height * 0.1,
+    width: width * 0.75
+  }
+});
+
+export const list = StyleSheet.create({
+  container: {
+    padding: 20
+  },
+
+  class: {
+    fontWeight: "500"
+  },
+
+  classBox: {
+    paddingVertical: 20
+  },
+
+  classList: {
+    flexDirection: "row",
+    paddingVertical: 5,
+    alignItems: "center",
+    borderBottomWidth: 1,
+    borderBottomColor: "#eee"
+  },
+
+  classTextBox: {
+    marginLeft: 15
+  },
+
+  classname: {
+    color: styles.header.backgroundColor,
+    fontWeight: "bold"
+  },
+
+  dateTimeBox: {
+    flexDirection: "row",
+    fontSize: 12,
+    marginTop: 5
+  },
+
+  iconDateTime: {
+    fontSize: 20
+  },
+
+  dateTimeText: {
+    marginLeft: 10
+  }
+});

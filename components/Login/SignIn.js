@@ -1,21 +1,39 @@
+import { connect } from 'react-redux'
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity, Image } from "react-native";
+import { Text, View, TouchableOpacity, Image, ScrollView } from "react-native";
 import { styles, login } from "../Style.js";
 import Logo from "../../assets/images/cariilmu_light.png";
 import Reinput from "reinput";
 import { Icon } from "native-base";
 import { Actions } from "react-native-router-flux";
+import {Sign_In} from "../Action/authActions"
 
-export default class Login extends Component {
+class SignIn extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      username: "",
+      password: ""
+    };
+
+    this.signIn = this.signIn.bind(this);
+  }
+
+  signIn = () => {
+    const {username, password} = this.state
+    this.props.Sign_In(username, password)
+  }
+
   render() {
     return (
-      <View style={{ ...styles.container, backgroundColor: "#eee" }}>
+      <ScrollView style={{ ...styles.container, backgroundColor: "#eee" }}>
         <View style={login.topContainer}>
           <Icon
             type="FontAwesome"
             name="arrow-left"
             style={{ color: "#fafafa" }}
-            onPress={()=>Actions.pop()}
+            onPress={() => Actions.pop()}
           />
           <View style={login.logoBox}>
             <Image style={login.logo} source={Logo} alt={Logo} />
@@ -35,6 +53,7 @@ export default class Login extends Component {
               onSubmitEditing={() => this.password.focus()}
               autoCapitalize="none"
               autoCorrect={false}
+              onChangeText={username => this.setState({ username })}
             />
             <Reinput
               label="Password"
@@ -47,17 +66,30 @@ export default class Login extends Component {
               ref={input => (this.password = input)}
               autoCapitalize="none"
               autoCorrect={false}
-              textSecureEntry
+              secureTextEntry
+              onChangeText={password => this.setState({ password })}
             />
-            <TouchableOpacity>
-              <Text style={{ ...styles.button, marginBottom: -20 }}>
-                SIGN IN
-              </Text>
-            </TouchableOpacity>
           </View>
-            <Text style={login.signupText} onPress={() => Actions.signup()}>SIGN UP</Text>
+          <TouchableOpacity
+            style={login.loginButton}
+            onPress={this.signIn}
+          >
+            <Text style={{ ...styles.button }}>SIGN IN</Text>
+          </TouchableOpacity>
+          <Text style={login.signupText} onPress={() => Actions.signup()}>
+            SIGN UP
+          </Text>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    Sign_In : (username,password) => dispatch(Sign_In(username,password))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(SignIn)
+
