@@ -29,7 +29,7 @@ class StudentDrawer extends Component {
         <View style={drawer.middleContainer}>
           <View style={drawer.listIcon}>
             <Icon type="FontAwesome" name="calendar" />
-            <Text style={drawer.listText}> Schedule </Text>
+            <Text style={drawer.listText} onPress={()=> Actions.studentSchedule()}> Schedule </Text>
           </View>
           <View style={drawer.listIcon}>
             <Icon type="MaterialCommunityIcons" name="certificate" />

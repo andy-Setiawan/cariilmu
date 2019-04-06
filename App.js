@@ -35,9 +35,9 @@ export default class App extends Component {
             <Scene key="signin" component={SignIn} />
             <Scene key="signup" component={SignUp} />
             <Scene key="home" component={Home} initial />
-            <Scene key="classList" component={ClassList} />
+            <Scene key="classList" component={ClassList}  />
             <Scene key="classDetail" component={ClassDetail} />
-            <Scene key="onboarding" component={OnBoarding}  />
+            <Scene key="onboarding" component={OnBoarding} />
             <Scene key="payment" component={Payment} />
             <Scene key="studentSchedule" component={StudentSchedule} />
             <Scene key="studentProfile" component={StudentProfile} />

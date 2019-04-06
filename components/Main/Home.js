@@ -3,49 +3,27 @@ import { Text, View, ScrollView, Image, TouchableOpacity } from "react-native";
 import { styles, home } from "../Style.js";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
-import {Get_Open_Class} from "../Action/pubActions"
+import { Get_Open_Class, Get_Category } from "../Action/pubActions";
 import IconDesignClass from "../../assets/images/ic_designClass.png";
 import { Icon, Drawer } from "native-base";
 import StudentDrawer from "../Student/StudentDrawer";
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      category: [
-        {
-          name: "COMPUTER",
-          image: require("../../assets/images/home_computer.png")
-        },
-        {
-          name: "DESIGN",
-          image: require("../../assets/images/home_design.png")
-        },
-        { name: "MUSIC", image: require("../../assets/images/home_music.png") },
-        {
-          name: "LANGUAGE",
-          image: require("../../assets/images/home_language.png")
-        },
-        {
-          name: "ECONOMY",
-          image: require("../../assets/images/home_economy.png")
-        },
-        { name: "OTHER", image: require("../../assets/images/home_other.png") }
-      ]
-    };
-  }
-
   openDrawer() {
-    {!this.props.token.token && Actions.signin()}
-    {this.props.token.token && this._drawer._root.open()};
+    {
+      !this.props.token.token && Actions.signin();
+    }
+    {
+      this.props.token.token && this._drawer._root.open();
+    }
   }
 
-  componentDidMount(){
-    this.props.Get_Open_Class()
+  componentDidMount() {
+    this.props.Get_Open_Class(), this.props.Get_Category();
   }
 
   render() {
+    console.log(this.props);
     return (
       <Drawer ref={ref => (this._drawer = ref)} content={<StudentDrawer />}>
         <View style={styles.container}>
@@ -67,37 +45,46 @@ class Home extends Component {
             <View style={home.banner}>
               <View style={home.bannerText}>
                 <Text style={home.topText}>
-                  {/* Join Us !! Find your passion in EduCity */}
                   Yuk bargabung dengan kita !!! Temukan Passionmu di cariilmu
                 </Text>
                 <Text style={home.midText}>
-                  {/* Hone your skills by learning from the expert */}
                   Tingkatkan kemampuanmu dengan belajar bersama para ahli
                 </Text>
                 <TouchableOpacity onPress={() => Actions.signup()}>
                   <Text style={home.join}>JOIN US!!</Text>
                 </TouchableOpacity>
               </View>
-              <Image style={home.bannerImage} source={require("../../assets/images/home_banner.png")} />
+              <Image
+                style={home.bannerImage}
+                source={require("../../assets/images/home_banner.png")}
+              />
             </View>
             <View style={home.category}>
               <Text style={home.categoryText}>CATEGORY</Text>
               <View style={home.categoryBox}>
-                {this.state.category.map((list, i) => {
+                {this.props.classData.category.map((list, i) => {
+                  // const image = list.name
                   return (
-                    <View style={home.categoryPosition} key={i}>
-                      <Image
-                        source={list.image}
+                    <TouchableOpacity key={list._id}>
+                      <View style={home.categoryPosition}>
+                        {/* <Image
+                        source={require(`../../assets/images/${image}.png`)}
                         alt=""
                         style={home.categoryIcon}
-                      />
-                      <Text style={home.categoryListText} onPress={()=> Actions.classList()}>{list.name}</Text>
-                    </View>
+                      /> */}
+                        <Text
+                          style={home.categoryListText}
+                          onPress={() => Actions.classList()}
+                        >
+                          {list.name}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
                   );
                 })}
               </View>
               <Text style={home.categoryText}>NEW CLASSES</Text>
-              {(this.props.classData.openClass.slice(0,5)).map((list, i) => {
+              {this.props.classData.openClass.slice(0, 5).map((list, i) => {
                 return (
                   <TouchableOpacity
                     key={list._id}
@@ -110,8 +97,8 @@ class Home extends Component {
                       />
                       <View style={home.classText}>
                         <Text style={home.classnameText}>{list.name}</Text>
-                        <Text>{list.status}</Text>
-                        <Text>{list.fee}</Text>
+                        <Text>{list.mentor.name}</Text>
+                        <Text>{list.city}</Text>
                         <Text>{list.schedule}</Text>
                       </View>
                       <Icon
@@ -133,13 +120,21 @@ class Home extends Component {
 
 const mapStateToProps = state => ({
   classData: state.homeReducer,
-  token:state.authReducer
+  token: state.authReducer
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    Get_Open_Class : () => {dispatch(Get_Open_Class())}
-  }
-}
+    Get_Open_Class: () => {
+      dispatch(Get_Open_Class());
+    },
+    Get_Category: () => {
+      dispatch(Get_Category());
+    }
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);

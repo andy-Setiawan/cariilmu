@@ -24,28 +24,28 @@ export default class ClassList extends Component {
           image: IcDesign
         },
         {
-          className: "Kelas Musisi",
+          className: "Kelas Desain Banner",
           mentorName: "Rama Soepang",
           time: "15:00 - 18.00",
           date: "Wednesday, March 27, 2019",
           image: IcMusic
         },
         {
-          className: "Kelas Microsoft word",
+          className: "Kelas CSS",
           mentorName: "Rama Soepang",
           time: "15:00 - 18.00",
           date: "Wednesday, March 27, 2019",
           image: IcComputer
         },
         {
-          className: "Kelas Jual Beli Tanah",
+          className: "Kelas CorelDraw",
           mentorName: "Rama Soepang",
           time: "15:00 - 18.00",
           date: "Wednesday, March 27, 2019",
           image: IcOther
         },
         {
-          className: "Kelas Bahasa Jawa",
+          className: "Kelas Adobe",
           mentorName: "Rama Soepang",
           time: "15:00 - 18.00",
           date: "Wednesday, March 27, 2019",
