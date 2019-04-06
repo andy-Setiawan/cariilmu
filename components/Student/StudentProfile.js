@@ -1,117 +1,65 @@
 import React, { Component } from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { View, Text, Image } from "react-native";
+import { connect } from "react-redux";
+import { styles, profile } from "../Style.js";
 import { Icon } from "native-base";
+import { Actions } from "react-native-router-flux";
 
-export default class StudentProfile extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      fullname: "ABCZYX",
-      email: "qwer@asd.com",
-      phoneNumber: "0819-9876-5432"
-    };
-  }
-
+export class StudentProfile extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.topContainer}>
-          <Text style={styles.studentPic} />
+        <View style={styles.header}>
+          <Icon
+            type="FontAwesome"
+            name="arrow-left"
+            style={{ color: "#fafafa" }}
+            onPress={() => Actions.pop()}
+          />
+          <Text style={styles.headerText}>PROFILE</Text>
+          <Icon
+            type="MaterialCommunityIcons"
+            name="account-circle"
+            style={{ color: styles.header.backgroundColor }}
+          />
         </View>
-        <View style={styles.profileBox}>
-          <View style={styles.studentProfile}>
-            <Icon
-              type="FontAwesome5"
-              name="user-alt"
-              style={styles.iconFront}
-            />
-            <View style={styles.nameBox}>
-              <Text>Name</Text>
-              <Text style={styles.studentName}>{this.state.fullname}</Text>
-            </View>
-            <Icon type="FontAwesome5" name="pen" style={styles.iconBehind} />
+        <View style={profile.topProfile}>
+          <Image style={profile.imageProfile} />
+          <View style={profile.nameBox}>
+            <Text style={profile.nameText}>Andy Setiawan</Text>
+            <Text style={profile.statusText}>Online</Text>
           </View>
-          <View style={styles.studentProfile}>
-            <Icon
-              type="MaterialCommunityIcons"
-              name="email"
-              style={styles.iconFront}
-            />
-            <View style={styles.nameBox}>
-              <Text>E-Mail</Text>
-              <Text style={styles.studentName}>{this.state.email}</Text>
-            </View>
-            <Icon type="FontAwesome5" name="pen" style={styles.iconBehind} />
+        </View>
+        <View style={profile.bottomProfile}>
+          <Text style={profile.accountText}>Account</Text>
+          <View style={profile.profileBox}>
+            <Text style={profile.profileText}>+62 819 9142 3158</Text>
+            <Text style={profile.editText}>Tap to change phonenumber</Text>
           </View>
-          <View style={styles.studentProfile}>
-            <Icon type="FontAwesome5" name="phone" style={styles.iconFront} />
-            <View style={styles.nameBox}>
-              <Text>Phone Number</Text>
-              <Text style={styles.studentName}>{this.state.phoneNumber}</Text>
-            </View>
-            <Icon type="FontAwesome5" name="pen" style={styles.iconBehind} />
+          <View style={profile.profileBox}>
+            <Text style={profile.profileText}>@AndySetiawan</Text>
+            <Text style={profile.editText}>Tap to change your username</Text>
           </View>
+          <View style={profile.profileBox}>
+            <Text style={profile.profileText}>AndySetiawan@gmail.com</Text>
+            <Text style={profile.editText}>Tap to change your email</Text>
+          </View>
+          <View style={profile.profileBox}>
+            <Text style={profile.profileText}>Bio</Text>
+            <Text style={profile.editText}>Add a few words about yourself</Text>
+          </View>
+          
         </View>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFFFFF",
-    padding: 20
-  },
+const mapStateToProps = state => ({});
 
-  topContainer: {
-    alignItems: "center"
-  },
+const mapDispatchToProps = {};
 
-  studentPic: {
-    borderRadius: 60,
-    width: 120,
-    height: 120,
-    backgroundColor: "#000000"
-  },
-
-  profileBox: {
-    marginTop: 25
-  },
-
-  studentProfile: {
-    paddingVertical: 20,
-    flexDirection: "row",
-    borderBottomWidth: 1,
-    borderColor: "#e8ecf1"
-  },
-
-  studentName: {
-    marginTop: 5,
-    color: "#000000",
-    fontWeight: "600"
-  },
-
-  nameBox: {
-    flexDirection: "column",
-    flex: 8,
-    paddingLeft: 15
-  },
-
-  iconFront: {
-    flex: 1,
-    fontSize: 20,
-    textAlign: "center",
-    textAlignVertical: "center",
-    color: "#FFA45C"
-  },
-
-  iconBehind: {
-    flex: 1,
-    fontSize: 20,
-    color: "#EEEEEE",
-    textAlign: "center",
-    textAlignVertical: "center"
-  }
-});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(StudentProfile);

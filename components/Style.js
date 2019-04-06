@@ -1,6 +1,7 @@
 import { StyleSheet, Dimensions } from "react-native";
 
-export const { width, height } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
+const textColor = "#000";
 
 export const styles = StyleSheet.create({
   container: {
@@ -73,7 +74,7 @@ export const home = StyleSheet.create({
 
   midText: {
     fontSize: 12,
-    textAlign:"justify"
+    textAlign: "justify"
   },
 
   bannerImage: {
@@ -210,11 +211,10 @@ export const login = StyleSheet.create({
     bottom: height * 0.125,
     width: width * 0.75,
     right: width * 0.125
-
   },
 
   signupText: {
-    marginTop: height *0.125,
+    marginTop: height * 0.125,
     textAlign: "center",
     fontWeight: "500"
   }
@@ -291,9 +291,8 @@ export const detail = StyleSheet.create({
     borderBottomColor: "#eee"
   },
 
-
   descriptionText: {
-    textAlign:"justify"
+    textAlign: "justify"
   },
 
   dateContainer: {
@@ -327,14 +326,14 @@ export const onBoarding = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "900",
-    color: "#000000",
+    color: textColor,
     marginTop: 50
   },
 
   descText: {
     fontSize: 15,
     textAlign: "center",
-    color: "#000000",
+    color: textColor,
     marginTop: 20,
     marginHorizontal: 40,
     flexWrap: "wrap"
@@ -393,5 +392,61 @@ export const list = StyleSheet.create({
 
   dateTimeText: {
     marginLeft: 10
+  }
+});
+
+export const profile = StyleSheet.create({
+  topProfile: {
+    backgroundColor: styles.header.backgroundColor,
+    height: height * 0.15,
+    padding: 20,
+    flexDirection: "row",
+    alignItems: "center"
+  },
+
+  imageProfile: {
+    backgroundColor: "#FFF",
+    borderRadius: 50,
+    width: width * 0.15,
+    height: width * 0.15
+  },
+
+  nameBox: {
+    marginLeft: 20,
+    flexDirection: "column"
+  },
+
+  nameText: {
+    color: styles.container.backgroundColor,
+    fontSize: 20,
+    fontWeight: "bold"
+  },
+
+  statusText: {
+    color: styles.container.backgroundColor
+  },
+
+  bottomProfile: {
+    backgroundColor: styles.container.backgroundColor,
+    padding: 20
+  },
+
+  accountText: {
+    color: styles.header.backgroundColor,
+    fontWeight: "700"
+  },
+
+  profileBox: {
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#EEE"
+  },
+
+  profileText: {
+    color: textColor
+  },
+
+  editText: {
+    marginTop: 5
   }
 });
