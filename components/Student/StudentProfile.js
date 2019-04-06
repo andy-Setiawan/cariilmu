@@ -24,9 +24,9 @@ export class StudentProfile extends Component {
           />
         </View>
         <View style={profile.topProfile}>
-          <Image style={profile.imageProfile} />
+          <Image style={profile.imageProfile} source={this.props.profileData.image} />
           <View style={profile.nameBox}>
-            <Text style={profile.nameText}>Andy Setiawan</Text>
+            <Text style={profile.nameText}>{this.props.profileData.profile.name}</Text>
             <Text style={profile.statusText}>Online</Text>
           </View>
         </View>
@@ -37,29 +37,25 @@ export class StudentProfile extends Component {
             <Text style={profile.editText}>Tap to change phonenumber</Text>
           </View>
           <View style={profile.profileBox}>
-            <Text style={profile.profileText}>@AndySetiawan</Text>
+            <Text style={profile.profileText}>@{this.props.profileData.profile.username}</Text>
             <Text style={profile.editText}>Tap to change your username</Text>
           </View>
           <View style={profile.profileBox}>
-            <Text style={profile.profileText}>AndySetiawan@gmail.com</Text>
+            <Text style={profile.profileText}>{this.props.profileData.profile.email}</Text>
             <Text style={profile.editText}>Tap to change your email</Text>
           </View>
           <View style={profile.profileBox}>
-            <Text style={profile.profileText}>Bio</Text>
+            <Text style={profile.profileText}>{this.props.profileData.profile.bio}</Text>
             <Text style={profile.editText}>Add a few words about yourself</Text>
           </View>
-          
         </View>
       </View>
     );
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  profileData:state.profileReducer
+});
 
-const mapDispatchToProps = {};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(StudentProfile);
+export default connect(mapStateToProps)(StudentProfile);

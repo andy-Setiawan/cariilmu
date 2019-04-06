@@ -1,7 +1,8 @@
 import { SIGN_IN } from "../Type/ActionType";
 
 const initialState = {
-  data: []
+  data: [],
+  token:"asd"
 };
 
 export default (state = initialState, action) => {

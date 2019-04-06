@@ -37,7 +37,8 @@ class Home extends Component {
   }
 
   openDrawer() {
-    this._drawer._root.open();
+    {!this.props.token.token && Actions.signin()}
+    {this.props.token.token && this._drawer._root.open()};
   }
 
   componentDidMount(){
@@ -66,10 +67,12 @@ class Home extends Component {
             <View style={home.banner}>
               <View style={home.bannerText}>
                 <Text style={home.topText}>
-                  Join Us !! Find your passion in EduCity
+                  {/* Join Us !! Find your passion in EduCity */}
+                  Yuk bargabung dengan kita !!! Temukan Passionmu di cariilmu
                 </Text>
                 <Text style={home.midText}>
-                  Hone your skills by learning from the expert
+                  {/* Hone your skills by learning from the expert */}
+                  Tingkatkan kemampuanmu dengan belajar bersama para ahli
                 </Text>
                 <TouchableOpacity onPress={() => Actions.signup()}>
                   <Text style={home.join}>JOIN US!!</Text>
@@ -88,13 +91,13 @@ class Home extends Component {
                         alt=""
                         style={home.categoryIcon}
                       />
-                      <Text style={home.categoryListText}>{list.name}</Text>
+                      <Text style={home.categoryListText} onPress={()=> Actions.classList()}>{list.name}</Text>
                     </View>
                   );
                 })}
               </View>
               <Text style={home.categoryText}>NEW CLASSES</Text>
-              {this.props.classData.openClass.map((list, i) => {
+              {(this.props.classData.openClass.slice(0,5)).map((list, i) => {
                 return (
                   <TouchableOpacity
                     key={list._id}
@@ -129,7 +132,8 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-  classData: state.homeReducer
+  classData: state.homeReducer,
+  token:state.authReducer
 });
 
 const mapDispatchToProps = dispatch => {
