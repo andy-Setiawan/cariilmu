@@ -23,7 +23,6 @@ class Home extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <Drawer ref={ref => (this._drawer = ref)} content={<StudentDrawer />}>
         <View style={styles.container}>
@@ -63,7 +62,6 @@ class Home extends Component {
               <Text style={home.categoryText}>CATEGORY</Text>
               <View style={home.categoryBox}>
                 {this.props.classData.category.map((list, i) => {
-                  // const image = list.name
                   return (
                     <TouchableOpacity key={list._id}>
                       <View style={home.categoryPosition}>
@@ -88,7 +86,7 @@ class Home extends Component {
                 return (
                   <TouchableOpacity
                     key={list._id}
-                    onPress={() => Actions.classDetail()}
+                    onPress={() => Actions.classDetail({classId:list._id})}
                   >
                     <View style={home.classBox}>
                       <Image
@@ -134,7 +132,5 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);
+export default connect(mapStateToProps,mapDispatchToProps)(Home);
+

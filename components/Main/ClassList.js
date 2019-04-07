@@ -9,9 +9,11 @@ import { Get_Class_List } from "../Action/pubActions";
 import IcLanguage from "../../assets/images/ic_languageClass.png";
 
 class ClassList extends Component {
+
   componentDidMount() {
     this.props.Get_Class_List(this.props.classId);
   }
+
   render() {
     console.log(this.props);
     return (
@@ -34,11 +36,11 @@ class ClassList extends Component {
         <ScrollView style={list.container}>
           <Text style={list.class}>CLASS</Text>
           <View style={list.classBox}>
-            {this.props.classData.classList.map((data, i) => {
+            {(this.props.classData.classList.filter(open => open.status=="opened")).map((data, i) => {
               return (
                 <TouchableOpacity
                   key={data._id}
-                  onPress={() => Actions.classDetail()}
+                  onPress={() => Actions.classDetail({classId:data._id})}
                 >
                   <View style={list.classList}>
                     <Image source={IcLanguage} style={styles.classIcon} />
@@ -60,7 +62,7 @@ class ClassList extends Component {
                           style={list.iconDateTime}
                         />
                         <Text style={list.dateTimeText}>
-                          {data.durationInMinutes}
+                          {data.durationInMinutes} minutes
                         </Text>
                       </View>
                     </View>
@@ -92,7 +94,5 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ClassList);
+export default connect(mapStateToProps,mapDispatchToProps)(ClassList);
+

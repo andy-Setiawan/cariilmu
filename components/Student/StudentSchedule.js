@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Text, View, ScrollView} from "react-native";
 import { styles, schedule } from "../Style.js";
 import { Icon } from "native-base";
+import {Actions} from "react-native-router-flux"
 
 export default class StudentSchedule extends Component {
   constructor(props) {

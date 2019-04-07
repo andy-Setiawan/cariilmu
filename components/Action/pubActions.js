@@ -5,7 +5,7 @@ import {
 } from "../Type/ActionType";
 import axios from "axios";
 
-const url = "http://cari-ilmu.herokuapp.com";
+const url = "http://cari-ilmu-test.herokuapp.com";
 
 export const Get_Open_Class = () => {
   return dispatch => {
