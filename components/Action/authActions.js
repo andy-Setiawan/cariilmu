@@ -1,4 +1,5 @@
 import axios from "axios";
+import AsyncStorage from "@react-native-community/async-storage";
 import { SIGN_IN } from "../Type/ActionType";
 
 const url = "http://cari-ilmu-test.herokuapp.com";
@@ -11,8 +12,9 @@ export const Sign_In = (username, password) => {
         password: password
       })
       .then(response => {
-        dispatch({ type: SIGN_IN, payload: response.data })
-      })
+        AsyncStorage.setItem("token", response.data.data.token);
+        dispatch({ type: SIGN_IN, payload: response.data.data.token });
+      });
   };
 };
 
@@ -21,13 +23,16 @@ export const Sign_Up = (name, username, email, password) => {
     axios
       .post(`${url}/student/sign-up`, {
         name: name,
-        username : username,
-        email : email,
+        username: username,
+        email: email,
         password: password
       })
       .then(response => {
-        console.log(response)
+        console.log(response);
       });
   };
 };
 
+export const Set_Token = token => {
+  return { type: SIGN_IN, payload: token };
+};

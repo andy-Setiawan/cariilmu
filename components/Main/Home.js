@@ -4,9 +4,11 @@ import { styles, home } from "../Style.js";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
 import { Get_Open_Class, Get_Category } from "../Action/pubActions";
+import { Set_Token } from "../Action/authActions";
 import IconDesignClass from "../../assets/images/ic_designClass.png";
 import { Icon, Drawer } from "native-base";
 import StudentDrawer from "../Student/StudentDrawer";
+import AsyncStorage from '@react-native-community/async-storage';
 
 class Home extends Component {
   openDrawer() {
@@ -19,10 +21,13 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.props.Get_Open_Class(), this.props.Get_Category();
+    this.props.Get_Open_Class(), this.props.Get_Category(),
+    AsyncStorage.getItem("token").then(value =>
+      this.props.Set_Token(value));
   }
 
   render() {
+    console.log(this.props)
     return (
       <Drawer ref={ref => (this._drawer = ref)} content={<StudentDrawer />}>
         <View style={styles.container}>
@@ -128,7 +133,8 @@ const mapDispatchToProps = dispatch => {
     },
     Get_Category: () => {
       dispatch(Get_Category());
-    }
+    },
+    Set_Token : token => {dispatch(Set_Token(token))},
   };
 };
 

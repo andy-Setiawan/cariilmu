@@ -1,14 +1,14 @@
 import { SIGN_IN } from "../Type/ActionType";
 
 const initialState = {
-  data: [],
-  token:"asd"
+  token: "",
+  
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case SIGN_IN:
-      return { ...state, data: action.payload };
+      return { ...state, token: action.payload };
     default:
       return state;
   }
