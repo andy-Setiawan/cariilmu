@@ -5,10 +5,11 @@ import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
 import { Get_Open_Class, Get_Category } from "../Action/pubActions";
 import { Set_Token } from "../Action/authActions";
+import { getProfile } from "../Action/studentActions";
 import IconDesignClass from "../../assets/images/ic_designClass.png";
 import { Icon, Drawer } from "native-base";
 import StudentDrawer from "../Student/StudentDrawer";
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from "@react-native-community/async-storage";
 
 class Home extends Component {
   openDrawer() {
@@ -20,14 +21,23 @@ class Home extends Component {
     }
   }
 
+  closeDrawer() {
+    {
+      this._drawer._root.close();
+    }
+  }
+
   componentDidMount() {
-    this.props.Get_Open_Class(), this.props.Get_Category(),
-    AsyncStorage.getItem("token").then(value =>
-      this.props.Set_Token(value));
+    AsyncStorage.getItem("token").then(value => {
+      value
+        ? (this.props.Set_Token(value), this.props.getProfile(value))
+        : console.log("no");
+    }),
+      this.props.Get_Open_Class(),
+      this.props.Get_Category();
   }
 
   render() {
-    console.log(this.props)
     return (
       <Drawer ref={ref => (this._drawer = ref)} content={<StudentDrawer />}>
         <View style={styles.container}>
@@ -54,7 +64,7 @@ class Home extends Component {
                 <Text style={home.midText}>
                   Tingkatkan kemampuanmu dengan belajar bersama para ahli
                 </Text>
-                <TouchableOpacity onPress={() => Actions.signup()}>
+                <TouchableOpacity onPress={() => Actions.signin()}>
                   <Text style={home.join}>JOIN US!!</Text>
                 </TouchableOpacity>
               </View>
@@ -68,19 +78,22 @@ class Home extends Component {
               <View style={home.categoryBox}>
                 {this.props.classData.category.map((list, i) => {
                   return (
-                    <TouchableOpacity key={list._id}>
+                    <TouchableOpacity
+                      key={list._id}
+                      onPress={() =>
+                        Actions.classList({
+                          className: list.name,
+                          classId: list._id
+                        })
+                      }
+                    >
                       <View style={home.categoryPosition}>
                         {/* <Image
                         source={require(`../../assets/images/${image}.png`)}
                         alt=""
                         style={home.categoryIcon}
                       /> */}
-                        <Text
-                          style={home.categoryListText}
-                          onPress={() => Actions.classList({className:list.name, classId:list._id})}
-                        >
-                          {list.name}
-                        </Text>
+                        <Text style={home.categoryListText}>{list.name}</Text>
                       </View>
                     </TouchableOpacity>
                   );
@@ -91,7 +104,7 @@ class Home extends Component {
                 return (
                   <TouchableOpacity
                     key={list._id}
-                    onPress={() => Actions.classDetail({classId:list._id})}
+                    onPress={() => Actions.classDetail({ classId: list._id })}
                   >
                     <View style={home.classBox}>
                       <Image
@@ -134,9 +147,16 @@ const mapDispatchToProps = dispatch => {
     Get_Category: () => {
       dispatch(Get_Category());
     },
-    Set_Token : token => {dispatch(Set_Token(token))},
+    Set_Token: token => {
+      dispatch(Set_Token(token));
+    },
+    getProfile: token => {
+      dispatch(getProfile(token));
+    }
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(Home);
-
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);

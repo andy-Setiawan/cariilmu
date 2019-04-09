@@ -23,6 +23,7 @@ class SignUp extends Component {
   signUp = () => {
     const {name, username, email, password} = this.state
     this.props.Sign_Up(name, username, email, password)
+    Actions.pop()
   }
 
   render() {

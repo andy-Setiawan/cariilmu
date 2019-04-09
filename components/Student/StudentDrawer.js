@@ -2,15 +2,11 @@ import React, { Component } from "react";
 import { Text, View, Image } from "react-native";
 import { styles, drawer } from "../Style.js";
 import { Icon } from "native-base";
-import {Actions} from 'react-native-router-flux'
-import {connect} from "react-redux"
-import {getProfile} from "../Action/studentActions"
+import { Actions } from "react-native-router-flux";
+import { connect } from "react-redux";
+import { Sign_Out } from "../Action/authActions";
 
 class StudentDrawer extends Component {
-  componentDidMount(){
-    this.props.getProfile()
-  }
-
   render() {
     return (
       <View style={styles.container}>
@@ -24,12 +20,20 @@ class StudentDrawer extends Component {
           >
             {this.props.profileData.profile.name}
           </Text>
-          <Text style={{ ...drawer.userText }}>{this.props.profileData.profile.email}</Text>
+          <Text style={{ ...drawer.userText }}>
+            {this.props.profileData.profile.email}
+          </Text>
         </View>
         <View style={drawer.middleContainer}>
           <View style={drawer.listIcon}>
             <Icon type="FontAwesome" name="calendar" />
-            <Text style={drawer.listText} onPress={()=> Actions.studentSchedule()}> Schedule </Text>
+            <Text
+              style={drawer.listText}
+              onPress={() => Actions.studentSchedule()}
+            >
+              {" "}
+              Schedule{" "}
+            </Text>
           </View>
           <View style={drawer.listIcon}>
             <Icon type="MaterialCommunityIcons" name="certificate" />
@@ -41,9 +45,14 @@ class StudentDrawer extends Component {
           </View>
         </View>
         <View style={drawer.middleContainer}>
-        <View style={drawer.listIcon}>
+          <View style={drawer.listIcon}>
             <Icon type="MaterialCommunityIcons" name="account-box" />
-            <Text style={drawer.listText} onPress={()=> Actions.studentProfile()}> Account </Text>
+            <Text
+              style={drawer.listText}
+              onPress={() => Actions.studentProfile()}
+            >
+              Account
+            </Text>
           </View>
           <View style={drawer.listIcon}>
             <Icon type="MaterialCommunityIcons" name="settings" />
@@ -51,7 +60,9 @@ class StudentDrawer extends Component {
           </View>
           <View style={drawer.listIcon}>
             <Icon type="MaterialCommunityIcons" name="logout" />
-            <Text style={drawer.listText}> Sign Out </Text>
+            <Text style={drawer.listText} onPress={() => this.props.Sign_Out()}>
+              Sign Out
+            </Text>
           </View>
         </View>
       </View>
@@ -60,13 +71,16 @@ class StudentDrawer extends Component {
 }
 
 const mapStateToProps = state => ({
-  profileData : state.profileReducer
-})
+  profileData: state.profileReducer
+});
 
 const mapDispatchToProps = dispatch => {
   return {
-    getProfile: () => {dispatch(getProfile())}
-  }
+    Sign_Out: () => {
+      dispatch(Sign_Out());
+    }
+  };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(StudentDrawer)
+export default connect(mapStateToProps,mapDispatchToProps)(StudentDrawer);
+

@@ -287,7 +287,7 @@ export const detail = StyleSheet.create({
   description: {
     padding: 20,
     borderBottomWidth: 1,
-    borderBottomColor: "#eee"
+    borderBottomColor: "#eee",
   },
 
   descriptionText: {

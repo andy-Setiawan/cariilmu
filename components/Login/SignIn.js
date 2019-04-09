@@ -26,6 +26,7 @@ class SignIn extends Component {
   }
 
   render() {
+    this.props.token.token && Actions.pop();
     return (
       <ScrollView style={{ ...styles.container, backgroundColor: "#eee" }}>
         <View style={login.topContainer}>
@@ -85,11 +86,15 @@ class SignIn extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  token: state.authReducer
+});
+
 const mapDispatchToProps = dispatch => {
   return {
     Sign_In : (username,password) => dispatch(Sign_In(username,password))
   }
 }
 
-export default connect(null, mapDispatchToProps)(SignIn)
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
 

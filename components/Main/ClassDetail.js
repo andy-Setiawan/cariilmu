@@ -13,21 +13,6 @@ import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
 
 class ClassDetail extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      className: "Piano Music Class",
-      Fee: "Rp 400.000",
-      classMentor: "Paulus Dian",
-      classDesc:
-        "All music, movement and mindfulness classes include various styles of music through sing-a-longs, chanting, large and small movement activities, dancing, marches, tonal and rhythm patterns, finger plays, instrument play, taking big breaths, and so much more. Embrace yourself for a fun, educational, and musical mindful experience.Each class is 45 minutes and includes a CD. For the first two years, there is a new CD for each session",
-      date: "Thursday, 1 Nov 2019",
-      time: "15:00 - 18:00",
-      location: "Universitas Negri Yogyakarta"
-    };
-  }
-
   render() {
     return (
       <View style={styles.container}>
@@ -35,8 +20,8 @@ class ClassDetail extends Component {
           .filter(data => data._id == this.props.classId)
           .map(list => {
             return (
-              <ScrollView>
-                <View style={styles.bannerContainer} key={list._id}>
+              <ScrollView key={list._id}>
+                <View style={styles.bannerContainer}>
                   <ImageBackground
                     source={ClassBanner}
                     alt=""
@@ -50,7 +35,7 @@ class ClassDetail extends Component {
                       onPress={() => Actions.pop()}
                     />
                     <Text style={detail.bannerClass}>{list.name}</Text>
-                    <Text style={detail.bannerFee}>{list.fee}</Text>
+                    <Text style={detail.bannerFee}>Rp. {list.fee}</Text>
                     <Text style={detail.bannerMentor}>
                       By: {list.mentor.name}
                     </Text>
