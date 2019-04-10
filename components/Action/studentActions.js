@@ -1,9 +1,11 @@
 import { GET_PROFILE } from "../Type/ActionType";
 import axios from "axios";
+import AsyncStorage from "@react-native-community/async-storage";
 
 const url = "http://cari-ilmu-test.herokuapp.com";
+const token = AsyncStorage.getItem("token").then(value => value)
 
-export const getProfile = (token) => {
+export const getProfile = () => {
   return dispatch => {
     axios({
       method: "get",

@@ -4,29 +4,44 @@ import { styles, register } from "../Style.js";
 import { Icon } from "native-base";
 import Reinput from "reinput";
 import { Actions } from "react-native-router-flux";
-import { connect } from 'react-redux'
-import {Sign_Up} from "../Action/authActions"
+import { connect } from "react-redux";
+import { Sign_Up_Student, Sign_Up_Mentor } from "../Action/authActions";
 
 class SignUp extends Component {
   constructor(props) {
-    super(props)
-  
+    super(props);
+
     this.state = {
-       name:"",
-       username:"",
-       email:"",
-       password:""
-    }
-  }
-  
-  
-  signUp = () => {
-    const {name, username, email, password} = this.state
-    this.props.Sign_Up(name, username, email, password)
-    Actions.pop()
+      name: "",
+      username: "",
+      email: "",
+      password: "",
+      role: ""
+    };
   }
 
+  signUp = () => {
+    const { name, username, email, password } = this.state;
+    switch (this.state.role) {
+      case "STUDENT": {
+        this.props.Sign_Up_Student(name, username, email, password);
+        Actions.pop();
+        break;
+      }
+      case "MENTOR": {
+        this.props.Sign_Up_Mentor(name, username, email, password);
+        Actions.pop();
+        break;
+      }
+      default: {
+        console.log("CHOOSE YOUR ROLE");
+        break;
+      }
+    }
+  };
+
   render() {
+    // console.log(this.state.role);
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -45,10 +60,27 @@ class SignUp extends Component {
         </View>
         <ScrollView>
           <View style={register.topContainer}>
-            <Image
-              source={require("../../assets/images/login_image.png")}
-              style={register.registerImage}
-            />
+            <Text style={register.roleText}>I Wanna Be {this.state.role}</Text>
+            <View style={register.imagePosition}>
+              <TouchableOpacity
+                onPress={role => this.setState({ role: "STUDENT" })}
+              >
+                <Image
+                  source={require("../../assets/images/role_student.png")}
+                  style={register.registerImage}
+                />
+                <Text style={register.rolePick}>STUDENT</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={role => this.setState({ role: "MENTOR" })}
+              >
+                <Image
+                  source={require("../../assets/images/role_mentor.png")}
+                  style={register.registerImage}
+                />
+                <Text style={register.rolePick}>MENTOR</Text>
+              </TouchableOpacity>
+            </View>
           </View>
           <View style={register.bottomContainer}>
             <View style={register.registerBox}>
@@ -63,7 +95,7 @@ class SignUp extends Component {
                 onSubmitEditing={() => this.username.focus()}
                 autoCapitalize="none"
                 autoCorrect={false}
-                onChangeText={name => this.setState({name})}
+                onChangeText={name => this.setState({ name })}
               />
               <Reinput
                 label="Username"
@@ -92,7 +124,7 @@ class SignUp extends Component {
                 onSubmitEditing={() => this.password.focus()}
                 autoCapitalize="none"
                 autoCorrect={false}
-                onChangeText={email => this.setState({email})}
+                onChangeText={email => this.setState({ email })}
               />
               <Reinput
                 label="Password"
@@ -107,7 +139,7 @@ class SignUp extends Component {
                 autoCapitalize="none"
                 autoCorrect={false}
                 secureTextEntry
-                onChangeText={password => this.setState({password})}
+                onChangeText={password => this.setState({ password })}
               />
               <Reinput
                 label="Confirm Password"
@@ -149,9 +181,15 @@ class SignUp extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    Sign_Up : (name, username, email, password) => dispatch(Sign_Up(name, username, email, password))
-  }
-}
+    Sign_Up_Student: (name, username, email, password) =>
+      dispatch(Sign_Up_Student(name, username, email, password)),
 
-export default connect(null, mapDispatchToProps)(SignUp)
+    Sign_Up_Mentor: (name, username, email, password) =>
+      dispatch(Sign_Up_Mentor(name, username, email, password))
+  };
+};
 
+export default connect(
+  null,
+  mapDispatchToProps
+)(SignUp);

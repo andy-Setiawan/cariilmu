@@ -6,7 +6,7 @@ import Logo from "../../assets/images/cariilmu_light.png";
 import Reinput from "reinput";
 import { Icon } from "native-base";
 import { Actions } from "react-native-router-flux";
-import {Sign_In} from "../Action/authActions"
+import {Sign_In_Student, Sign_In_Mentor} from "../Action/authActions"
 
 class SignIn extends Component {
   constructor(props) {
@@ -14,7 +14,8 @@ class SignIn extends Component {
 
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      role:"",
     };
 
     this.signIn = this.signIn.bind(this);
@@ -22,7 +23,23 @@ class SignIn extends Component {
 
   signIn = () => {
     const {username, password} = this.state
-    this.props.Sign_In(username, password)
+    // switch (this.state.role) {
+    //   case "STUDENT": {
+    //     this.props.Sign_In_Student(username, password)
+    //     break;
+    //   }
+    //   case "MENTOR": {
+    //     this.props.Sign_In_Mentor(username, password)
+    //     break;
+    //   }
+    //   default: {
+    //     console.log("CHOOSE YOUR ROLE");
+    //     break;
+    //   }
+    // }
+
+
+    this.props.Sign_In_Student(username, password)
   }
 
   render() {
@@ -92,7 +109,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    Sign_In : (username,password) => dispatch(Sign_In(username,password))
+    Sign_In_Student : (username,password) => dispatch(Sign_In_Student(username,password)),
+    Sign_In_Mentor : (username,password) => dispatch(Sign_In_Mentor(username,password))
   }
 }
 

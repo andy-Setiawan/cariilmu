@@ -32,7 +32,7 @@ export default class App extends Component {
       <Provider store={store}>
         <Router>
           <Scene key="root" hideNavBar>
-            <Scene key="signin" component={SignIn}  />
+            <Scene key="signin" component={SignIn} />
             <Scene key="signup" component={SignUp} />
             <Scene key="home" component={Home} initial />
             <Scene key="classList" component={ClassList}  />

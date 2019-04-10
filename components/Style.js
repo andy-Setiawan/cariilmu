@@ -143,26 +143,44 @@ export const home = StyleSheet.create({
 
 export const register = StyleSheet.create({
   topContainer: {
-    flex: 1,
-    alignItems: "center",
+    padding:(20,40),
     justifyContent: "flex-end",
     backgroundColor: styles.header.backgroundColor
   },
 
   bottomContainer: {
-    flex: 9,
     paddingBottom: 20
   },
 
+  roleText:{
+    color:"#fafafa",
+    fontSize:30,
+    fontWeight:"700",
+  },
+
+  rolePick:{
+    color:"#fafafa",
+    fontSize:20,
+    fontWeight:"700",
+    textAlign:"center",
+    marginTop:10,
+  },
+
+  imagePosition:{
+    marginTop:20,
+    flexDirection: "row",
+    justifyContent:"space-around",
+  },
+
   registerImage: {
-    marginBottom: -70,
-    width: width * 0.4,
-    height: height * 0.2,
+    borderRadius:100,
+    width: width * 0.3,
+    height: width * 0.3,
     justifyContent: "center"
   },
 
   registerBox: {
-    marginTop: 40,
+    marginTop: 20,
     paddingHorizontal: 40,
     borderRadius: 5
   }
