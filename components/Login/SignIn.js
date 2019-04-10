@@ -15,7 +15,7 @@ class SignIn extends Component {
     this.state = {
       username: "",
       password: "",
-      role:"",
+      role:"MENTOR",
     };
 
     this.signIn = this.signIn.bind(this);
@@ -23,20 +23,20 @@ class SignIn extends Component {
 
   signIn = () => {
     const {username, password} = this.state
-    // switch (this.state.role) {
-    //   case "STUDENT": {
-    //     this.props.Sign_In_Student(username, password)
-    //     break;
-    //   }
-    //   case "MENTOR": {
-    //     this.props.Sign_In_Mentor(username, password)
-    //     break;
-    //   }
-    //   default: {
-    //     console.log("CHOOSE YOUR ROLE");
-    //     break;
-    //   }
-    // }
+    switch (this.state.role) {
+      case "STUDENT": {
+        this.props.Sign_In_Student(username, password)
+        break;
+      }
+      case "MENTOR": {
+        this.props.Sign_In_Mentor(username, password)
+        break;
+      }
+      default: {
+        console.log("CHOOSE YOUR ROLE");
+        break;
+      }
+    }
 
 
     this.props.Sign_In_Student(username, password)

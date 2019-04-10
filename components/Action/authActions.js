@@ -13,6 +13,7 @@ export const Sign_In_Student = (username, password) => {
       })
       .then(response => {
         AsyncStorage.setItem("token", response.data.data.token);
+        AsyncStorage.setItem("role", response.data.data.role);
         dispatch({ type: SIGN_IN, payload: response.data.data.token });
         axios({
           method: "get",
