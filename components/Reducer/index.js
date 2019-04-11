@@ -1,10 +1,10 @@
 import {combineReducers} from "redux"
-import homeReducer from "./homeReducer"
-import authReducer from "./authReducer";
-import profileReducer from "./profileReducer"
+import publicReducer from "./publicReducer"
+import authReducer from "./authReducer"
+import mentorReducer from "./mentorReducer"
 
 export default combineReducers({
-    homeReducer : homeReducer,
-    authReducer : authReducer,
-    profileReducer : profileReducer
+    auth : authReducer,
+    public : publicReducer,
+    mentor : mentorReducer,
 })

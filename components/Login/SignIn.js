@@ -43,7 +43,7 @@ class SignIn extends Component {
   }
 
   render() {
-    this.props.token.token && Actions.pop();
+    this.props.auth.token && Actions.pop();
     return (
       <ScrollView style={{ ...styles.container, backgroundColor: "#eee" }}>
         <View style={login.topContainer}>
@@ -104,7 +104,7 @@ class SignIn extends Component {
 }
 
 const mapStateToProps = state => ({
-  token: state.authReducer
+  auth: state.auth
 });
 
 const mapDispatchToProps = dispatch => {

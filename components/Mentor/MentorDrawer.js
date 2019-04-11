@@ -37,7 +37,13 @@ class MentorDrawer extends Component {
           </View>
           <View style={drawer.listIcon}>
             <Icon type="FontAwesome5" name="chalkboard" />
-            <Text style={drawer.listText}> class </Text>
+            <Text
+              style={drawer.listText}
+              onPress={() => Actions.mentorClassList()}
+            >
+              {" "}
+              Class{" "}
+            </Text>
           </View>
           <View style={drawer.listIcon}>
             <Icon type="MaterialIcons" name="notifications" />
@@ -71,7 +77,7 @@ class MentorDrawer extends Component {
 }
 
 const mapStateToProps = state => ({
-  profileData: state.profileReducer
+  profileData: state.public
 });
 
 const mapDispatchToProps = dispatch => {
@@ -82,5 +88,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(MentorDrawer);
-
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MentorDrawer);

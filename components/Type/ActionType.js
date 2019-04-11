@@ -6,3 +6,5 @@ export const GET_OPEN_CLASS = "GET_OPEN_CLASS"
 export const GET_CLASS_LIST = "GET_CLASS_LIST"
 
 export const GET_PROFILE = "GET_PROFILE"
+
+export const GET_MENTOR_CLASS = "GET_MENTOR_CLASS"

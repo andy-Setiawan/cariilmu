@@ -16,6 +16,7 @@ import StudentProfile from "./components/Student/StudentProfile";
 import StudentSchedule from "./components/Student/StudentSchedule";
 import StudentDrawer from "./components/Student/StudentDrawer";
 import SignIn from "./components/Login/SignIn";
+import MentorClassList from "./components/Mentor/MentorClassList";
 
 const instructions = Platform.select({
   ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
@@ -42,6 +43,7 @@ export default class App extends Component {
             <Scene key="studentSchedule" component={StudentSchedule} />
             <Scene key="studentProfile" component={StudentProfile} />
             <Scene key="studentDrawer" component={StudentDrawer} />
+            <Scene key="mentorClassList" component={MentorClassList} />
           </Scene>
         </Router>
       </Provider>

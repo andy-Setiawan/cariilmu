@@ -11,14 +11,15 @@ import IconDesignClass from "../../assets/images/ic_designClass.png";
 import { Icon, Drawer } from "native-base";
 import StudentDrawer from "../Student/StudentDrawer";
 import AsyncStorage from "@react-native-community/async-storage";
+import MentorDrawer from "../Mentor/MentorDrawer.js";
 
 class Home extends Component {
   openDrawer() {
     {
-      !this.props.token.token && Actions.signin();
+      !this.props.auth.token && Actions.signin();
     }
     {
-      this.props.token.token && this._drawer._root.open();
+      this.props.auth.token && this._drawer._root.open();
     }
   }
 
@@ -41,7 +42,7 @@ class Home extends Component {
   render() {
     console.log(this.props);
     return (
-      <Drawer ref={ref => (this._drawer = ref)} content={<StudentDrawer />}>
+      <Drawer ref={ref => (this._drawer = ref)} content={<MentorDrawer />}>
         <View style={styles.container}>
           <View style={styles.header}>
             <Icon
@@ -137,9 +138,9 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-  classData: state.homeReducer,
-  token: state.authReducer,
-  role: state.profileReducer
+  classData: state.public,
+  auth: state.auth,
+  role: state.public
 });
 
 const mapDispatchToProps = dispatch => {
