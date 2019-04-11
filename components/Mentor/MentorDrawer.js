@@ -36,8 +36,8 @@ class MentorDrawer extends Component {
             </Text>
           </View>
           <View style={drawer.listIcon}>
-            <Icon type="MaterialCommunityIcons" name="certificate" />
-            <Text style={drawer.listText}> Certificate </Text>
+            <Icon type="FontAwesome5" name="chalkboard" />
+            <Text style={drawer.listText}> class </Text>
           </View>
           <View style={drawer.listIcon}>
             <Icon type="MaterialIcons" name="notifications" />

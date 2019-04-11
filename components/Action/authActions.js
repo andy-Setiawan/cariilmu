@@ -22,8 +22,8 @@ export const Sign_In_Student = (username, password) => {
             Authorization: response.data.data.token
           }
         }).then(res =>
-          dispatch({ type: GET_PROFILE, payload: res.data.result })
-        ).catch(console.log('nostudent'));
+          dispatch({ type: GET_PROFILE, payload: res.data.data })
+        ).catch(err => console.log("no student"));
       });
   };
 };
@@ -56,13 +56,13 @@ export const Sign_In_Mentor = (username, password) => {
         dispatch({ type: SIGN_IN, payload: response.data.data.token });
         axios({
           method: "get",
-          url: `${url}/student/profile`,
+          url: `${url}/mentor`,
           headers: {
             Authorization: response.data.data.token
           }
         }).then(res =>
-          dispatch({ type: GET_PROFILE, payload: res.data.result })
-        ).catch("nomentor");
+          dispatch({ type: GET_PROFILE, payload: res.data.data })
+        ).catch(err => console.log("no sign"));
       });
   };
 };

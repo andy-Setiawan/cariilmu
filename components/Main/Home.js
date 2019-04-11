@@ -5,7 +5,8 @@ import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
 import { Get_Open_Class, Get_Category } from "../Action/pubActions";
 import { Set_Token } from "../Action/authActions";
-import { getProfile } from "../Action/studentActions";
+import { getProfileStudent } from "../Action/studentActions";
+import { getProfileMentor } from "../Action/mentorActions";
 import IconDesignClass from "../../assets/images/ic_designClass.png";
 import { Icon, Drawer } from "native-base";
 import StudentDrawer from "../Student/StudentDrawer";
@@ -30,7 +31,7 @@ class Home extends Component {
   componentDidMount() {
     AsyncStorage.getItem("token").then(value => {
       value
-        ? (this.props.Set_Token(value), this.props.getProfile(value))
+        ? (this.props.Set_Token(value), this.props.getProfileMentor(value))
         : console.log("no");
     }),
       this.props.Get_Open_Class(),
@@ -38,6 +39,7 @@ class Home extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <Drawer ref={ref => (this._drawer = ref)} content={<StudentDrawer />}>
         <View style={styles.container}>
@@ -136,7 +138,8 @@ class Home extends Component {
 
 const mapStateToProps = state => ({
   classData: state.homeReducer,
-  token: state.authReducer
+  token: state.authReducer,
+  role: state.profileReducer
 });
 
 const mapDispatchToProps = dispatch => {
@@ -150,8 +153,11 @@ const mapDispatchToProps = dispatch => {
     Set_Token: token => {
       dispatch(Set_Token(token));
     },
-    getProfile: token => {
-      dispatch(getProfile(token));
+    getProfileStudent: token => {
+      dispatch(getProfileStudent(token));
+    },
+    getProfileMentor: token => {
+      dispatch(getProfileMentor(token));
     }
   };
 };
