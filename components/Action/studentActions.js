@@ -33,12 +33,28 @@ export const getPaymentStatus = tokens => {
       }
     })
       .then(response => {
-        console.log(response.data)
+        console.log(response.data);
         dispatch({
           type: GET_PAYMENT_STATUS,
           payload: response.data.data
         });
       })
       .catch(err => console.log("no payment detected"));
+  };
+};
+
+export const enrollclass = (tokens, classId) => {
+  return dispatch => {
+    axios({
+      method: "put",
+      url: `${url}/${classId}/enroll`,
+      headers: {
+        Authorization: tokens
+      }
+    })
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(err => console.log("no enroll yet"));
   };
 };

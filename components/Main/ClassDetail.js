@@ -9,10 +9,23 @@ import {
 import { Icon } from "native-base";
 import { styles, detail } from "../Style.js";
 import ClassBanner from "../../assets/images/languageClass.png";
+import { enrollclass } from "../Action/studentActions";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
 
 class ClassDetail extends Component {
+  handleEnrollClass = () => {
+    {
+      !this.props.token && Actions.signin();
+    }
+    {
+      this.props.token &&
+        this.props.enrollclass(this.props.token, this.props.classId);
+        alert('ENROLL SUCCESS')
+      Actions.home();
+    }
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -72,7 +85,7 @@ class ClassDetail extends Component {
                     />
                     <Text style={detail.dateText}>{list.city}</Text>
                   </View>
-                  <TouchableOpacity onPress={() => Actions.signin()}>
+                  <TouchableOpacity onPress={this.handleEnrollClass}>
                     <Text style={styles.button}>ENROLL</Text>
                   </TouchableOpacity>
                 </View>
@@ -85,11 +98,16 @@ class ClassDetail extends Component {
 }
 
 const mapStateToProps = state => ({
-  classDetails: state.public
+  classDetails: state.public,
+  token: state.auth.token
 });
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    enrollclass: (tokens, classId) => {
+      dispatch(enrollclass(tokens, classId));
+    }
+  };
 };
 
 export default connect(
