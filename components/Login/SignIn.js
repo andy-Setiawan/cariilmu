@@ -1,4 +1,4 @@
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 import React, { Component } from "react";
 import { Text, View, TouchableOpacity, Image, ScrollView } from "react-native";
 import { styles, login } from "../Style.js";
@@ -6,7 +6,7 @@ import Logo from "../../assets/images/cariilmu_light.png";
 import Reinput from "reinput";
 import { Icon } from "native-base";
 import { Actions } from "react-native-router-flux";
-import {Sign_In_Student, Sign_In_Mentor} from "../Action/authActions"
+import { Sign_In_Student, Sign_In_Mentor } from "../Action/authActions";
 
 class SignIn extends Component {
   constructor(props) {
@@ -15,21 +15,27 @@ class SignIn extends Component {
     this.state = {
       username: "",
       password: "",
-      role:"MENTOR",
+      role: "MENTOR"
     };
 
     this.signIn = this.signIn.bind(this);
   }
 
+  componentDidMount() {
+    this.props.auth.token && Actions.pop();
+  }
+
   signIn = () => {
-    const {username, password} = this.state
+    const { username, password } = this.state;
     switch (this.state.role) {
       case "STUDENT": {
-        this.props.Sign_In_Student(username, password)
+        this.props.Sign_In_Student(username, password);
+        Actions.pop();
         break;
       }
       case "MENTOR": {
-        this.props.Sign_In_Mentor(username, password)
+        this.props.Sign_In_Mentor(username, password);
+        Actions.pop();
         break;
       }
       default: {
@@ -37,13 +43,9 @@ class SignIn extends Component {
         break;
       }
     }
-
-
-    this.props.Sign_In_Student(username, password)
-  }
+  };
 
   render() {
-    this.props.auth.token && Actions.pop();
     return (
       <ScrollView style={{ ...styles.container, backgroundColor: "#eee" }}>
         <View style={login.topContainer}>
@@ -81,6 +83,7 @@ class SignIn extends Component {
               underlineActiveColor="#4f9da6"
               underlineColor="#4f9da6"
               returnKeyType="done"
+              onSubmitEditing={this.signIn}
               ref={input => (this.password = input)}
               autoCapitalize="none"
               autoCorrect={false}
@@ -88,10 +91,7 @@ class SignIn extends Component {
               onChangeText={password => this.setState({ password })}
             />
           </View>
-          <TouchableOpacity
-            style={login.loginButton}
-            onPress={this.signIn}
-          >
+          <TouchableOpacity style={login.loginButton} onPress={this.signIn}>
             <Text style={{ ...styles.button }}>SIGN IN</Text>
           </TouchableOpacity>
           <Text style={login.signupText} onPress={() => Actions.signup()}>
@@ -109,10 +109,14 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    Sign_In_Student : (username,password) => dispatch(Sign_In_Student(username,password)),
-    Sign_In_Mentor : (username,password) => dispatch(Sign_In_Mentor(username,password))
-  }
-}
+    Sign_In_Student: (username, password) =>
+      dispatch(Sign_In_Student(username, password)),
+    Sign_In_Mentor: (username, password) =>
+      dispatch(Sign_In_Mentor(username, password))
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
-
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignIn);

@@ -2,7 +2,6 @@ import {GET_MENTOR_CLASS} from "../Type/ActionType"
 
 const initialState = {
     allClass:[],
-    profile:[],
 }
 
 export default (state = initialState, action) => {

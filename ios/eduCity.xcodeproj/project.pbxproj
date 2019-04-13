@@ -59,6 +59,7 @@
 		A3964779EC7A4A0594EDD828 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 057B7148EE0C476CA6BD4DC1 /* Zocial.ttf */; };
 		B3937C50547C4B99A7D016FA /* libRNCViewpager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 121A8E07B4224EE282E52DEC /* libRNCViewpager.a */; };
 		EA32EB6D217C4781894BE6BE /* libRNCAsyncStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F06BF505740647BC89B42088 /* libRNCAsyncStorage.a */; };
+		CFB189A1FE77409380D08D41 /* Lato.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B08069E19C843A9B4B8FBB1 /* Lato.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -388,6 +389,7 @@
 		121A8E07B4224EE282E52DEC /* libRNCViewpager.a */ = {isa = PBXFileReference; name = "libRNCViewpager.a"; path = "libRNCViewpager.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		BC8F318485B84A0A853BFE3E /* RNCAsyncStorage.xcodeproj */ = {isa = PBXFileReference; name = "RNCAsyncStorage.xcodeproj"; path = "../node_modules/@react-native-community/async-storage/ios/RNCAsyncStorage.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		F06BF505740647BC89B42088 /* libRNCAsyncStorage.a */ = {isa = PBXFileReference; name = "libRNCAsyncStorage.a"; path = "libRNCAsyncStorage.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		9B08069E19C843A9B4B8FBB1 /* Lato.ttf */ = {isa = PBXFileReference; name = "Lato.ttf"; path = "../assets/fonts/Lato.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -678,6 +680,7 @@
 				F6923D23DE3C41AFA95471EF /* rubicon-icon-font.ttf */,
 				2BB73D2CCCE249569C426B42 /* SimpleLineIcons.ttf */,
 				057B7148EE0C476CA6BD4DC1 /* Zocial.ttf */,
+				9B08069E19C843A9B4B8FBB1 /* Lato.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1147,6 +1150,7 @@
 				43247610669C43BE8AA45A55 /* rubicon-icon-font.ttf in Resources */,
 				62FB0DC5B9C74A88AD6C0A19 /* SimpleLineIcons.ttf in Resources */,
 				A3964779EC7A4A0594EDD828 /* Zocial.ttf in Resources */,
+				CFB189A1FE77409380D08D41 /* Lato.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

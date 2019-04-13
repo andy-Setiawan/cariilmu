@@ -23,12 +23,6 @@ class Home extends Component {
     }
   }
 
-  closeDrawer() {
-    {
-      this._drawer._root.close();
-    }
-  }
-
   componentDidMount() {
     AsyncStorage.getItem("token").then(value => {
       value
@@ -40,7 +34,7 @@ class Home extends Component {
   }
 
   render() {
-    console.log(this.props);
+console.log(this.props)
     return (
       <Drawer ref={ref => (this._drawer = ref)} content={<MentorDrawer />}>
         <View style={styles.container}>

@@ -2,6 +2,7 @@ import { StyleSheet, Dimensions } from "react-native";
 
 const { width, height } = Dimensions.get("window");
 const textColor = "#000";
+const fontType = "Lato";
 
 export const styles = StyleSheet.create({
   container: {
@@ -21,7 +22,8 @@ export const styles = StyleSheet.create({
   headerText: {
     color: "#fafafa",
     fontSize: 20,
-    fontWeight: "700"
+    fontWeight: "700",
+    fontFamily: fontType
   },
 
   classIcon: {
@@ -35,6 +37,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#f07b3f",
     color: "#fafafa",
     fontWeight: "500",
+    fontFamily: fontType,
     height: 50,
     marginTop: 60,
     borderRadius: 10,
@@ -58,7 +61,8 @@ export const home = StyleSheet.create({
     fontWeight: "500",
     height: 30,
     borderRadius: 20,
-    paddingTop: 5
+    paddingTop: 5,
+    fontFamily: fontType
   },
 
   bannerText: {
@@ -69,12 +73,14 @@ export const home = StyleSheet.create({
 
   topText: {
     fontSize: 15,
-    fontWeight: "600"
+    fontWeight: "600",
+    fontFamily: fontType
   },
 
   midText: {
     fontSize: 12,
-    textAlign: "justify"
+    textAlign: "justify",
+    fontFamily: fontType
   },
 
   bannerImage: {
@@ -87,7 +93,8 @@ export const home = StyleSheet.create({
   },
 
   categoryText: {
-    fontWeight: "500"
+    fontWeight: "500",
+    fontFamily: fontType
   },
 
   categoryBox: {
@@ -115,7 +122,8 @@ export const home = StyleSheet.create({
   categoryListText: {
     marginTop: 5,
     fontSize: 12,
-    fontWeight: "700"
+    fontWeight: "700",
+    fontFamily: fontType
   },
 
   classBox: {
@@ -137,13 +145,14 @@ export const home = StyleSheet.create({
   classnameText: {
     color: styles.header.backgroundColor,
     fontWeight: "bold",
-    fontSize: 15
+    fontSize: 15,
+    fontFamily: fontType
   }
 });
 
 export const register = StyleSheet.create({
   topContainer: {
-    padding:(20,40),
+    padding: (20, 40),
     justifyContent: "flex-end",
     backgroundColor: styles.header.backgroundColor
   },
@@ -152,28 +161,30 @@ export const register = StyleSheet.create({
     paddingBottom: 20
   },
 
-  roleText:{
-    color:"#fafafa",
-    fontSize:30,
-    fontWeight:"700",
+  roleText: {
+    color: "#fafafa",
+    fontSize: 30,
+    fontWeight: "700",
+    fontFamily: fontType
   },
 
-  rolePick:{
-    color:"#fafafa",
-    fontSize:20,
-    fontWeight:"700",
-    textAlign:"center",
-    marginTop:10,
+  rolePick: {
+    color: "#fafafa",
+    fontSize: 20,
+    fontWeight: "700",
+    textAlign: "center",
+    marginTop: 10,
+    fontFamily: fontType
   },
 
-  imagePosition:{
-    marginTop:20,
+  imagePosition: {
+    marginTop: 20,
     flexDirection: "row",
-    justifyContent:"space-around",
+    justifyContent: "space-around"
   },
 
   registerImage: {
-    borderRadius:100,
+    borderRadius: 100,
     width: width * 0.3,
     height: width * 0.3,
     justifyContent: "center"
@@ -212,7 +223,8 @@ export const login = StyleSheet.create({
     marginTop: 20,
     color: "#fafafa",
     fontWeight: "500",
-    fontSize: 20
+    fontSize: 20,
+    fontFamily: fontType
   },
 
   loginBox: {
@@ -233,7 +245,8 @@ export const login = StyleSheet.create({
   signupText: {
     marginTop: height * 0.125,
     textAlign: "center",
-    fontWeight: "500"
+    fontWeight: "500",
+    fontFamily: fontType
   }
 });
 
@@ -254,7 +267,8 @@ export const drawer = StyleSheet.create({
   },
 
   userText: {
-    color: "#fafafa"
+    color: "#fafafa",
+    fontFamily: fontType
   },
 
   listIcon: {
@@ -265,7 +279,8 @@ export const drawer = StyleSheet.create({
 
   listText: {
     marginLeft: 20,
-    fontWeight: "500"
+    fontWeight: "500",
+    fontFamily: fontType
   }
 });
 
@@ -285,27 +300,30 @@ export const detail = StyleSheet.create({
     marginTop: height * 0.15,
     color: "#fafafa",
     fontSize: 35,
-    fontWeight: "400"
+    fontWeight: "400",
+    fontFamily: fontType
   },
 
   bannerFee: {
     color: "#fafafa",
     fontSize: 20,
     fontWeight: "600",
-    lineHeight: 30
+    lineHeight: 30,
+    fontFamily: fontType
   },
 
   bannerMentor: {
     color: "#fafafa",
     fontSize: 15,
     fontWeight: "800",
-    lineHeight: 30
+    lineHeight: 30,
+    fontFamily: fontType
   },
 
   description: {
     padding: 20,
     borderBottomWidth: 1,
-    borderBottomColor: "#eee",
+    borderBottomColor: "#eee"
   },
 
   descriptionText: {
@@ -344,7 +362,8 @@ export const onBoarding = StyleSheet.create({
     fontSize: 20,
     fontWeight: "900",
     color: textColor,
-    marginTop: 50
+    marginTop: 50,
+    fontFamily: fontType
   },
 
   descText: {
@@ -353,7 +372,8 @@ export const onBoarding = StyleSheet.create({
     color: textColor,
     marginTop: 20,
     marginHorizontal: 40,
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    fontFamily: fontType
   },
 
   page: {
@@ -373,7 +393,8 @@ export const list = StyleSheet.create({
   },
 
   class: {
-    fontWeight: "500"
+    fontWeight: "500",
+    fontFamily: fontType
   },
 
   classBox: {
@@ -394,13 +415,15 @@ export const list = StyleSheet.create({
 
   classname: {
     color: styles.header.backgroundColor,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontFamily: fontType
   },
 
   dateTimeBox: {
     flexDirection: "row",
     fontSize: 12,
-    marginTop: 5
+    marginTop: 5,
+    fontFamily: fontType
   },
 
   iconDateTime: {
@@ -436,11 +459,13 @@ export const profile = StyleSheet.create({
   nameText: {
     color: styles.container.backgroundColor,
     fontSize: 20,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontFamily: fontType
   },
 
   statusText: {
-    color: styles.container.backgroundColor
+    color: styles.container.backgroundColor,
+    fontFamily: fontType
   },
 
   bottomProfile: {
@@ -450,7 +475,8 @@ export const profile = StyleSheet.create({
 
   accountText: {
     color: styles.header.backgroundColor,
-    fontWeight: "700"
+    fontWeight: "700",
+    fontFamily: fontType
   },
 
   profileBox: {
@@ -460,7 +486,8 @@ export const profile = StyleSheet.create({
   },
 
   profileText: {
-    color: textColor
+    color: textColor,
+    fontFamily: fontType
   },
 
   editText: {
@@ -498,21 +525,24 @@ export const schedule = StyleSheet.create({
   classnameText: {
     fontWeight: "800",
     fontSize: 15,
-    color: textColor
+    color: textColor,
+    fontFamily: fontType
   },
 
   dateTimeBox: {
     width,
     flexDirection: "row",
     fontSize: 12,
-    marginTop: 15
+    marginTop: 15,
+    fontFamily: fontType
   },
 
   locationBox: {
     flexDirection: "row",
     fontSize: 12,
     marginTop: 5,
-    alignItems: "stretch"
+    alignItems: "stretch",
+    fontFamily: fontType
   },
 
   iconDateTime: {
@@ -533,7 +563,8 @@ export const schedule = StyleSheet.create({
     paddingTop: 5,
     marginTop: 10,
     marginLeft: 15,
-    fontWeight: "800"
+    fontWeight: "800",
+    fontFamily: fontType
   },
 
   notYetText: {
@@ -545,6 +576,84 @@ export const schedule = StyleSheet.create({
     paddingTop: 5,
     marginTop: 10,
     marginLeft: 15,
-    fontWeight: "800"
+    fontWeight: "800",
+    fontFamily: fontType
   }
+});
+
+export const mntClassDetails = StyleSheet.create({
+  bannerImage: {
+    height: height * 0.3,
+    backgroundColor: "black"
+  },
+
+  topContainer: {
+    padding: 20,
+  },
+
+  name: {
+    fontSize: 25,
+    color: textColor,
+    fontWeight: "700",
+    fontFamily: fontType
+  },
+
+  categoryBox: {
+    marginTop: 20,
+    flexDirection: "row"
+  },
+
+  category: {
+    backgroundColor: styles.header.backgroundColor,
+    color: "#fafafa",
+    fontFamily: fontType,
+    fontWeight: "700",
+    padding: 5,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+    marginRight: 15
+  },
+
+  description: {
+    marginTop: 20,
+    fontFamily: fontType
+  },
+
+  ratingContainer: {
+    flexDirection: "row",
+    marginTop: 20,
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: "#eee"
+  },
+
+  ratingBox: {
+    padding: 10,
+    justifyContent: "center",
+    flex: 1,
+    flexDirection: "column",
+  },
+
+  rating: {
+    fontFamily: fontType,
+    fontSize: 18,
+    color: textColor,
+    fontWeight: "800"
+  },
+
+  bottomContainer:{
+    flexDirection:"column",
+    paddingHorizontal:20,
+  },
+
+  dateBox:{
+    flexDirection:"row",
+    marginTop:15
+  },
+
+  dateText:{
+    fontFamily:fontType,
+    marginLeft:15,
+  }
+
 });

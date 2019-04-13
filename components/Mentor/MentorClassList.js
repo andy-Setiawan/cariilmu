@@ -39,7 +39,7 @@ class MentorClassList extends Component {
                 return (
                   <TouchableOpacity
                     key={data._id}
-                    onPress={() => Actions.classDetail({ classId: data._id })}
+                    onPress={() => Actions.mentorClassDetail({ classId: data._id })}
                   >
                     <View style={list.classList}>
                       <Image source={IcLanguage} style={styles.classIcon} />

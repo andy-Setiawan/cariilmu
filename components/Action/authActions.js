@@ -21,10 +21,11 @@ export const Sign_In_Student = (username, password) => {
           headers: {
             Authorization: response.data.data.token
           }
-        }).then(res =>
-          dispatch({ type: GET_PROFILE, payload: res.data.data })
-        ).catch(err => console.log("no student"));
-      });
+        })
+          .then(res => dispatch({ type: GET_PROFILE, payload: res.data.data }))
+          .catch(err => console.log("no student"));
+      })
+      .catch(err => console.log("no student 02"));
   };
 };
 
@@ -60,10 +61,11 @@ export const Sign_In_Mentor = (username, password) => {
           headers: {
             Authorization: response.data.data.token
           }
-        }).then(res =>
-          dispatch({ type: GET_PROFILE, payload: res.data.data })
-        ).catch(err => console.log("no sign"));
-      });
+        })
+          .then(res => dispatch({ type: GET_PROFILE, payload: res.data.data }))
+          .catch(err => console.log("no sign"));
+      })
+      .catch(err => console.log("no sign"));
   };
 };
 
