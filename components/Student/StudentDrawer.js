@@ -36,8 +36,8 @@ class StudentDrawer extends Component {
             </Text>
           </View>
           <View style={drawer.listIcon}>
-            <Icon type="MaterialCommunityIcons" name="certificate" />
-            <Text style={drawer.listText}> Certificate </Text>
+            <Icon type="Foundation" name="shopping-cart" />
+            <Text style={drawer.listText} onPress={() => Actions.studentCart()}> Cart </Text>
           </View>
           <View style={drawer.listIcon}>
             <Icon type="MaterialIcons" name="notifications" />
@@ -71,7 +71,7 @@ class StudentDrawer extends Component {
 }
 
 const mapStateToProps = state => ({
-  profileData: state.profileReducer
+  profileData: state.public
 });
 
 const mapDispatchToProps = dispatch => {

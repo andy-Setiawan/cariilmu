@@ -85,7 +85,7 @@ class ClassDetail extends Component {
 }
 
 const mapStateToProps = state => ({
-  classDetails: state.homeReducer
+  classDetails: state.public
 });
 
 const mapDispatchToProps = dispatch => {

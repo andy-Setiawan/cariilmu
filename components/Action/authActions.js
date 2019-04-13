@@ -22,7 +22,7 @@ export const Sign_In_Student = (username, password) => {
             Authorization: response.data.data.token
           }
         })
-          .then(res => dispatch({ type: GET_PROFILE, payload: res.data.data }))
+          .then(res => dispatch({ type: GET_PROFILE, payload: res.data.result }))
           .catch(err => console.log("no student"));
       })
       .catch(err => console.log("no student 02"));

@@ -1,6 +1,7 @@
 import {
   ADD_TASK,
   GET_OPEN_CLASS,
+  GET_ALL_CLASS,
   GET_CATEGORY,
   GET_CLASS_LIST,
   GET_PROFILE
@@ -8,6 +9,7 @@ import {
 
 const initialState = {
   openClass: [],
+  allClass: [],
   category: [],
   classList: [],
   profile: [],
@@ -20,6 +22,8 @@ export default (state = initialState, action) => {
       return action.payload;
     case GET_OPEN_CLASS:
       return { ...state, openClass: action.payload };
+    case GET_ALL_CLASS:
+      return { ...state, allClass: action.payload };
     case GET_CATEGORY:
       return { ...state, category: action.payload };
     case GET_CLASS_LIST:

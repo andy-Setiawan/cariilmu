@@ -83,7 +83,7 @@ class ClassList extends Component {
 }
 
 const mapStateToProps = state => ({
-  classData: state.homeReducer
+  classData: state.public 
 });
 
 const mapDispatchToProps = dispatch => {

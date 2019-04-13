@@ -34,9 +34,8 @@ class Home extends Component {
   }
 
   render() {
-console.log(this.props)
     return (
-      <Drawer ref={ref => (this._drawer = ref)} content={<MentorDrawer />}>
+      <Drawer ref={ref => (this._drawer = ref)} content={<StudentDrawer />}>
         <View style={styles.container}>
           <View style={styles.header}>
             <Icon

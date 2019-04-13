@@ -15,7 +15,7 @@ class SignIn extends Component {
     this.state = {
       username: "",
       password: "",
-      role: "MENTOR"
+      role: "STUDENT"
     };
 
     this.signIn = this.signIn.bind(this);
