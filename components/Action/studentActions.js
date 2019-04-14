@@ -15,13 +15,13 @@ export const getProfileStudent = tokens => {
   return dispatch => {
     axios({
       method: "get",
-      url: `${url}/student/profile`,
+      url: `${url}/student`,
       headers: {
         Authorization: tokens
       }
     })
       .then(response =>
-        dispatch({ type: GET_PROFILE, payload: response.data.result })
+        dispatch({ type: GET_PROFILE, payload: response.data.data })
       )
       .catch(err => console.log("no profile student"));
   };

@@ -11,6 +11,7 @@ class StudentSchedule extends Component {
     this.props.getStudentClass(this.props.token);
   }
   render() {
+    console.log(this.props);
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -28,30 +29,36 @@ class StudentSchedule extends Component {
           />
         </View>
         <ScrollView style={schedule.container}>
-          <View style={schedule.classBox}>
-            {this.props.schedule.map((list, i) => {
-              return (
-                <View style={schedule.classList} key={i}>
-                  <View style={schedule.classText}>
-                    <Text style={schedule.classnameText}>{list.name}</Text>
-                    <View style={schedule.dateTimeBox}>
-                      <Icon
-                        type="FontAwesome"
-                        name="calendar"
-                        style={schedule.iconDateTime}
-                      />
-                      <Text style={schedule.dateTimeText}>{list.schedule}</Text>
+          {this.props.schedule.class ? (
+            <View style={schedule.classBox}>
+              {this.props.schedule.class.map((list, i) => {
+                return (
+                  <View style={schedule.classList} key={i}>
+                    <View style={schedule.classText}>
+                      <Text style={schedule.classnameText}>{list.name}</Text>
+                      <View style={schedule.dateTimeBox}>
+                        <Icon
+                          type="FontAwesome"
+                          name="calendar"
+                          style={schedule.iconDateTime}
+                        />
+                        <Text style={schedule.dateTimeText}>
+                          {list.schedule}
+                        </Text>
+                      </View>
                     </View>
+                    {list.status == "finished" ? (
+                      <Text style={schedule.paidText}>FINISHED</Text>
+                    ) : (
+                      <Text style={schedule.notYetText}>ON PROGRESS</Text>
+                    )}
                   </View>
-                  {list.status == "finished" ? (
-                    <Text style={schedule.paidText}>FINISHED</Text>
-                  ) : (
-                    <Text style={schedule.notYetText}>ON PROGRESS</Text>
-                  )}
-                </View>
-              );
-            })}
-          </View>
+                );
+              })}
+            </View>
+          ) : (
+            console.log("NONO")
+          )}
         </ScrollView>
       </View>
     );

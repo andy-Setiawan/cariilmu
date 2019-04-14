@@ -26,7 +26,7 @@ class Home extends Component {
   componentDidMount() {
     AsyncStorage.getItem("token").then(value => {
       value
-        ? (this.props.Set_Token(value), this.props.getProfileMentor(value))
+        ? (this.props.Set_Token(value), this.props.getProfileStudent(value))
         : console.log("no");
     }),
       this.props.Get_Open_Class(),
@@ -46,8 +46,8 @@ class Home extends Component {
             />
             <Image source={require("../../assets/images/home_logo.png")} />
             <Icon
-              type="MaterialIcons"
-              name="notifications"
+              type="FontAwesome"
+              name="search"
               style={{ color: "#fafafa" }}
             />
           </View>
@@ -71,42 +71,54 @@ class Home extends Component {
             </View>
             <View style={home.category}>
               <Text style={home.categoryText}>CATEGORY</Text>
-              <View style={home.categoryBox}>
-                {this.props.classData.category.map((list, i) => {
-                  return (
-                    <TouchableOpacity
-                      key={list._id}
-                      onPress={() =>
-                        Actions.classList({
-                          className: list.name,
-                          classId: list._id
-                        })
-                      }
-                    >
-                      <View style={home.categoryPosition}>
-                        <Image
-                        source={url(list.photo)}
-                        alt=""
-                        style={home.categoryIcon}
-                      />
-                        <Text style={home.categoryListText}>{list.name}</Text>
-                      </View>
-                    </TouchableOpacity>
-                  );
-                })}
-              </View>
+              <ScrollView horizontal>
+                <View horizontal style={home.categoryBox}>
+                  {this.props.classData.category.map((list, i) => {
+                    return (
+                      <TouchableOpacity
+                        key={list._id}
+                        onPress={() =>
+                          Actions.classList({
+                            className: list.name,
+                            classId: list._id
+                          })
+                        }
+                      >
+                        <View style={home.categoryPosition}>
+                          <Image
+                            source={{ uri: list.photo }}
+                            alt=""
+                            style={home.categoryIcon}
+                          />
+                          <Text style={home.categoryListText}>
+                            {list.name.toUpperCase()}
+                          </Text>
+                        </View>
+                      </TouchableOpacity>
+                    );
+                  })}
+                </View>
+              </ScrollView>
               <Text style={home.categoryText}>NEW CLASSES</Text>
-              {this.props.classData.openClass.slice(0, 5).map((list, i) => {
+              {this.props.classData.allClass.slice(0, 5).map(list => {
                 return (
                   <TouchableOpacity
                     key={list._id}
                     onPress={() => Actions.classDetail({ classId: list._id })}
                   >
                     <View style={home.classBox}>
-                      <Image
-                        source={IconDesignClass}
-                        style={styles.classIcon}
-                      />
+                      {this.props.classData.category
+                        .filter(data => data._id == list.category._id)
+                        .map((img, i) => {
+                          return (
+                            <Image
+                              key={i}
+                              source={{ uri: img.photo }}
+                              style={styles.classIcon}
+                            />
+                          );
+                        })}
+
                       <View style={home.classText}>
                         <Text style={home.classnameText}>{list.name}</Text>
                         <Text>{list.mentor.name}</Text>

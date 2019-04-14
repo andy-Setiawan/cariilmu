@@ -25,7 +25,7 @@ class ClassList extends Component {
             style={{ color: "#fafafa" }}
             onPress={() => Actions.pop()}
           />
-          <Text style={styles.headerText}>{this.props.className}</Text>
+          <Text style={styles.headerText}>{this.props.className.toUpperCase()}</Text>
           <Icon
             type="MaterialCommunityIcons"
             name="account-circle"

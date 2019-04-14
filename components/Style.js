@@ -98,8 +98,9 @@ export const home = StyleSheet.create({
   },
 
   categoryBox: {
-    flexDirection: "row",
-    flexWrap: "wrap"
+    flexDirection:"column",
+    flexWrap: "wrap",
+    height: height * 0.4,
   },
 
   categoryPosition: {
@@ -115,8 +116,9 @@ export const home = StyleSheet.create({
   },
 
   categoryIcon: {
-    width: width * 0.1,
-    height: height * 0.05
+    width: width * 0.2,
+    height: width * 0.2,
+    borderRadius:10
   },
 
   categoryListText: {
