@@ -84,11 +84,11 @@ class Home extends Component {
                       }
                     >
                       <View style={home.categoryPosition}>
-                        {/* <Image
-                        source={require(`../../assets/images/${image}.png`)}
+                        <Image
+                        source={url(list.photo)}
                         alt=""
                         style={home.categoryIcon}
-                      /> */}
+                      />
                         <Text style={home.categoryListText}>{list.name}</Text>
                       </View>
                     </TouchableOpacity>

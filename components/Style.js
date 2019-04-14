@@ -509,6 +509,92 @@ export const schedule = StyleSheet.create({
     marginTop: 10,
     backgroundColor: styles.container.backgroundColor,
     width,
+    height: height * 0.125,
+    borderBottomWidth: 1,
+    borderColor: "#EEE",
+    flexDirection: "row",
+    flex: 1,
+    alignItems: "center",
+    flexWrap: "wrap"
+  },
+
+  classText: {
+    marginLeft: 15
+  },
+
+  classnameText: {
+    fontWeight: "800",
+    fontSize: 15,
+    color: textColor,
+    fontFamily: fontType
+  },
+
+  dateTimeBox: {
+    width,
+    flexDirection: "row",
+    fontSize: 12,
+    marginTop: 15,
+    fontFamily: fontType
+  },
+
+  locationBox: {
+    flexDirection: "row",
+    fontSize: 12,
+    marginTop: 5,
+    alignItems: "stretch",
+    fontFamily: fontType
+  },
+
+  iconDateTime: {
+    fontSize: 20,
+    
+  },
+
+  dateTimeText: {
+    marginLeft:20
+  },
+
+  paidText: {
+    backgroundColor: "#00bd56",
+    color: styles.container.backgroundColor,
+    borderRadius: 10,
+    height: 30,
+    paddingHorizontal: 15,
+    paddingTop: 5,
+    marginTop: 20,
+    marginLeft: 15,
+    fontWeight: "800",
+    fontFamily: fontType
+  },
+
+  notYetText: {
+    backgroundColor: "#ff5959",
+    color: styles.container.backgroundColor,
+    borderRadius: 10,
+    height: 30,
+    paddingHorizontal: 15,
+    paddingTop: 5,
+    marginTop: 20,
+    marginLeft: 15,
+    fontWeight: "800",
+    fontFamily: fontType
+  }
+});
+
+export const payment = StyleSheet.create({
+  container: {
+    paddingHorizontal: 20
+  },
+
+  classBox: {
+    flexDirection: "column",
+    marginTop: 10
+  },
+
+  classList: {
+    marginTop: 10,
+    backgroundColor: styles.container.backgroundColor,
+    width,
     height: height * 0.2,
     borderBottomWidth: 1,
     borderColor: "#EEE",

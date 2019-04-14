@@ -1,6 +1,10 @@
-import { GET_PROFILE, GET_PAYMENT_STATUS } from "../Type/ActionType";
+import {
+  GET_PROFILE,
+  GET_PAYMENT_STATUS,
+  GET_STUDENT_CLASS
+} from "../Type/ActionType";
 import axios from "axios";
-import AsyncStorage from "@react-native-community/async-storage";
+// import AsyncStorage from "@react-native-community/async-storage";
 
 const url = "http://cari-ilmu-test.herokuapp.com";
 // const token =
@@ -20,6 +24,22 @@ export const getProfileStudent = tokens => {
         dispatch({ type: GET_PROFILE, payload: response.data.result })
       )
       .catch(err => console.log("no profile student"));
+  };
+};
+
+export const getStudentClass = tokens => {
+  return dispatch => {
+    axios({
+      method: "get",
+      url: `${url}/student/class`,
+      headers: {
+        Authorization: tokens
+      }
+    })
+      .then(response =>
+        dispatch({ type: GET_STUDENT_CLASS, payload: response.data.data })
+      )
+      .catch(err => console.log("no student class"));
   };
 };
 
@@ -47,13 +67,13 @@ export const enrollclass = (tokens, classId) => {
   return dispatch => {
     axios({
       method: "put",
-      url: `${url}/${classId}/enroll`,
+      url: `${url}/student/class/${classId}/enroll`,
       headers: {
         Authorization: tokens
       }
     })
       .then(response => {
-        console.log(response.data);
+        console.log("ENROLL SUCCESS", response.data);
       })
       .catch(err => console.log("no enroll yet"));
   };

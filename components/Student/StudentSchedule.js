@@ -1,54 +1,15 @@
 import React, { Component } from "react";
-import { Text, View, ScrollView} from "react-native";
+import { Text, View, ScrollView } from "react-native";
 import { styles, schedule } from "../Style.js";
 import { Icon } from "native-base";
-import {Actions} from "react-native-router-flux"
+import { Actions } from "react-native-router-flux";
+import { connect } from "react-redux";
+import { getStudentClass } from "../Action/studentActions";
 
-export default class StudentSchedule extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      schedule: [
-        {
-          className: "Kelas Adobe",
-          date: "Kamis, 1 Nov 2019",
-          time: "15:00 - 18:00",
-          location: "Rusun BPJS Kabil",
-          paymentStatus: true
-        },
-        {
-          className: "Kelas CorelDraw",
-          date: "Kamis, 8 Nov 2019",
-          time: "15:00 - 18:00",
-          location: "Rusun BPJS Kabil",
-          paymentStatus: false
-        },
-        {
-          className: "Kelas Microsoft Office",
-          date: "Kamis, 1 Nov 2019",
-          time: "15:00 - 18:00",
-          location: "Rusun BPJS Kabil",
-          paymentStatus: true
-        },
-        {
-          className: "Kelas Javascript",
-          date: "Kamis, 1 Nov 2019",
-          time: "15:00 - 18:00",
-          location: "Rusun BPJS Kabil",
-          paymentStatus: false
-        },
-        {
-          className: "Kelas SQL",
-          date: "Kamis, 1 Nov 2019",
-          time: "15:00 - 18:00",
-          location: "Rusun BPJS Kabil",
-          paymentStatus: true
-        }
-      ]
-    };
+class StudentSchedule extends Component {
+  componentDidMount() {
+    this.props.getStudentClass(this.props.token);
   }
-
   render() {
     return (
       <View style={styles.container}>
@@ -68,35 +29,24 @@ export default class StudentSchedule extends Component {
         </View>
         <ScrollView style={schedule.container}>
           <View style={schedule.classBox}>
-            {this.state.schedule.map((list, i) => {
+            {this.props.schedule.map((list, i) => {
               return (
                 <View style={schedule.classList} key={i}>
                   <View style={schedule.classText}>
-                    <Text style={schedule.classnameText}>{list.className}</Text>
+                    <Text style={schedule.classnameText}>{list.name}</Text>
                     <View style={schedule.dateTimeBox}>
                       <Icon
                         type="FontAwesome"
                         name="calendar"
                         style={schedule.iconDateTime}
                       />
-                      <Text style={schedule.dateTimeText}>{list.date}</Text>
-
-                      <Text style={schedule.dateTimeText}>{list.time}</Text>
-                    </View>
-                    <View style={schedule.locationBox}>
-                      <Icon
-                        type="MaterialIcons"
-                        name="location-on"
-                        style={schedule.iconDateTime}
-                      />
-                      <Text style={schedule.dateTimeText}>{list.location}</Text>
-                      <Text style={schedule.dateTimeText} />
+                      <Text style={schedule.dateTimeText}>{list.schedule}</Text>
                     </View>
                   </View>
-                  {list.paymentStatus ? (
-                    <Text style={schedule.paidText}>Paid</Text>
+                  {list.status == "finished" ? (
+                    <Text style={schedule.paidText}>FINISHED</Text>
                   ) : (
-                    <Text style={schedule.notYetText}>Not Yet</Text>
+                    <Text style={schedule.notYetText}>ON PROGRESS</Text>
                   )}
                 </View>
               );
@@ -107,3 +57,21 @@ export default class StudentSchedule extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  schedule: state.student.class,
+  token: state.auth.token
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getStudentClass: token => {
+      dispatch(getStudentClass(token));
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(StudentSchedule);

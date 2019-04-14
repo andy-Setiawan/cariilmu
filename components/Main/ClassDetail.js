@@ -21,8 +21,7 @@ class ClassDetail extends Component {
     {
       this.props.token &&
         this.props.enrollclass(this.props.token, this.props.classId);
-        alert('ENROLL SUCCESS')
-      Actions.home();
+        Actions.home();
     }
   };
 
