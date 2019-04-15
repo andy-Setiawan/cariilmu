@@ -3,6 +3,8 @@ import { StyleSheet, Dimensions } from "react-native";
 const { width, height } = Dimensions.get("window");
 const textColor = "#000";
 const fontType = "Lato";
+const submitColor = "#00e640"
+const cancelColor = "#f64747"
 
 export const styles = StyleSheet.create({
   container: {
@@ -494,6 +496,53 @@ export const profile = StyleSheet.create({
 
   editText: {
     marginTop: 5
+  },
+
+  modalBox:{
+    backgroundColor:styles.container.backgroundColor,
+    padding:20,
+  },
+
+  modalText: {
+    fontSize:20,
+    fontWeight:"700",
+    fontFamily:fontType,
+    color:styles.header.backgroundColor
+  },
+
+  modalInput:{
+    marginTop:10,
+    borderWidth:1,
+    borderRadius:10,
+    borderColor:"#eee"
+  },
+
+  handleBox:{
+    flexDirection:"row",
+    justifyContent:"flex-end",
+    marginTop:10
+  },
+
+  submit:{
+    backgroundColor:submitColor,
+    color:"#fafafa",
+    borderRadius:10,
+    borderColor:"#eee",
+    textAlign:"center",
+    fontWeight:"700",
+    padding:10,
+    marginLeft:5,
+  },
+
+
+  cancel:{
+    backgroundColor:cancelColor,
+    color:"#fafafa",
+    borderRadius:10,
+    borderColor:"#eee",
+    textAlign:"center",
+    fontWeight:"700",
+    padding:10
   }
 });
 

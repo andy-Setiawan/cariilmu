@@ -11,13 +11,13 @@ const url = "http://cari-ilmu-test.herokuapp.com";
 //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjYTMyM2U1MjA1ZTc2MWU2NTRhNTRkMSIsImVtYWlsIjoiamFuZS5kb2VAZ21haWwuY29tIiwidXNlcm5hbWUiOiJqYW5lLmRvZSIsInJvbGUiOiJzdHVkZW50IiwiaWF0IjoxNTU1MTE5ODkxLCJleHAiOjE1NTUyMDYyOTF9.AO4ijmbLVzyuej0IVk2qt1tc5ISYHoGHjcvKkcvk0V4";
 // const token = AsyncStorage.getItem("token").then(value => value)
 
-export const getProfileStudent = tokens => {
+export const getProfileStudent = token => {
   return dispatch => {
     axios({
       method: "get",
       url: `${url}/student`,
       headers: {
-        Authorization: tokens
+        Authorization: token
       }
     })
       .then(response =>
@@ -27,13 +27,13 @@ export const getProfileStudent = tokens => {
   };
 };
 
-export const getStudentClass = tokens => {
+export const getStudentClass = token => {
   return dispatch => {
     axios({
       method: "get",
       url: `${url}/student/class`,
       headers: {
-        Authorization: tokens
+        Authorization: token
       }
     })
       .then(response =>
@@ -43,13 +43,13 @@ export const getStudentClass = tokens => {
   };
 };
 
-export const getPaymentStatus = tokens => {
+export const getPaymentStatus = token => {
   return dispatch => {
     axios({
       method: "get",
       url: `${url}/student/payment`,
       headers: {
-        Authorization: tokens
+        Authorization: token
       }
     })
       .then(response => {
@@ -63,18 +63,37 @@ export const getPaymentStatus = tokens => {
   };
 };
 
-export const enrollclass = (tokens, classId) => {
+export const enrollclass = (token, classId) => {
   return dispatch => {
     axios({
       method: "put",
       url: `${url}/student/class/${classId}/enroll`,
       headers: {
-        Authorization: tokens
+        Authorization: token
       }
     })
       .then(response => {
         console.log("ENROLL SUCCESS", response.data);
       })
       .catch(err => console.log("no enroll yet"));
+  };
+};
+
+export const updateProfile = (token, bio) => {
+  return dispatch => {
+    axios({
+      method: "put",
+      url: `${url}/student/`,
+      headers: {
+        Authorization: token
+      },
+      data:{
+        bio : bio
+      }
+    })
+      .then(response => {
+        dispatch({ type: GET_PROFILE, payload: response.data.message })
+      })
+      .catch(err => console.log("no update yet"));
   };
 };
