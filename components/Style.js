@@ -604,49 +604,17 @@ export const schedule = StyleSheet.create({
   dateTimeText: {
     marginLeft:20
   },
-
-  paidText: {
-    backgroundColor: "#00bd56",
-    color: styles.container.backgroundColor,
-    borderRadius: 10,
-    height: 30,
-    paddingHorizontal: 15,
-    paddingTop: 5,
-    marginTop: 20,
-    marginLeft: 15,
-    fontWeight: "800",
-    fontFamily: fontType
-  },
-
-  notYetText: {
-    backgroundColor: "#ff5959",
-    color: styles.container.backgroundColor,
-    borderRadius: 10,
-    height: 30,
-    paddingHorizontal: 15,
-    paddingTop: 5,
-    marginTop: 20,
-    marginLeft: 15,
-    fontWeight: "800",
-    fontFamily: fontType
-  }
 });
 
 export const payment = StyleSheet.create({
-  container: {
-    paddingHorizontal: 20
-  },
-
   classBox: {
     flexDirection: "column",
-    marginTop: 10
   },
 
   classList: {
-    marginTop: 10,
+    padding : (10,20),
     backgroundColor: styles.container.backgroundColor,
     width,
-    height: height * 0.2,
     borderBottomWidth: 1,
     borderColor: "#EEE",
     flexDirection: "row",
@@ -655,64 +623,45 @@ export const payment = StyleSheet.create({
     flexWrap: "wrap"
   },
 
-  classText: {
-    marginLeft: 15
-  },
-
   classnameText: {
     fontWeight: "800",
-    fontSize: 15,
-    color: textColor,
+    fontSize: 20,
+    color: styles.header.backgroundColor,
     fontFamily: fontType
+  },
+
+  dataBox:{
+    marginLeft:20,
   },
 
   dateTimeBox: {
-    width,
     flexDirection: "row",
-    fontSize: 12,
-    marginTop: 15,
-    fontFamily: fontType
-  },
-
-  locationBox: {
-    flexDirection: "row",
-    fontSize: 12,
-    marginTop: 5,
-    alignItems: "stretch",
+    marginTop: 10,
     fontFamily: fontType
   },
 
   iconDateTime: {
     fontSize: 20,
-    flex: 1
   },
 
   dateTimeText: {
-    flex: 6
+    marginLeft:20
   },
 
   paidText: {
-    backgroundColor: "#00bd56",
+    backgroundColor: submitColor,
     color: styles.container.backgroundColor,
     borderRadius: 10,
-    height: 30,
-    paddingHorizontal: 15,
-    paddingTop: 5,
-    marginTop: 10,
-    marginLeft: 15,
+    padding:(15,15),
     fontWeight: "800",
     fontFamily: fontType
   },
 
-  notYetText: {
-    backgroundColor: "#ff5959",
+  unpaidText: {
+    backgroundColor: cancelColor,
     color: styles.container.backgroundColor,
     borderRadius: 10,
-    height: 30,
-    paddingHorizontal: 15,
-    paddingTop: 5,
-    marginTop: 10,
-    marginLeft: 15,
+    padding:(15,15),
     fontWeight: "800",
     fontFamily: fontType
   }

@@ -92,7 +92,7 @@ export const updateProfile = (token, bio) => {
       }
     })
       .then(response => {
-        dispatch({ type: GET_PROFILE, payload: response.data.message })
+        dispatch({ type: GET_PROFILE, payload: response.data.data })
       })
       .catch(err => console.log("no update yet"));
   };

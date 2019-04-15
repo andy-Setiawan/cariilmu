@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, Image } from "react-native";
 import { connect } from "react-redux";
 import { styles, payment } from "../Style.js";
 import { Icon } from "native-base";
@@ -29,51 +29,57 @@ class StudentCart extends Component {
             style={{ color: styles.header.backgroundColor }}
           />
         </View>
-        <ScrollView style={payment.container}>
+        <ScrollView>
           <View style={payment.classBox}>
             {this.props.status.map((list, i) => {
               return list.class !== null ? (
-                <View style={payment.classList} key={i}>
-                  <View style={payment.classText}>
-                    <Text style={payment.classnameText}>
-                      {list.class.name}
-                    </Text>
-                  </View>
+                <View key={i}>
                   {this.props.class
                     .filter(id => id._id == list.class._id)
-                    .map((data,index )=> {
+                    .map((data, index) => {
                       return (
-                        <View key={index}>
-                          <View style={payment.dateTimeBox}>
-                            <Icon
-                              type="FontAwesome"
-                              name="calendar"
-                              style={payment.iconDateTime}
-                            />
-                            <Text style={payment.dateTimeText}>
-                              {data.schedule}
+                        <View style={payment.classList} key={index}>
+                          <Image
+                            style={{
+                              ...styles.classIcon,
+                              backgroundColor: "black"
+                            }}
+                          />
+                          <View style={payment.dataBox}>
+                            <Text style={payment.classnameText}>
+                              {data.name}
                             </Text>
-                            <Text style={payment.dateTimeText} />
+                            <View style={payment.dateTimeBox}>
+                              <Icon
+                                type="FontAwesome"
+                                name="calendar"
+                                style={payment.iconDateTime}
+                              />
+                              <Text style={payment.dateTimeText}>
+                                {data.schedule}
+                              </Text>
+                            </View>
+                            <View style={payment.dateTimeBox}>
+                              <Icon
+                                type="MaterialIcons"
+                                name="payment"
+                                style={payment.iconDateTime}
+                              />
+                              <Text style={payment.dateTimeText}>
+                                Rp. {data.fee.toLocaleString("ar-EG")}
+                              </Text>
+                            </View>
                           </View>
-                          <View style={payment.locationBox}>
-                            <Icon
-                              type="MaterialIcons"
-                              name="location-on"
-                              style={payment.iconDateTime}
-                            />
-                            <Text style={payment.dateTimeText}>
-                              {data.city}
-                            </Text>
-                            <Text style={payment.dateTimeText} />
+                          <View style={{ position: "absolute", right: 20 }}>
+                            {list.status == "pending" ? (
+                              <Text style={payment.paidText}>PAID</Text>
+                            ) : (
+                              <Text style={payment.unpaidText}>UNPAID</Text>
+                            )}
                           </View>
                         </View>
                       );
                     })}
-                  {list.status == "pending" ? (
-                    <Text style={payment.paidText}>Paid</Text>
-                  ) : (
-                    <Text style={payment.notYetText}>Not Yet</Text>
-                  )}
                 </View>
               ) : (
                 <View key={i} />
@@ -94,7 +100,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    getPaymentStatus: (token) => {
+    getPaymentStatus: token => {
       dispatch(getPaymentStatus(token));
     }
   };
