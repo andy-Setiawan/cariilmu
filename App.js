@@ -36,8 +36,8 @@ export default class App extends Component {
         <Router>
           <Scene key="root" hideNavBar>
             <Scene key="signin" component={SignIn} />
-            <Scene key="signup" component={SignUp} />
-            <Scene key="home" component={Home} initial />
+            <Scene key="signup" component={SignUp} initial />
+            <Scene key="home" component={Home} />
             <Scene key="classList" component={ClassList}  />
             <Scene key="classDetail" component={ClassDetail} />
             <Scene key="onboarding" component={OnBoarding} />

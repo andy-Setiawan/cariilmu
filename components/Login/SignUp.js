@@ -16,21 +16,33 @@ class SignUp extends Component {
       username: "",
       email: "",
       password: "",
-      role: ""
+      confirm: "",
+      role: "",
+
+      checkName: false,
+      checkUser: false,
+      checkEmail: false,
+      checkPassword: false,
+      checkConfirm: false,
+
+      errorName: "",
+      errorUser: "",
+      errorEmail: "",
+      errorPassword: "",
+      errorConfirm: ""
     };
   }
 
   signUp = () => {
     const { name, username, email, password } = this.state;
+    this.validation();
     switch (this.state.role) {
       case "STUDENT": {
         this.props.Sign_Up_Student(name, username, email, password);
-        Actions.pop();
         break;
       }
       case "MENTOR": {
         this.props.Sign_Up_Mentor(name, username, email, password);
-        Actions.pop();
         break;
       }
       default: {
@@ -40,8 +52,54 @@ class SignUp extends Component {
     }
   };
 
+  validation = () => {
+    const regEmail = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+
+    this.state.name == ""
+      ? this.setState({
+          checkName: true,
+          errorName: "Enter your fullname"
+        })
+      : this.setState({ checkName: false }),
+      this.state.username == ""
+        ? this.setState({
+            checkUser: true,
+            errorUser: "Enter your username"
+          })
+        : this.setState({ checkUser: false }),
+      this.state.email == ""
+        ? this.setState({
+            checkEmail: true,
+            errorEmail: "Enter your email"
+          })
+        : !regEmail.exec(String(this.state.email).toLowerCase())
+        ? this.setState({
+            checkEmail: true,
+            errorEmail: "Invalid email address"
+          })
+        : this.setState({ checkEmail: false }),
+      this.state.password == ""
+        ? this.setState({
+            checkPassword: true,
+            errorPassword: "Password must not blank",
+            checkConfirm: false
+          })
+        : this.state.password.length < 6
+        ? this.setState({
+            checkPassword: true,
+            errorPassword: "Use 6 characters or more for your password",
+            checkConfirm: false
+          })
+        : (this.setState({ checkPassword: false }),
+          this.state.password != this.state.confirm
+            ? this.setState({
+                checkConfirm: true,
+                errorConfirm: "Password didn't match. Try again"
+              })
+            : this.setState({ checkConfirm: false }));
+  };
+
   render() {
-    // console.log(this.state.role);
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -97,6 +155,9 @@ class SignUp extends Component {
                 autoCorrect={false}
                 onChangeText={name => this.setState({ name })}
               />
+              {this.state.checkName && (
+                <Text style={register.error}>{this.state.errorName}</Text>
+              )}
               <Reinput
                 label="Username"
                 labelActiveColor="#4f9da6"
@@ -111,6 +172,9 @@ class SignUp extends Component {
                 autoCorrect={false}
                 onChangeText={username => this.setState({ username })}
               />
+              {this.state.checkUser && (
+                <Text style={register.error}>{this.state.errorUser}</Text>
+              )}
               <Reinput
                 label="E-Mail"
                 labelActiveColor="#4f9da6"
@@ -126,6 +190,9 @@ class SignUp extends Component {
                 autoCorrect={false}
                 onChangeText={email => this.setState({ email })}
               />
+              {this.state.checkEmail && (
+                <Text style={register.error}>{this.state.errorEmail}</Text>
+              )}
               <Reinput
                 label="Password"
                 labelActiveColor="#4f9da6"
@@ -141,6 +208,9 @@ class SignUp extends Component {
                 secureTextEntry
                 onChangeText={password => this.setState({ password })}
               />
+              {this.state.checkPassword && (
+                <Text style={register.error}>{this.state.errorPassword}</Text>
+              )}
               <Reinput
                 label="Confirm Password"
                 labelActiveColor="#4f9da6"
@@ -148,26 +218,17 @@ class SignUp extends Component {
                 labelActiveScale={1}
                 underlineActiveColor="#4f9da6"
                 underlineColor="#4f9da6"
-                returnKeyType="next"
+                returnKeyType="done"
                 ref={input => (this.confirm = input)}
-                // onSubmitEditing={() => this.phone.focus()}
+                onSubmitEditing={this.signUp}
                 autoCapitalize="none"
                 autoCorrect={false}
                 secureTextEntry
+                onChangeText={confirm => this.setState({ confirm })}
               />
-              {/* <Reinput
-                label="Phonenumber"
-                labelActiveColor="#4f9da6"
-                labelColor="#4f9da6"
-                labelActiveScale={1}
-                underlineActiveColor="#4f9da6"
-                underlineColor="#4f9da6"
-                returnKeyType="done"
-                ref={input => (this.phone = input)}
-                keyboardType="phone-pad"
-                autoCapitalize="none"
-                autoCorrect={false}
-              /> */}
+              {this.state.checkConfirm && (
+                <Text style={register.error}>{this.state.errorConfirm}</Text>
+              )}
               <TouchableOpacity onPress={this.signUp}>
                 <Text style={{ ...styles.button, marginTop: 30 }}>SIGN UP</Text>
               </TouchableOpacity>

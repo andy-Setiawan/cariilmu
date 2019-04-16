@@ -198,6 +198,10 @@ export const register = StyleSheet.create({
     marginTop: 20,
     paddingHorizontal: 40,
     borderRadius: 5
+  },
+
+  error:{
+    color:cancelColor
   }
 });
 
