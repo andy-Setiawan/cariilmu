@@ -6,7 +6,7 @@ import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
 import { Sign_Out } from "../Action/authActions";
 
-class StudentDrawer extends Component {
+class MentorDrawer extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -36,8 +36,14 @@ class StudentDrawer extends Component {
             </Text>
           </View>
           <View style={drawer.listIcon}>
-            <Icon type="Foundation" name="shopping-cart" />
-            <Text style={drawer.listText} onPress={() => Actions.studentCart()}> Cart </Text>
+            <Icon type="FontAwesome5" name="chalkboard" />
+            <Text
+              style={drawer.listText}
+              onPress={() => Actions.mentorClassList()}
+            >
+              {" "}
+              Class{" "}
+            </Text>
           </View>
           <View style={drawer.listIcon}>
             <Icon type="MaterialIcons" name="notifications" />
@@ -82,5 +88,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(StudentDrawer);
-
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MentorDrawer);

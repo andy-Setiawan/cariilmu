@@ -2,55 +2,35 @@ import React, { Component } from "react";
 import { Text, View, ScrollView, Image, TouchableOpacity } from "react-native";
 import { styles, home } from "../Style.js";
 import { Actions } from "react-native-router-flux";
+import { connect } from "react-redux";
+import { Get_Open_Class, Get_Category } from "../Action/pubActions";
+import { Set_Token } from "../Action/authActions";
+import { getProfileStudent } from "../Action/studentActions";
+import { getProfileMentor } from "../Action/mentorActions";
 import IconDesignClass from "../../assets/images/ic_designClass.png";
 import { Icon, Drawer } from "native-base";
 import StudentDrawer from "../Student/StudentDrawer";
+import AsyncStorage from "@react-native-community/async-storage";
+import MentorDrawer from "../Mentor/MentorDrawer.js";
 
-export default class Home extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      list: [
-        {
-          className: "Kelas Desain",
-          mentorName: "Rama Soepang",
-          fee: "Rp 30.000",
-          date: "Wednesday, March 27, 2019"
-        },
-        {
-          className: "Kelas Desain",
-          mentorName: "Rama Soepang",
-          fee: "Rp 30.000",
-          date: "Wednesday, March 27, 2019"
-        }
-      ],
-
-      category: [
-        {
-          name: "COMPUTER",
-          image: require("../../assets/images/home_computer.png")
-        },
-        {
-          name: "DESIGN",
-          image: require("../../assets/images/home_design.png")
-        },
-        { name: "MUSIC", image: require("../../assets/images/home_music.png") },
-        {
-          name: "LANGUAGE",
-          image: require("../../assets/images/home_language.png")
-        },
-        {
-          name: "ECONOMY",
-          image: require("../../assets/images/home_economy.png")
-        },
-        { name: "OTHER", image: require("../../assets/images/home_other.png") }
-      ]
-    };
+class Home extends Component {
+  openDrawer() {
+    {
+      !this.props.auth.token && Actions.signin();
+    }
+    {
+      this.props.auth.token && this._drawer._root.open();
+    }
   }
 
-  openDrawer() {
-    this._drawer._root.open();
+  componentDidMount() {
+    AsyncStorage.getItem("token").then(value => {
+      value
+        ? (this.props.Set_Token(value), this.props.getProfileStudent(value))
+        : console.log("no");
+    }),
+      this.props.Get_Open_Class(),
+      this.props.Get_Category();
   }
 
   render() {
@@ -66,8 +46,8 @@ export default class Home extends Component {
             />
             <Image source={require("../../assets/images/home_logo.png")} />
             <Icon
-              type="MaterialIcons"
-              name="notifications"
+              type="FontAwesome"
+              name="search"
               style={{ color: "#fafafa" }}
             />
           </View>
@@ -75,47 +55,75 @@ export default class Home extends Component {
             <View style={home.banner}>
               <View style={home.bannerText}>
                 <Text style={home.topText}>
-                  Join Us !! Find your passion in EduCity
+                  Yuk bargabung dengan kita !!! Temukan Passionmu di cariilmu
                 </Text>
                 <Text style={home.midText}>
-                  Hone your skills by learning from the expert
+                  Tingkatkan kemampuanmu dengan belajar bersama para ahli
                 </Text>
-                <TouchableOpacity onPress={() => Actions.signup()}>
+                <TouchableOpacity onPress={() => Actions.signin()}>
                   <Text style={home.join}>JOIN US!!</Text>
                 </TouchableOpacity>
               </View>
-              <View style={home.bannerImage} />
+              <Image
+                style={home.bannerImage}
+                source={require("../../assets/images/home_banner.png")}
+              />
             </View>
             <View style={home.category}>
               <Text style={home.categoryText}>CATEGORY</Text>
-              <View style={home.categoryBox}>
-                {this.state.category.map((list, i) => {
-                  return (
-                    <View style={home.categoryPosition} key={i}>
-                      <Image
-                        source={list.image}
-                        alt=""
-                        style={home.categoryIcon}
-                      />
-                      <Text style={home.categoryListText}>{list.name}</Text>
-                    </View>
-                  );
-                })}
-              </View>
+              <ScrollView horizontal>
+                <View horizontal style={home.categoryBox}>
+                  {this.props.classData.category.map((list, i) => {
+                    return (
+                      <TouchableOpacity
+                        key={list._id}
+                        onPress={() =>
+                          Actions.classList({
+                            className: list.name,
+                            classId: list._id
+                          })
+                        }
+                      >
+                        <View style={home.categoryPosition}>
+                          <Image
+                            source={{ uri: list.photo }}
+                            alt=""
+                            style={home.categoryIcon}
+                          />
+                          <Text style={home.categoryListText}>
+                            {list.name.toUpperCase()}
+                          </Text>
+                        </View>
+                      </TouchableOpacity>
+                    );
+                  })}
+                </View>
+              </ScrollView>
               <Text style={home.categoryText}>NEW CLASSES</Text>
-              {this.state.list.map((list, i) => {
+              {this.props.classData.allClass.slice(0, 5).map(list => {
                 return (
-                  <TouchableOpacity key={i} onPress={() => Actions.classDetail()}>
+                  <TouchableOpacity
+                    key={list._id}
+                    onPress={() => Actions.classDetail({ classId: list._id })}
+                  >
                     <View style={home.classBox}>
-                      <Image
-                        source={IconDesignClass}
-                        style={styles.classIcon}
-                      />
+                      {this.props.classData.category
+                        .filter(data => data._id == list.category._id)
+                        .map((img, i) => {
+                          return (
+                            <Image
+                              key={i}
+                              source={{ uri: img.photo }}
+                              style={styles.classIcon}
+                            />
+                          );
+                        })}
+
                       <View style={home.classText}>
-                        <Text style={home.classnameText}>{list.className}</Text>
-                        <Text>{list.mentorName}</Text>
-                        <Text>{list.fee}</Text>
-                        <Text>{list.date}</Text>
+                        <Text style={home.classnameText}>{list.name}</Text>
+                        <Text>{list.mentor.name}</Text>
+                        <Text>{list.city}</Text>
+                        <Text>{list.schedule}</Text>
                       </View>
                       <Icon
                         type="MaterialIcons"
@@ -134,3 +142,33 @@ export default class Home extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  classData: state.public,
+  auth: state.auth,
+  role: state.public
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    Get_Open_Class: () => {
+      dispatch(Get_Open_Class());
+    },
+    Get_Category: () => {
+      dispatch(Get_Category());
+    },
+    Set_Token: token => {
+      dispatch(Set_Token(token));
+    },
+    getProfileStudent: token => {
+      dispatch(getProfileStudent(token));
+    },
+    getProfileMentor: token => {
+      dispatch(getProfileMentor(token));
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);
