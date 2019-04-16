@@ -7,7 +7,6 @@ import { Get_Open_Class, Get_Category } from "../Action/pubActions";
 import { Set_Token } from "../Action/authActions";
 import { getProfileStudent } from "../Action/studentActions";
 import { getProfileMentor } from "../Action/mentorActions";
-import IconDesignClass from "../../assets/images/ic_designClass.png";
 import { Icon, Drawer } from "native-base";
 import StudentDrawer from "../Student/StudentDrawer";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -100,25 +99,17 @@ class Home extends Component {
                 </View>
               </ScrollView>
               <Text style={home.categoryText}>NEW CLASSES</Text>
-              {this.props.classData.allClass.slice(0, 5).map(list => {
+              {this.props.classData.openClass.slice(0, 5).map(list => {
                 return (
                   <TouchableOpacity
                     key={list._id}
                     onPress={() => Actions.classDetail({ classId: list._id })}
                   >
                     <View style={home.classBox}>
-                      {this.props.classData.category
-                        .filter(data => data._id == list.category._id)
-                        .map((img, i) => {
-                          return (
-                            <Image
-                              key={i}
-                              source={{ uri: img.photo }}
-                              style={styles.classIcon}
-                            />
-                          );
-                        })}
-
+                      <Image
+                        source={{ uri: list.image }}
+                        style={home.categoryIcon}
+                      />
                       <View style={home.classText}>
                         <Text style={home.classnameText}>{list.name}</Text>
                         <Text>{list.mentor.name}</Text>
