@@ -4,7 +4,8 @@ import {
   GET_ALL_CLASS,
   GET_CATEGORY,
   GET_CLASS_LIST,
-  GET_PROFILE
+  GET_PROFILE,
+  SEND_ALERT
 } from "../Type/ActionType";
 
 const initialState = {
@@ -13,6 +14,9 @@ const initialState = {
   category: [],
   classList: [],
   profile: [],
+  alertMessage: "",
+  progressStatus: false,
+  alertStatus: false,
   image: require("../../assets/images/login_image.png")
 };
 
@@ -30,6 +34,8 @@ export default (state = initialState, action) => {
       return { ...state, classList: action.payload };
     case GET_PROFILE:
       return { ...state, profile: action.payload };
+    case SEND_ALERT:
+      return { ...state, alertMessage:action.message, progressStatus:action.progress ,alertStatus:action.visible };
     default:
       return state;
   }

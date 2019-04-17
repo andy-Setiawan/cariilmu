@@ -1,15 +1,12 @@
 import {
   GET_PROFILE,
   GET_PAYMENT_STATUS,
-  GET_STUDENT_CLASS
+  GET_STUDENT_CLASS,
+  SEND_ALERT
 } from "../Type/ActionType";
 import axios from "axios";
-// import AsyncStorage from "@react-native-community/async-storage";
 
 const url = "http://cari-ilmu-test.herokuapp.com";
-// const token =
-//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjYTMyM2U1MjA1ZTc2MWU2NTRhNTRkMSIsImVtYWlsIjoiamFuZS5kb2VAZ21haWwuY29tIiwidXNlcm5hbWUiOiJqYW5lLmRvZSIsInJvbGUiOiJzdHVkZW50IiwiaWF0IjoxNTU1MTE5ODkxLCJleHAiOjE1NTUyMDYyOTF9.AO4ijmbLVzyuej0IVk2qt1tc5ISYHoGHjcvKkcvk0V4";
-// const token = AsyncStorage.getItem("token").then(value => value)
 
 export const getProfileStudent = token => {
   return dispatch => {
@@ -87,13 +84,52 @@ export const updateProfile = (token, bio) => {
       headers: {
         Authorization: token
       },
-      data:{
-        bio : bio
+      data: {
+        bio: bio
       }
     })
       .then(response => {
-        dispatch({ type: GET_PROFILE, payload: response.data.data })
+        dispatch({ type: GET_PROFILE, payload: response.data.data });
       })
       .catch(err => console.log("no update yet"));
   };
+};
+
+export const uploadImage = (token, paymentId, photo) => {
+  console.log("token : ", token);
+  console.log("classId : ", paymentId);
+
+  var bodyFormData = new FormData();
+  bodyFormData.append("photo", {
+    uri: photo.uri,
+    type: photo.type,
+    name: photo.fileName
+  });
+  console.log("DATA : ", bodyFormData);
+  return dispatch => {
+    axios({
+      method: "put",
+      url: `${url}/student/payment/${paymentId}/confirm`,
+      headers: {
+        Authorization: token
+      },
+      data: bodyFormData
+    })
+      .then(() =>
+        dispatch({
+          type: SEND_ALERT,
+          message: "UPLOAD SUCCESS",
+          progress: false,
+          visible: true
+        })
+      )
+      .catch(err => console.log("GAGAL UPLOAD"));
+  };
+};
+
+export const uploadFailed = () => {
+  return { type: SEND_ALERT, 
+    message: "UPLOAD FAILED",
+    progress: false,
+    visible: true };
 };

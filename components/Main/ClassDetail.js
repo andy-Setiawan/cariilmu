@@ -21,7 +21,7 @@ class ClassDetail extends Component {
     {
       this.props.token &&
         this.props.enrollclass(this.props.token, this.props.classId);
-        Actions.home();
+      Actions.home();
     }
   };
 
@@ -35,7 +35,7 @@ class ClassDetail extends Component {
               <ScrollView key={list._id}>
                 <View style={styles.bannerContainer}>
                   <ImageBackground
-                    source={ClassBanner}
+                    source={{ uri: list.image }}
                     alt=""
                     style={detail.bannerImage}
                   />

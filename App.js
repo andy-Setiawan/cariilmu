@@ -11,7 +11,6 @@ import Home from "./components/Main/Home";
 import ClassList from "./components/Main/ClassList";
 import ClassDetail from "./components/Main/ClassDetail";
 import OnBoarding from "./components/Intro/OnBoarding";
-import Payment from "./components/Student/Payment";
 import StudentProfile from "./components/Student/StudentProfile";
 import StudentSchedule from "./components/Student/StudentSchedule";
 import StudentDrawer from "./components/Student/StudentDrawer";
@@ -19,6 +18,7 @@ import SignIn from "./components/Login/SignIn";
 import MentorClassList from "./components/Mentor/MentorClassList";
 import MentorClassDetails from "./components/Mentor/MentorClassDetails";
 import StudentCart from "./components/Student/StudentCart";
+import StudentPayment  from "./components/Student/StudentPayment";
 
 const instructions = Platform.select({
   ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
@@ -41,7 +41,7 @@ export default class App extends Component {
             <Scene key="classList" component={ClassList}  />
             <Scene key="classDetail" component={ClassDetail} />
             <Scene key="onboarding" component={OnBoarding} />
-            <Scene key="payment" component={Payment} />
+            <Scene key="studentPayment" component={StudentPayment}  />
             <Scene key="studentSchedule" component={StudentSchedule} />
             <Scene key="studentProfile" component={StudentProfile} />
             <Scene key="studentDrawer" component={StudentDrawer} />

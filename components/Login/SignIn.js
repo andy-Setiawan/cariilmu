@@ -7,6 +7,8 @@ import Reinput from "reinput";
 import { Icon } from "native-base";
 import { Actions } from "react-native-router-flux";
 import { Sign_In_Student, Sign_In_Mentor } from "../Action/authActions";
+import { closeAlert } from "../Action/pubActions";
+import AwesomeAlert from "react-native-awesome-alerts";
 
 class SignIn extends Component {
   constructor(props) {
@@ -30,12 +32,10 @@ class SignIn extends Component {
     switch (this.state.role) {
       case "STUDENT": {
         this.props.Sign_In_Student(username, password);
-        Actions.pop();
         break;
       }
       case "MENTOR": {
         this.props.Sign_In_Mentor(username, password);
-        Actions.pop();
         break;
       }
       default: {
@@ -47,72 +47,87 @@ class SignIn extends Component {
 
   render() {
     return (
-      <ScrollView style={{ ...styles.container, backgroundColor: "#eee" }}>
-        <View style={login.topContainer}>
-          <Icon
-            type="FontAwesome"
-            name="arrow-left"
-            style={{ color: "#fafafa" }}
-            onPress={() => Actions.pop()}
-          />
-          <View style={login.logoBox}>
-            <Image style={login.logo} source={Logo} alt={Logo} />
-            <Text style={login.loginText}>Login to continue</Text>
-          </View>
-        </View>
-        <View style={login.bottomContainer}>
-          <View style={login.loginBox}>
-            <Reinput
-              label="Username"
-              labelActiveColor="#4f9da6"
-              labelColor="#4f9da6"
-              labelActiveScale={1}
-              underlineActiveColor="#4f9da6"
-              underlineColor="#4f9da6"
-              returnKeyType="next"
-              onSubmitEditing={() => this.password.focus()}
-              autoCapitalize="none"
-              autoCorrect={false}
-              onChangeText={username => this.setState({ username })}
+      <View style={{ ...styles.container, backgroundColor: "#eee" }}>
+        <ScrollView>
+          <View style={login.topContainer}>
+            <Icon
+              type="FontAwesome"
+              name="arrow-left"
+              style={{ color: "#fafafa" }}
+              onPress={() => Actions.pop()}
             />
-            <Reinput
-              label="Password"
-              labelActiveColor="#4f9da6"
-              labelColor="#4f9da6"
-              labelActiveScale={1}
-              underlineActiveColor="#4f9da6"
-              underlineColor="#4f9da6"
-              returnKeyType="done"
-              onSubmitEditing={this.signIn}
-              ref={input => (this.password = input)}
-              autoCapitalize="none"
-              autoCorrect={false}
-              secureTextEntry
-              onChangeText={password => this.setState({ password })}
-            />
+            <View style={login.logoBox}>
+              <Image style={login.logo} source={Logo} alt={Logo} />
+              <Text style={login.loginText}>Login to continue</Text>
+            </View>
           </View>
-          <TouchableOpacity style={login.loginButton} onPress={this.signIn}>
-            <Text style={{ ...styles.button }}>SIGN IN</Text>
-          </TouchableOpacity>
-          <Text style={login.signupText} onPress={() => Actions.signup()}>
-            SIGN UP
-          </Text>
-        </View>
-      </ScrollView>
+          <View style={login.bottomContainer}>
+            <View style={login.loginBox}>
+              <Reinput
+                label="Username"
+                labelActiveColor="#4f9da6"
+                labelColor="#4f9da6"
+                labelActiveScale={1}
+                underlineActiveColor="#4f9da6"
+                underlineColor="#4f9da6"
+                returnKeyType="next"
+                onSubmitEditing={() => this.password.focus()}
+                autoCapitalize="none"
+                autoCorrect={false}
+                onChangeText={username => this.setState({ username })}
+              />
+              <Reinput
+                label="Password"
+                labelActiveColor="#4f9da6"
+                labelColor="#4f9da6"
+                labelActiveScale={1}
+                underlineActiveColor="#4f9da6"
+                underlineColor="#4f9da6"
+                returnKeyType="done"
+                onSubmitEditing={this.signIn}
+                ref={input => (this.password = input)}
+                autoCapitalize="none"
+                autoCorrect={false}
+                secureTextEntry
+                onChangeText={password => this.setState({ password })}
+              />
+            </View>
+            <TouchableOpacity style={login.loginButton} onPress={this.signIn}>
+              <Text style={{ ...styles.button }}>SIGN IN</Text>
+            </TouchableOpacity>
+            <Text style={login.signupText} onPress={() => Actions.signup()}>
+              SIGN UP
+            </Text>
+          </View>
+        </ScrollView>
+        <AwesomeAlert
+          show={this.props.visible}
+          message={this.props.message}
+          messageStyle={styles.alertMessage}
+          closeOnTouchOutside={false}
+          closeOnHardwareBackPress={false}
+          showConfirmButton={true}
+          confirmText="OK"
+          onConfirmPressed={() => {
+            this.props.closeAlert();
+          }}
+        />
+      </View>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  message: state.public.alertMessage,
+  visible: state.public.alertStatus
 });
 
 const mapDispatchToProps = dispatch => {
   return {
     Sign_In_Student: (username, password) =>
       dispatch(Sign_In_Student(username, password)),
-    Sign_In_Mentor: (username, password) =>
-      dispatch(Sign_In_Mentor(username, password))
+    closeAlert: () => dispatch(closeAlert())
   };
 };
 

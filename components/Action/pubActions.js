@@ -2,7 +2,8 @@ import {
   GET_OPEN_CLASS,
   GET_ALL_CLASS,
   GET_CATEGORY,
-  GET_CLASS_LIST
+  GET_CLASS_LIST,
+  SEND_ALERT
 } from "../Type/ActionType";
 import axios from "axios";
 
@@ -58,4 +59,11 @@ export const Get_Class_List = classId => {
       })
       .catch(err => console.log("no class list"));
   };
+};
+
+export const closeAlert = () => {
+  return { type: SEND_ALERT, 
+    message: "",
+    progress: false,
+    visible: false };
 };

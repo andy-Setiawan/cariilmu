@@ -69,7 +69,7 @@ class Home extends Component {
               />
             </View>
             <View style={home.category}>
-              <Text style={home.categoryText}>CATEGORY</Text>
+              <Text style={home.categoryText}>CATEGORIES</Text>
               <ScrollView horizontal>
                 <View horizontal style={home.categoryBox}>
                   {this.props.classData.category.map((list, i) => {
@@ -79,7 +79,8 @@ class Home extends Component {
                         onPress={() =>
                           Actions.classList({
                             className: list.name,
-                            classId: list._id
+                            classId: list._id,
+                            imageUrl:list.photo
                           })
                         }
                       >
@@ -108,13 +109,13 @@ class Home extends Component {
                     <View style={home.classBox}>
                       <Image
                         source={{ uri: list.image }}
-                        style={home.categoryIcon}
+                        style={{...home.categoryIcon, marginLeft:10}}
                       />
                       <View style={home.classText}>
                         <Text style={home.classnameText}>{list.name}</Text>
-                        <Text>{list.mentor.name}</Text>
-                        <Text>{list.city}</Text>
-                        <Text>{list.schedule}</Text>
+                        <Text style={home.text}>{list.mentor.name}</Text>
+                        <Text style={home.text}>{list.city}</Text>
+                        <Text style={home.text}>{list.schedule}</Text>
                       </View>
                       <Icon
                         type="MaterialIcons"

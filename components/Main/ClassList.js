@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import { Text, View, ScrollView, Image, TouchableOpacity } from "react-native";
 import { Icon } from "native-base";
-import { styles, list } from "../Style.js";
+import { styles, list, home } from "../Style.js";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
 import { Get_Class_List } from "../Action/pubActions";
-
-import IcLanguage from "../../assets/images/ic_languageClass.png";
 
 class ClassList extends Component {
 
@@ -43,17 +41,17 @@ class ClassList extends Component {
                   onPress={() => Actions.classDetail({classId:data._id})}
                 >
                   <View style={list.classList}>
-                    <Image source={IcLanguage} style={styles.classIcon} />
+                    <Image source={{uri :this.props.imageUrl}} style={home.categoryIcon} />
                     <View style={list.classTextBox}>
                       <Text style={list.classname}>{data.name}</Text>
-                      <Text>{data.mentor.name}</Text>
+                      <Text style={list.mentorname}>{data.mentor.name}</Text>
                       <View style={list.dateTimeBox}>
                         <Icon
                           type="FontAwesome"
                           name="calendar"
                           style={list.iconDateTime}
                         />
-                        <Text style={list.dateTimeText}>{data.schedule}</Text>
+                        <Text style={list.dateTimeText}>{data.schedule.substring(0,15)}</Text>
                       </View>
                       <View style={list.dateTimeBox}>
                         <Icon

@@ -1,6 +1,6 @@
 import axios from "axios";
 import AsyncStorage from "@react-native-community/async-storage";
-import { SIGN_IN, GET_PROFILE, SIGN_OUT } from "../Type/ActionType";
+import { SIGN_IN, GET_PROFILE, SIGN_OUT, SEND_ALERT } from "../Type/ActionType";
 
 const url = "http://cari-ilmu-test.herokuapp.com";
 
@@ -14,6 +14,12 @@ export const Sign_In_Student = (username, password) => {
       .then(response => {
         AsyncStorage.setItem("token", response.data.data.token);
         AsyncStorage.setItem("role", response.data.data.role);
+        dispatch({
+          type: SEND_ALERT,
+          message: "SIGN IN SUCCESS",
+          progress: false,
+          visible: true
+        });
         dispatch({ type: SIGN_IN, payload: response.data.data.token });
         axios({
           method: "get",
@@ -22,12 +28,17 @@ export const Sign_In_Student = (username, password) => {
             Authorization: response.data.data.token
           }
         })
-          .then(res =>
-            dispatch({ type: GET_PROFILE, payload: res.data.result })
-          )
+          .then(res => dispatch({ type: GET_PROFILE, payload: res.data.data }))
           .catch(err => console.log("no student"));
       })
-      .catch(err => console.log("no student 02"));
+      .catch(() =>
+        dispatch({
+          type: SEND_ALERT,
+          message: "SIGN IN FAILED",
+          progress: false,
+          visible: true
+        })
+      );
   };
 };
 

@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
+import RF from "react-native-responsive-fontsize"
 
 const { width, height } = Dimensions.get("window");
 const textColor = "#000";
@@ -23,7 +24,7 @@ export const styles = StyleSheet.create({
 
   headerText: {
     color: "#fafafa",
-    fontSize: 20,
+    fontSize: RF(3),
     fontWeight: "700",
     fontFamily: fontType
   },
@@ -40,11 +41,16 @@ export const styles = StyleSheet.create({
     color: "#fafafa",
     fontWeight: "500",
     fontFamily: fontType,
-    height: 50,
     marginTop: 60,
     borderRadius: 10,
-    paddingVertical: 15,
+    paddingVertical: 10,
     textAlign: "center"
+  },
+
+  alertMessage:{
+    fontFamily:fontType,
+    fontSize:RF(2.5),
+    fontWeight:"700"   
   }
 });
 
@@ -74,13 +80,13 @@ export const home = StyleSheet.create({
   },
 
   topText: {
-    fontSize: 15,
+    fontSize: RF(2),
     fontWeight: "600",
     fontFamily: fontType
   },
 
   midText: {
-    fontSize: 12,
+    fontSize: RF(2),
     textAlign: "justify",
     fontFamily: fontType
   },
@@ -102,41 +108,41 @@ export const home = StyleSheet.create({
   categoryBox: {
     flexDirection:"column",
     flexWrap: "wrap",
-    height: height * 0.4,
+    height: height * 0.45,
   },
 
   categoryPosition: {
     padding: 5,
     backgroundColor: "#fafafa",
     borderRadius: 5,
-    width: width * 0.25,
-    height: width * 0.25,
+    width: width * 0.3,
+    height: width * 0.3,
     margin: (10, 10),
     alignItems: "center",
     justifyContent: "center",
-    elevation: 4
+    elevation:1
   },
 
   categoryIcon: {
     width: width * 0.2,
     height: width * 0.2,
-    borderRadius:10
+    borderRadius:10,
   },
 
   categoryListText: {
     marginTop: 5,
-    fontSize: 12,
+    fontSize: RF(1.5),
     fontWeight: "700",
     fontFamily: fontType
   },
 
   classBox: {
-    marginTop: 10,
+    marginTop: 5,
     borderRadius: 5,
     backgroundColor: "#fafafa",
     width: width * 0.9,
     height: height * 0.15,
-    elevation: 6,
+    elevation: 1,
     flexDirection: "row",
     flex: 1,
     alignItems: "center"
@@ -149,8 +155,13 @@ export const home = StyleSheet.create({
   classnameText: {
     color: styles.header.backgroundColor,
     fontWeight: "bold",
-    fontSize: 15,
+    fontSize: RF(2),
     fontFamily: fontType
+  },
+
+  text:{
+    fontFamily: fontType,  
+    fontSize:RF(2)
   }
 });
 
@@ -307,14 +318,14 @@ export const detail = StyleSheet.create({
   bannerClass: {
     marginTop: height * 0.15,
     color: "#fafafa",
-    fontSize: 35,
+    fontSize: RF(4),
     fontWeight: "400",
     fontFamily: fontType
   },
 
   bannerFee: {
     color: "#fafafa",
-    fontSize: 20,
+    fontSize: RF(3),
     fontWeight: "600",
     lineHeight: 30,
     fontFamily: fontType
@@ -322,7 +333,7 @@ export const detail = StyleSheet.create({
 
   bannerMentor: {
     color: "#fafafa",
-    fontSize: 15,
+    fontSize: RF(3),
     fontWeight: "800",
     lineHeight: 30,
     fontFamily: fontType
@@ -335,6 +346,7 @@ export const detail = StyleSheet.create({
   },
 
   descriptionText: {
+    fontSize:RF(2),
     textAlign: "justify"
   },
 
@@ -350,6 +362,7 @@ export const detail = StyleSheet.create({
   },
 
   dateText: {
+    fontSize:RF(2),
     marginLeft: 20
   }
 });
@@ -424,21 +437,26 @@ export const list = StyleSheet.create({
   classname: {
     color: styles.header.backgroundColor,
     fontWeight: "bold",
-    fontFamily: fontType
+    fontFamily: fontType,
+    fontSize:RF(2.5)
+  },
+
+  mentorname:{
+    fontSize:RF(2.5)
   },
 
   dateTimeBox: {
     flexDirection: "row",
-    fontSize: 12,
     marginTop: 5,
     fontFamily: fontType
   },
 
   iconDateTime: {
-    fontSize: 20
+    fontSize: RF(2)
   },
 
   dateTimeText: {
+    fontSize:RF(2),
     marginLeft: 10
   }
 });
@@ -629,7 +647,7 @@ export const payment = StyleSheet.create({
 
   classnameText: {
     fontWeight: "800",
-    fontSize: 20,
+    fontSize: RF(2),
     color: styles.header.backgroundColor,
     fontFamily: fontType
   },
@@ -645,18 +663,20 @@ export const payment = StyleSheet.create({
   },
 
   iconDateTime: {
-    fontSize: 20,
+    fontSize: RF(3),
   },
 
   dateTimeText: {
-    marginLeft:20
+    marginLeft:10,
+    fontSize:RF(2),
   },
 
   paidText: {
     backgroundColor: submitColor,
     color: styles.container.backgroundColor,
     borderRadius: 10,
-    padding:(15,15),
+    fontSize:RF(1.5),
+    padding:(10,10),
     fontWeight: "800",
     fontFamily: fontType
   },
@@ -665,7 +685,8 @@ export const payment = StyleSheet.create({
     backgroundColor: cancelColor,
     color: styles.container.backgroundColor,
     borderRadius: 10,
-    padding:(15,15),
+    fontSize:RF(1.5),
+    padding:(10,10),
     fontWeight: "800",
     fontFamily: fontType
   }
@@ -747,3 +768,39 @@ export const mntClassDetails = StyleSheet.create({
   }
 
 });
+
+export const confirm = StyleSheet.create({
+  image:{
+    width,
+    height: height * 0.3,
+    backgroundColor:"black"
+  },
+
+  detailContainer:{
+    padding:20,
+  },
+
+  detailBox:{
+    paddingVertical:15,
+    flexDirection:"row",
+    justifyContent:"space-between",
+    borderBottomColor:"#eee",
+    borderBottomWidth:1
+  },
+
+  text:{
+    fontSize:RF(2),
+    fontFamily:fontType,
+    color:styles.header.backgroundColor
+  },
+
+  uploadBox:{
+    alignItems:"center",
+  },
+
+  upload:{
+    marginTop:15,
+    width:width*0.8,
+    height:width*0.8
+  }
+})
