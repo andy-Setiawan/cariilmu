@@ -18,7 +18,7 @@ class StudentDrawer extends Component {
             />
           ) : (
             <Image
-              source={this.props.profileData.profile.image}
+              source={{uri : this.props.profileData.profile.image}}
               style={styles.classIcon}
             />
           )}

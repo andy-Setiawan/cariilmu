@@ -5,19 +5,21 @@ import { styles, profile } from "../Style.js";
 import { Icon } from "native-base";
 import { Actions } from "react-native-router-flux";
 import Modal from "react-native-modal";
-import { updateProfile } from "../Action/studentActions";
+import { updateProfile, setProfileImage } from "../Action/studentActions";
+import ImagePicker from "react-native-image-picker";
 
 export class StudentProfile extends Component {
   state = {
     isModalVisible: false,
     title: "",
-    bio: this.props.profileData.profile.bio
+    bio: this.props.profileData.profile.bio,
   };
 
   _toggleCancel = () =>
     this.setState({
       isModalVisible: !this.state.isModalVisible,
-      bio: this.props.profileData.profile.bio
+      bio: this.props.profileData.profile.bio,
+      image: this.props.profileData.profile.image
     });
 
   _toggleSubmit = () => {
@@ -32,6 +34,17 @@ export class StudentProfile extends Component {
       isModalVisible: !this.state.isModalVisible,
       title: "BIO"
     });
+
+  handleChoosePhoto = () => {
+    const options = {
+      noData: true
+    };
+    ImagePicker.launchImageLibrary(options, response => {
+      if (response.uri) {
+        this.props.setProfileImage(this.props.token, response);
+      }
+    });
+  };
 
   render() {
     return (
@@ -51,10 +64,19 @@ export class StudentProfile extends Component {
           />
         </View>
         <View style={profile.topProfile}>
-          <Image
-            style={profile.imageProfile}
-            source={this.props.profileData.image}
-          />
+          <TouchableOpacity onPress={this.handleChoosePhoto}>
+            {this.props.profileData.profile.image === null ? (
+              <Image
+                source={this.props.profileData.image}
+                style={styles.classIcon}
+              />
+            ) : (
+              <Image
+                source={{uri : this.props.profileData.profile.image}}
+                style={styles.classIcon}
+              />
+            )}
+          </TouchableOpacity>
           <View style={profile.nameBox}>
             <Text style={profile.nameText}>
               {this.props.profileData.profile.name}
@@ -124,9 +146,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateProfile: (token, bio) => {
-      dispatch(updateProfile(token, bio));
-    }
+    updateProfile: (token, bio) => dispatch(updateProfile(token, bio)),
+    setProfileImage: (token, image) => dispatch(setProfileImage(token, image))
   };
 };
 

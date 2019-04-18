@@ -76,14 +76,7 @@ export const enrollclass = (token, classId) => {
   };
 };
 
-export const updateProfile = (token,image, bio) => {
-  let bodyFormData = new FormData();
-  bodyFormData.set("bio",bio)
-  bodyFormData.append("image", {
-    uri: image.uri,
-    type: image.type,
-    name: image.fileName
-  })
+export const updateProfile = (token, bio) => {
   return dispatch => {
     axios({
       method: "put",
@@ -91,7 +84,7 @@ export const updateProfile = (token,image, bio) => {
       headers: {
         Authorization: token
       },
-      data: bodyFormData
+      data: { bio: bio }
     })
       .then(response => {
         dispatch({ type: GET_PROFILE, payload: response.data.data });
@@ -101,14 +94,12 @@ export const updateProfile = (token,image, bio) => {
 };
 
 export const uploadImage = (token, paymentId, photo) => {
-  
   let bodyFormData = new FormData();
   bodyFormData.append("photo", {
     uri: photo.uri,
     type: photo.type,
     name: photo.fileName
   });
-  console.log("DATA : ", bodyFormData);
   return dispatch => {
     axios({
       method: "put",
@@ -131,8 +122,33 @@ export const uploadImage = (token, paymentId, photo) => {
 };
 
 export const uploadFailed = () => {
-  return { type: SEND_ALERT, 
+  return {
+    type: SEND_ALERT,
     message: "UPLOAD FAILED",
     progress: false,
-    visible: true };
+    visible: true
+  };
+};
+
+export const setProfileImage = (token, image) => {
+  let bodyFormData = new FormData();
+  bodyFormData.append("image", {
+    uri: image.uri,
+    type: image.type,
+    name: image.fileName
+  });
+  return dispatch => {
+    axios({
+      method: "put",
+      url: `${url}/student/`,
+      headers: {
+        Authorization: token
+      },
+      data: bodyFormData
+    })
+      .then(response => {
+        dispatch({ type: GET_PROFILE, payload: response.data.data });
+      })
+      .catch(err => console.log("GAGAL UPLOAD"));
+  };
 };
