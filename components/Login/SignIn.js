@@ -45,6 +45,11 @@ class SignIn extends Component {
     }
   };
 
+  closeMsg = () => {
+    this.props.auth.token
+      ? (Actions.pop(), this.props.closeAlert())
+      : this.props.closeAlert();
+  };
   render() {
     return (
       <View style={{ ...styles.container, backgroundColor: "#eee" }}>
@@ -102,15 +107,14 @@ class SignIn extends Component {
         </ScrollView>
         <AwesomeAlert
           show={this.props.visible}
+          showProgress={this.props.progress}
           message={this.props.message}
           messageStyle={styles.alertMessage}
           closeOnTouchOutside={false}
           closeOnHardwareBackPress={false}
           showConfirmButton={true}
           confirmText="OK"
-          onConfirmPressed={() => {
-            this.props.closeAlert();
-          }}
+          onConfirmPressed={this.closeMsg}
         />
       </View>
     );
@@ -120,6 +124,7 @@ class SignIn extends Component {
 const mapStateToProps = state => ({
   auth: state.auth,
   message: state.public.alertMessage,
+  progress: state.public.progressStatus,
   visible: state.public.alertStatus
 });
 

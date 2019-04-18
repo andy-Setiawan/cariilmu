@@ -76,7 +76,14 @@ export const enrollclass = (token, classId) => {
   };
 };
 
-export const updateProfile = (token, bio) => {
+export const updateProfile = (token,image, bio) => {
+  let bodyFormData = new FormData();
+  bodyFormData.set("bio",bio)
+  bodyFormData.append("image", {
+    uri: image.uri,
+    type: image.type,
+    name: image.fileName
+  })
   return dispatch => {
     axios({
       method: "put",
@@ -84,9 +91,7 @@ export const updateProfile = (token, bio) => {
       headers: {
         Authorization: token
       },
-      data: {
-        bio: bio
-      }
+      data: bodyFormData
     })
       .then(response => {
         dispatch({ type: GET_PROFILE, payload: response.data.data });
@@ -96,10 +101,8 @@ export const updateProfile = (token, bio) => {
 };
 
 export const uploadImage = (token, paymentId, photo) => {
-  console.log("token : ", token);
-  console.log("classId : ", paymentId);
-
-  var bodyFormData = new FormData();
+  
+  let bodyFormData = new FormData();
   bodyFormData.append("photo", {
     uri: photo.uri,
     type: photo.type,

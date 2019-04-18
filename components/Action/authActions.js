@@ -17,7 +17,7 @@ export const Sign_In_Student = (username, password) => {
         dispatch({
           type: SEND_ALERT,
           message: "SIGN IN SUCCESS",
-          progress: false,
+          progress: true,
           visible: true
         });
         dispatch({ type: SIGN_IN, payload: response.data.data.token });

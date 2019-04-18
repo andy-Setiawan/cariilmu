@@ -18,7 +18,7 @@ import SignIn from "./components/Login/SignIn";
 import MentorClassList from "./components/Mentor/MentorClassList";
 import MentorClassDetails from "./components/Mentor/MentorClassDetails";
 import StudentCart from "./components/Student/StudentCart";
-import StudentPayment  from "./components/Student/StudentPayment";
+import StudentPayment from "./components/Student/StudentPayment";
 
 const instructions = Platform.select({
   ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
@@ -35,13 +35,13 @@ export default class App extends Component {
       <Provider store={store}>
         <Router>
           <Scene key="root" hideNavBar>
+            <Scene key="home" component={Home} />
             <Scene key="signin" component={SignIn} />
             <Scene key="signup" component={SignUp} />
-            <Scene key="home" component={Home} initial />
-            <Scene key="classList" component={ClassList}  />
+            <Scene key="classList" component={ClassList} />
             <Scene key="classDetail" component={ClassDetail} />
             <Scene key="onboarding" component={OnBoarding} />
-            <Scene key="studentPayment" component={StudentPayment}  />
+            <Scene key="studentPayment" component={StudentPayment} />
             <Scene key="studentSchedule" component={StudentSchedule} />
             <Scene key="studentProfile" component={StudentProfile} />
             <Scene key="studentDrawer" component={StudentDrawer} />

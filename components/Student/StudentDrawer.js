@@ -11,13 +11,19 @@ class StudentDrawer extends Component {
     return (
       <View style={styles.container}>
         <View style={drawer.topContainer}>
-          <Image
-            source={this.props.profileData.image}
-            style={styles.classIcon}
-          />
-          <Text
-            style={{ ...drawer.userText, fontWeight: "500", marginTop: 20 }}
-          >
+          {this.props.profileData.profile.image === null ? (
+            <Image
+              source={this.props.profileData.image}
+              style={styles.classIcon}
+            />
+          ) : (
+            <Image
+              source={this.props.profileData.profile.image}
+              style={styles.classIcon}
+            />
+          )}
+
+          <Text style={{ ...drawer.userText, fontWeight: "500" }}>
             {this.props.profileData.profile.name}
           </Text>
           <Text style={{ ...drawer.userText }}>
@@ -25,28 +31,49 @@ class StudentDrawer extends Component {
           </Text>
         </View>
         <View style={drawer.middleContainer}>
-          <View style={drawer.listIcon}>
-            <Icon type="FontAwesome" name="calendar" />
+          <View style={drawer.listBox}>
+            <View style={drawer.iconBox}>
+              <Icon type="FontAwesome" name="calendar" style={drawer.icon} />
+            </View>
             <Text
               style={drawer.listText}
               onPress={() => Actions.studentSchedule()}
             >
-              {" "}
-              Schedule{" "}
+              Schedule
             </Text>
           </View>
-          <View style={drawer.listIcon}>
-            <Icon type="Foundation" name="shopping-cart" />
-            <Text style={drawer.listText} onPress={() => Actions.studentCart()}> Cart </Text>
+          <View style={drawer.listBox}>
+            <View style={drawer.iconBox}>
+              <Icon
+                type="Foundation"
+                name="shopping-cart"
+                style={drawer.icon}
+              />
+            </View>
+            <Text style={drawer.listText} onPress={() => Actions.studentCart()}>
+              Cart
+            </Text>
           </View>
-          <View style={drawer.listIcon}>
-            <Icon type="MaterialIcons" name="notifications" />
-            <Text style={drawer.listText}> Notification </Text>
+          <View style={drawer.listBox}>
+            <View style={drawer.iconBox}>
+              <Icon
+                type="MaterialIcons"
+                name="notifications"
+                style={drawer.icon}
+              />
+            </View>
+            <Text style={drawer.listText}>Notification</Text>
           </View>
         </View>
         <View style={drawer.middleContainer}>
-          <View style={drawer.listIcon}>
-            <Icon type="MaterialCommunityIcons" name="account-box" />
+          <View style={drawer.listBox}>
+            <View style={drawer.iconBox}>
+              <Icon
+                type="MaterialCommunityIcons"
+                name="account-box"
+                style={drawer.icon}
+              />
+            </View>
             <Text
               style={drawer.listText}
               onPress={() => Actions.studentProfile()}
@@ -54,12 +81,24 @@ class StudentDrawer extends Component {
               Account
             </Text>
           </View>
-          <View style={drawer.listIcon}>
-            <Icon type="MaterialCommunityIcons" name="settings" />
-            <Text style={drawer.listText}> Setting </Text>
+          <View style={drawer.listBox}>
+            <View style={drawer.iconBox}>
+              <Icon
+                type="MaterialCommunityIcons"
+                name="settings"
+                style={drawer.icon}
+              />
+            </View>
+            <Text style={drawer.listText}>Setting</Text>
           </View>
-          <View style={drawer.listIcon}>
-            <Icon type="MaterialCommunityIcons" name="logout" />
+          <View style={drawer.listBox}>
+            <View style={drawer.iconBox}>
+              <Icon
+                type="MaterialCommunityIcons"
+                name="logout"
+                style={drawer.icon}
+              />
+            </View>
             <Text style={drawer.listText} onPress={() => this.props.Sign_Out()}>
               Sign Out
             </Text>
@@ -82,5 +121,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(StudentDrawer);
-
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(StudentDrawer);

@@ -30,8 +30,8 @@ export const styles = StyleSheet.create({
   },
 
   classIcon: {
-    height: width * 0.17,
-    width: width * 0.17,
+    height: width * 0.2,
+    width: width * 0.2,
     borderRadius: 100,
     marginLeft: 10
   },
@@ -290,16 +290,24 @@ export const drawer = StyleSheet.create({
     fontFamily: fontType
   },
 
-  listIcon: {
+  listBox: {
     flexDirection: "row",
     marginTop: 15,
     alignItems: "center"
   },
 
   listText: {
-    marginLeft: 20,
     fontWeight: "500",
+    fontSize:RF(2),
     fontFamily: fontType
+  },
+
+  iconBox:{
+    width:width*0.075
+  },
+
+  icon:{
+    fontSize:RF(3)
   }
 });
 
@@ -364,6 +372,13 @@ export const detail = StyleSheet.create({
   dateText: {
     fontSize:RF(2),
     marginLeft: 20
+  },
+  
+  buttonPosition:{
+    paddingHorizontal:20,
+    width,
+    position:"absolute",
+    bottom:10
   }
 });
 

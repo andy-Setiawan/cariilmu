@@ -47,7 +47,12 @@ class ClassDetail extends Component {
                       onPress={() => Actions.pop()}
                     />
                     <Text style={detail.bannerClass}>{list.name}</Text>
-                    <Text style={detail.bannerFee}>Rp. {list.fee}</Text>
+                    <Text style={detail.bannerFee}>
+                      Rp.{" "}
+                      {list.fee
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    </Text>
                     <Text style={detail.bannerMentor}>
                       By: {list.mentor.name}
                     </Text>
@@ -84,13 +89,14 @@ class ClassDetail extends Component {
                     />
                     <Text style={detail.dateText}>{list.city}</Text>
                   </View>
-                  <TouchableOpacity onPress={this.handleEnrollClass}>
-                    <Text style={styles.button}>ENROLL</Text>
-                  </TouchableOpacity>
                 </View>
               </ScrollView>
             );
           })}
+
+        <TouchableOpacity style={detail.buttonPosition} onPress={this.handleEnrollClass}>
+          <Text style={styles.button}>ENROLL</Text>
+        </TouchableOpacity>
       </View>
     );
   }
