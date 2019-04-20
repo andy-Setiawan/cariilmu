@@ -128,6 +128,18 @@ export const home = StyleSheet.create({
     elevation: 1
   },
 
+  ratingPosition: {
+    padding: 5,
+    backgroundColor: "#fafafa",
+    borderRadius: 5,
+    width: width * 0.4,
+    height: width * 0.4,
+    margin: (10, 10),
+    alignItems: "center",
+    justifyContent: "center",
+    elevation: 1,
+  },
+
   categoryIcon: {
     width: width * 0.2,
     height: width * 0.2,
@@ -140,6 +152,21 @@ export const home = StyleSheet.create({
     fontWeight: "700",
     fontFamily: fontType
   },
+
+
+  ratingIcon: {
+    width: width * 0.25,
+    height: width * 0.25,
+    borderRadius: 10
+  },
+
+  ratingListText: {
+    marginTop: 5,
+    fontSize: RF(1.5),
+    fontWeight: "700",
+    fontFamily: fontType
+  },
+
 
   classBox: {
     marginTop: 5,
@@ -844,7 +871,7 @@ export const search = StyleSheet.create({
 
   listIcon: {
     width: width * 0.05,
-    fontSize: RF(2.5),
+    fontSize: RF(3),
     color: styles.header.backgroundColor
   },
 

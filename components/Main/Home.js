@@ -10,6 +10,8 @@ import { getProfileMentor } from "../Action/mentorActions";
 import { Icon, Drawer } from "native-base";
 import StudentDrawer from "../Student/StudentDrawer";
 import AsyncStorage from "@react-native-community/async-storage";
+import moment from "moment";
+import StarRating from "react-native-star-rating";
 import MentorDrawer from "../Mentor/MentorDrawer.js";
 
 class Home extends Component {
@@ -47,7 +49,7 @@ class Home extends Component {
               type="Ionicons"
               name="md-search"
               style={{ color: "#fafafa" }}
-              onPress={()=> Actions.search()}
+              onPress={() => Actions.search()}
             />
           </View>
           <ScrollView style={styles.container}>
@@ -86,7 +88,7 @@ class Home extends Component {
                       >
                         <View style={home.categoryPosition}>
                           <Image
-                            source={{ uri:list.photo }}
+                            source={{ uri: list.photo }}
                             alt=""
                             style={home.categoryIcon}
                           />
@@ -116,15 +118,30 @@ class Home extends Component {
                             })
                           }
                         >
-                          <View style={home.categoryPosition}>
+                          <View style={home.ratingPosition}>
                             <Image
                               source={{ uri: list.photo }}
                               alt=""
-                              style={home.categoryIcon}
+                              style={home.ratingIcon}
                             />
-                            <Text style={home.categoryListText}>
+                            <Text style={home.ratingListText}>
                               {list.name.toUpperCase()}
                             </Text>
+                            <StarRating
+                              disabled={true}
+                              emptyStar={"ios-star-outline"}
+                              fullStar={"ios-star"}
+                              halfStar={"ios-star-half"}
+                              iconSet={"Ionicons"}
+                              maxStars={5}
+                              rating={list.avgRating}
+                              selectedStar={rating =>
+                                this.onStarRatingPress(rating)
+                              }
+                              fullStarColor={"#4f9da6"}
+                              halfStarColor={"#4f9da6"}
+                              starSize={15}
+                            />
                           </View>
                         </TouchableOpacity>
                       );
@@ -147,7 +164,9 @@ class Home extends Component {
                         <Text style={home.classnameText}>{list.name}</Text>
                         <Text style={home.text}>{list.mentor.name}</Text>
                         <Text style={home.text}>{list.city}</Text>
-                        <Text style={home.text}>{list.schedule}</Text>
+                        <Text style={home.text}>
+                          {moment(list.schedule).format("dddd, MMMM Do YYYY")}
+                        </Text>
                       </View>
                       <Icon
                         type="MaterialIcons"
