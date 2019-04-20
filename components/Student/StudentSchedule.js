@@ -5,6 +5,7 @@ import { Icon } from "native-base";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
 import { getStudentClass } from "../Action/studentActions";
+import moment from "moment";
 
 class StudentSchedule extends Component {
   componentDidMount() {
@@ -21,7 +22,7 @@ class StudentSchedule extends Component {
             style={{ color: "#fafafa" }}
             onPress={() => Actions.pop()}
           />
-          <Text style={styles.headerText}>SCHEDULE</Text>
+          <Text style={styles.headerText}>MY SCHEDULES</Text>
           <Icon
             type="MaterialCommunityIcons"
             name="account-circle"
@@ -30,7 +31,7 @@ class StudentSchedule extends Component {
         </View>
         <ScrollView style={schedule.container}>
           {this.props.schedule.class ? (
-            <View style={schedule.classBox}>
+            <View style={schedule.classContainer}>
               {this.props.schedule.class.map((list, i) => {
                 return (
                   <TouchableOpacity
@@ -38,28 +39,51 @@ class StudentSchedule extends Component {
                     onPress={() =>
                       Actions.studentClassDetail({
                         classId: list._id,
-                        mentorId: list.mentor
+                        mentorId: list.mentor,
+                        location: list.location,
+                        rating: list.rating,
+                        status: list.status
                       })
                     }
                   >
-                    <View style={schedule.classList}>
-                      <View style={schedule.classText}>
+                    <View style={schedule.classBox}>
+                      <View style={schedule.classList}>
                         <Text style={schedule.classnameText}>{list.name}</Text>
                         <View style={schedule.dateTimeBox}>
                           <Icon
-                            type="FontAwesome"
+                            type="Ionicons"
                             name="calendar"
                             style={schedule.iconDateTime}
                           />
                           <Text style={schedule.dateTimeText}>
-                            {list.schedule}
+                            {moment(list.schedule).format("dddd, MMMM Do YYYY")}
+                          </Text>
+                        </View>
+                        <View style={schedule.dateTimeBox}>
+                          <Icon
+                            type="Ionicons"
+                            name="md-time"
+                            style={schedule.iconDateTime}
+                          />
+                          <Text style={schedule.dateTimeText}>
+                            {moment(Date(list.startTime)).format("hh:mm")}
+                            {" - "}
+                            {moment(Date(list.endTime)).format("hh:mm")}
                           </Text>
                         </View>
                       </View>
-                      {list.status == "finished" ? (
-                        <Text style={schedule.paidText}>FINISHED</Text>
+                      {list.status == "opened" ? (
+                        <Icon
+                          type="Ionicons"
+                          name="md-close-circle"
+                          style={schedule.cancelIcon}
+                        />
                       ) : (
-                        <Text style={schedule.notYetText}>ON PROGRESS</Text>
+                        <Icon
+                          type="Ionicons"
+                          name="ios-checkmark-circle"
+                          style={schedule.okIcon}
+                        />
                       )}
                     </View>
                   </TouchableOpacity>

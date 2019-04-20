@@ -5,7 +5,6 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import reducers from "./components/Reducer/";
 import thunk from "redux-thunk";
-
 import SignUp from "./components/Login/SignUp";
 import Home from "./components/Main/Home";
 import ClassList from "./components/Main/ClassList";

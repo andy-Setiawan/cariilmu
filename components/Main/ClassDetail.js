@@ -33,7 +33,7 @@ class ClassDetail extends Component {
           .map(list => {
             return (
               <ScrollView key={list._id}>
-                <View style={styles.bannerContainer}>
+                <View>
                   <ImageBackground
                     source={{ uri: list.image }}
                     alt=""

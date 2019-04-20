@@ -1,11 +1,11 @@
 import { StyleSheet, Dimensions } from "react-native";
-import RF from "react-native-responsive-fontsize"
+import RF from "react-native-responsive-fontsize";
 
 const { width, height } = Dimensions.get("window");
 const textColor = "#000";
 const fontType = "Lato";
-const submitColor = "#00e640"
-const cancelColor = "#f64747"
+const submitColor = "#00e640";
+const cancelColor = "#f64747";
 
 export const styles = StyleSheet.create({
   container: {
@@ -47,10 +47,10 @@ export const styles = StyleSheet.create({
     textAlign: "center"
   },
 
-  alertMessage:{
-    fontFamily:fontType,
-    fontSize:RF(2.5),
-    fontWeight:"700"   
+  alertMessage: {
+    fontFamily: fontType,
+    fontSize: RF(2.5),
+    fontWeight: "700"
   }
 });
 
@@ -105,15 +105,15 @@ export const home = StyleSheet.create({
   },
 
   categoryBox: {
-    flexDirection:"column",
+    flexDirection: "column",
     flexWrap: "wrap",
-    height: height * 0.45,
+    height: height * 0.45
   },
 
   mentorBox: {
-    flexDirection:"column",
+    flexDirection: "column",
     flexWrap: "wrap",
-    height: height * 0.3,
+    height: height * 0.3
   },
 
   categoryPosition: {
@@ -125,13 +125,13 @@ export const home = StyleSheet.create({
     margin: (10, 10),
     alignItems: "center",
     justifyContent: "center",
-    elevation:1
+    elevation: 1
   },
 
   categoryIcon: {
     width: width * 0.2,
     height: width * 0.2,
-    borderRadius:10,
+    borderRadius: 10
   },
 
   categoryListText: {
@@ -164,9 +164,9 @@ export const home = StyleSheet.create({
     fontFamily: fontType
   },
 
-  text:{
-    fontFamily: fontType,  
-    fontSize:RF(2)
+  text: {
+    fontFamily: fontType,
+    fontSize: RF(2)
   }
 });
 
@@ -216,8 +216,8 @@ export const register = StyleSheet.create({
     borderRadius: 5
   },
 
-  error:{
-    color:cancelColor
+  error: {
+    color: cancelColor
   }
 });
 
@@ -303,16 +303,16 @@ export const drawer = StyleSheet.create({
 
   listText: {
     fontWeight: "500",
-    fontSize:RF(2),
+    fontSize: RF(2),
     fontFamily: fontType
   },
 
-  iconBox:{
-    width:width*0.075
+  iconBox: {
+    width: width * 0.075
   },
 
-  icon:{
-    fontSize:RF(3)
+  icon: {
+    fontSize: RF(3)
   }
 });
 
@@ -359,7 +359,7 @@ export const detail = StyleSheet.create({
   },
 
   descriptionText: {
-    fontSize:RF(2),
+    fontSize: RF(2),
     textAlign: "justify"
   },
 
@@ -375,15 +375,15 @@ export const detail = StyleSheet.create({
   },
 
   dateText: {
-    fontSize:RF(2),
+    fontSize: RF(2),
     marginLeft: 20
   },
-  
-  buttonPosition:{
-    paddingHorizontal:20,
+
+  buttonPosition: {
+    paddingHorizontal: 20,
     width,
-    position:"absolute",
-    bottom:10
+    position: "absolute",
+    bottom: 10
   }
 });
 
@@ -458,11 +458,11 @@ export const list = StyleSheet.create({
     color: styles.header.backgroundColor,
     fontWeight: "bold",
     fontFamily: fontType,
-    fontSize:RF(2.5)
+    fontSize: RF(2.5)
   },
 
-  mentorname:{
-    fontSize:RF(2.5)
+  mentorname: {
+    fontSize: RF(2.5)
   },
 
   dateTimeBox: {
@@ -476,7 +476,7 @@ export const list = StyleSheet.create({
   },
 
   dateTimeText: {
-    fontSize:RF(2),
+    fontSize: RF(2),
     marginLeft: 10
   }
 });
@@ -540,51 +540,50 @@ export const profile = StyleSheet.create({
     marginTop: 5
   },
 
-  modalBox:{
-    backgroundColor:styles.container.backgroundColor,
-    padding:20,
+  modalBox: {
+    backgroundColor: styles.container.backgroundColor,
+    padding: 20
   },
 
   modalText: {
-    fontSize:20,
-    fontWeight:"700",
-    fontFamily:fontType,
-    color:styles.header.backgroundColor
+    fontSize: 20,
+    fontWeight: "700",
+    fontFamily: fontType,
+    color: styles.header.backgroundColor
   },
 
-  modalInput:{
-    marginTop:10,
-    borderWidth:1,
-    borderRadius:10,
-    borderColor:"#eee"
+  modalInput: {
+    marginTop: 10,
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: "#eee"
   },
 
-  handleBox:{
-    flexDirection:"row",
-    justifyContent:"flex-end",
-    marginTop:10
+  handleBox: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    marginTop: 10
   },
 
-  submit:{
-    backgroundColor:submitColor,
-    color:"#fafafa",
-    borderRadius:10,
-    borderColor:"#eee",
-    textAlign:"center",
-    fontWeight:"700",
-    padding:10,
-    marginLeft:5,
+  submit: {
+    backgroundColor: submitColor,
+    color: "#fafafa",
+    borderRadius: 10,
+    borderColor: "#eee",
+    textAlign: "center",
+    fontWeight: "700",
+    padding: 10,
+    marginLeft: 5
   },
 
-
-  cancel:{
-    backgroundColor:cancelColor,
-    color:"#fafafa",
-    borderRadius:10,
-    borderColor:"#eee",
-    textAlign:"center",
-    fontWeight:"700",
-    padding:10
+  cancel: {
+    backgroundColor: cancelColor,
+    color: "#fafafa",
+    borderRadius: 10,
+    borderColor: "#eee",
+    textAlign: "center",
+    fontWeight: "700",
+    padding: 10
   }
 });
 
@@ -594,21 +593,18 @@ export const schedule = StyleSheet.create({
   },
 
   classBox: {
-    flexDirection: "column",
-    marginTop: 10
+    flexDirection: "row",
+    padding: 10,
+    width,
+    alignItems: "center",
+    borderBottomWidth: 1,
+    borderColor: "#EEE"
   },
 
   classList: {
-    marginTop: 10,
     backgroundColor: styles.container.backgroundColor,
-    width,
-    height: height * 0.125,
-    borderBottomWidth: 1,
-    borderColor: "#EEE",
-    flexDirection: "row",
-    flex: 1,
-    alignItems: "center",
-    flexWrap: "wrap"
+    flexDirection: "column",
+    width: width * 0.75
   },
 
   classText: {
@@ -617,44 +613,46 @@ export const schedule = StyleSheet.create({
 
   classnameText: {
     fontWeight: "800",
-    fontSize: 15,
     color: textColor,
-    fontFamily: fontType
+    fontFamily: fontType,
+    fontSize: RF(2),
+    color: styles.header.backgroundColor
   },
 
   dateTimeBox: {
+    paddingTop: 5,
     width,
-    flexDirection: "row",
-    fontSize: 12,
-    marginTop: 15,
-    fontFamily: fontType
-  },
-
-  locationBox: {
-    flexDirection: "row",
-    fontSize: 12,
-    marginTop: 5,
-    alignItems: "stretch",
-    fontFamily: fontType
+    flexDirection: "row"
   },
 
   iconDateTime: {
-    fontSize: 20,
-    
+    fontSize: RF(2.5)
   },
 
   dateTimeText: {
-    marginLeft:20
+    fontSize: RF(2),
+    fontFamily: fontType,
+    marginLeft: 15
   },
+
+  okIcon: {
+    color: submitColor,
+    fontSize: RF(8)
+  },
+
+  cancelIcon: {
+    color: cancelColor,
+    fontSize: RF(8)
+  }
 });
 
 export const payment = StyleSheet.create({
   classBox: {
-    flexDirection: "column",
+    flexDirection: "column"
   },
 
   classList: {
-    padding : (10,20),
+    padding: (10, 20),
     backgroundColor: styles.container.backgroundColor,
     width,
     borderBottomWidth: 1,
@@ -672,8 +670,8 @@ export const payment = StyleSheet.create({
     fontFamily: fontType
   },
 
-  dataBox:{
-    marginLeft:20,
+  dataBox: {
+    marginLeft: 20
   },
 
   dateTimeBox: {
@@ -683,20 +681,20 @@ export const payment = StyleSheet.create({
   },
 
   iconDateTime: {
-    fontSize: RF(3),
+    fontSize: RF(3)
   },
 
   dateTimeText: {
-    marginLeft:10,
-    fontSize:RF(2),
+    marginLeft: 10,
+    fontSize: RF(2)
   },
 
   paidText: {
     backgroundColor: submitColor,
     color: styles.container.backgroundColor,
     borderRadius: 10,
-    fontSize:RF(1.5),
-    padding:(10,10),
+    fontSize: RF(1.5),
+    padding: (10, 10),
     fontWeight: "800",
     fontFamily: fontType
   },
@@ -705,8 +703,8 @@ export const payment = StyleSheet.create({
     backgroundColor: cancelColor,
     color: styles.container.backgroundColor,
     borderRadius: 10,
-    fontSize:RF(1.5),
-    padding:(10,10),
+    fontSize: RF(1.5),
+    padding: (10, 10),
     fontWeight: "800",
     fontFamily: fontType
   }
@@ -719,7 +717,7 @@ export const mntClassDetails = StyleSheet.create({
   },
 
   topContainer: {
-    padding: 20,
+    padding: 20
   },
 
   name: {
@@ -762,7 +760,7 @@ export const mntClassDetails = StyleSheet.create({
     padding: 10,
     justifyContent: "center",
     flex: 1,
-    flexDirection: "column",
+    flexDirection: "column"
   },
 
   rating: {
@@ -772,89 +770,184 @@ export const mntClassDetails = StyleSheet.create({
     fontWeight: "800"
   },
 
-  bottomContainer:{
-    flexDirection:"column",
-    paddingHorizontal:20,
+  bottomContainer: {
+    flexDirection: "column",
+    paddingHorizontal: 20
   },
 
-  dateBox:{
-    flexDirection:"row",
-    marginTop:15
+  dateBox: {
+    flexDirection: "row",
+    marginTop: 15
   },
 
-  dateText:{
-    fontFamily:fontType,
-    marginLeft:15,
+  dateText: {
+    fontFamily: fontType,
+    marginLeft: 15
   }
-
 });
 
 export const confirm = StyleSheet.create({
-  image:{
+  image: {
     width,
     height: height * 0.3,
-    backgroundColor:"black"
+    backgroundColor: "black"
   },
 
-  detailContainer:{
-    padding:20,
+  detailContainer: {
+    padding: 20
   },
 
-  detailBox:{
-    paddingVertical:15,
+  detailBox: {
+    paddingVertical: 15,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    borderBottomColor: "#eee",
+    borderBottomWidth: 1
+  },
+
+  text: {
+    fontSize: RF(2),
+    fontFamily: fontType,
+    color: styles.header.backgroundColor
+  },
+
+  uploadBox: {
+    alignItems: "center"
+  },
+
+  upload: {
+    marginTop: 15,
+    width: width * 0.8,
+    height: width * 0.8
+  }
+});
+
+export const search = StyleSheet.create({
+  searchInput: {
+    color: textColor,
+    backgroundColor: "#fafafa",
+    width: width * 0.8,
+    fontFamily: fontType,
+    fontSize: RF(2.5),
+    paddingLeft: 10
+  },
+
+  listContainer: {
+    paddingVertical: 20
+  },
+
+  listBox: {
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    flexDirection: "row"
+  },
+
+  listIcon: {
+    width: width * 0.05,
+    fontSize: RF(2.5),
+    color: styles.header.backgroundColor
+  },
+
+  listText: {
+    fontFamily: fontType,
+    fontSize: RF(2.5),
+    color: textColor,
+    marginLeft: 15
+  }
+});
+
+export const studentDetail = StyleSheet.create({
+  topContainer: {
+    marginTop:20,
+    alignItems: "center"
+  },
+
+  bannerImage: {
+    height: height * 0.3,
+    width: width * 0.9,
+    borderRadius: 10,
+  },
+
+  bannerBox:{
+    padding:15,
+  },
+
+  classBox:{
     flexDirection:"row",
-    justifyContent:"space-between",
-    borderBottomColor:"#eee",
-    borderBottomWidth:1
-  },
-
-  text:{
-    fontSize:RF(2),
-    fontFamily:fontType,
-    color:styles.header.backgroundColor
-  },
-
-  uploadBox:{
     alignItems:"center",
   },
 
-  upload:{
-    marginTop:15,
-    width:width*0.8,
-    height:width*0.8
-  }
-})
+  category:{
+    marginLeft:10,
+    padding:(5,10),
+    color:"#fafafa",
+    backgroundColor:styles.header.backgroundColor,
+    fontFamily:fontType,
+    fontSize:RF(2),
+    borderRadius:10
+  },
 
-export const search = StyleSheet.create({
-  searchInput:{
+  bannerClass: {
+    marginTop: 10,
+    color: styles.header.backgroundColor,
+    fontSize: RF(3),
+    fontWeight: "400",
+    fontFamily: fontType,
+  },
+
+  bannerMentor: {
+    marginTop:10,
     color: textColor,
-    backgroundColor:"#fafafa",
-    width: width * 0.8,
+    fontSize: RF(2),
+    fontWeight: "800",
+    fontFamily: fontType
+  },
+
+  dateContainer: {
+    paddingHorizontal: 20,
+    paddingBottom: 20
+  },
+
+  dateBox: {
+    marginTop: 10,
+    flexDirection: "row"
+  },
+
+  dateText: {
+    fontSize: RF(2),
+    marginLeft: 20
+  },
+
+  star:{
+    flexDirection:"row",
+    marginTop:10,
+    width:width*0.5,
+  },
+
+  icon:{
+    fontSize:RF(3),
+    color:textColor
+  },
+
+  ratingBox:{
+    backgroundColor:styles.container.backgroundColor,
+    width:width *0.8,
+    height: height * 0.3,
+    padding:20,
+    justifyContent:"center",
+    alignItems:"center"
+  },
+
+  rateText:{
     fontFamily:fontType,
-    fontSize: RF(2.5),
-    paddingLeft:10,
+    color:styles.header.backgroundColor,
+    fontSize:RF(2.5)
   },
 
-  listContainer:{
-    paddingVertical:20,
+  starBox:{
+    width:width *0.3,
+    marginTop:15
   },
 
-  listBox:{
-    paddingHorizontal:15,
-    paddingVertical:10,
-    flexDirection:"row"
-  },
   
-  listIcon:{
-    width:width * 0.05,
-    fontSize:RF(2.5),
-    color:styles.header.backgroundColor
-  },
-
-  listText:{
-    fontFamily:fontType,
-    fontSize:RF(2.5),
-    color:textColor,
-    marginLeft:15
-  }
-})
+});

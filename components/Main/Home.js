@@ -32,14 +32,13 @@ class Home extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <Drawer ref={ref => (this._drawer = ref)} content={<StudentDrawer />}>
         <View style={styles.container}>
           <View style={styles.header}>
             <Icon
-              type="MaterialCommunityIcons"
-              name="menu"
+              type="Ionicons"
+              name="md-menu"
               style={{ color: "#fafafa" }}
               onPress={() => this.openDrawer()}
             />
@@ -87,7 +86,7 @@ class Home extends Component {
                       >
                         <View style={home.categoryPosition}>
                           <Image
-                            source={{ uri: list.photo }}
+                            source={{ uri:list.photo }}
                             alt=""
                             style={home.categoryIcon}
                           />

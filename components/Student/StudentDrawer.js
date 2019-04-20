@@ -33,7 +33,7 @@ class StudentDrawer extends Component {
         <View style={drawer.middleContainer}>
           <View style={drawer.listBox}>
             <View style={drawer.iconBox}>
-              <Icon type="FontAwesome" name="calendar" style={drawer.icon} />
+              <Icon type="Ionicons" name="calendar" style={drawer.icon} />
             </View>
             <Text
               style={drawer.listText}
@@ -45,8 +45,8 @@ class StudentDrawer extends Component {
           <View style={drawer.listBox}>
             <View style={drawer.iconBox}>
               <Icon
-                type="Foundation"
-                name="shopping-cart"
+                type="Ionicons"
+                name="md-cart"
                 style={drawer.icon}
               />
             </View>
@@ -57,8 +57,8 @@ class StudentDrawer extends Component {
           <View style={drawer.listBox}>
             <View style={drawer.iconBox}>
               <Icon
-                type="MaterialIcons"
-                name="notifications"
+                type="Ionicons"
+                name="md-notifications"
                 style={drawer.icon}
               />
             </View>
@@ -69,8 +69,8 @@ class StudentDrawer extends Component {
           <View style={drawer.listBox}>
             <View style={drawer.iconBox}>
               <Icon
-                type="MaterialCommunityIcons"
-                name="account-box"
+                type="Ionicons"
+                name="md-person"
                 style={drawer.icon}
               />
             </View>
@@ -84,8 +84,8 @@ class StudentDrawer extends Component {
           <View style={drawer.listBox}>
             <View style={drawer.iconBox}>
               <Icon
-                type="MaterialCommunityIcons"
-                name="settings"
+                type="Ionicons"
+                name="md-settings"
                 style={drawer.icon}
               />
             </View>
@@ -94,8 +94,8 @@ class StudentDrawer extends Component {
           <View style={drawer.listBox}>
             <View style={drawer.iconBox}>
               <Icon
-                type="MaterialCommunityIcons"
-                name="logout"
+                type="Ionicons"
+                name="md-log-out"
                 style={drawer.icon}
               />
             </View>
