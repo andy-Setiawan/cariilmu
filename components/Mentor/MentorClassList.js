@@ -19,8 +19,8 @@ class MentorClassList extends Component {
       <View style={styles.container}>
         <View style={styles.header}>
           <Icon
-            type="FontAwesome"
-            name="arrow-left"
+            type="Ionicons"
+            name="md-arrow-back"
             style={{ color: "#fafafa" }}
             onPress={() => Actions.pop()}
           />
@@ -36,43 +36,45 @@ class MentorClassList extends Component {
           <Text style={list.class}>CLASS</Text>
           <View style={list.classBox}>
             {this.props.classData.allClass.map((data, i) => {
-                return (
-                  <TouchableOpacity
-                    key={data._id}
-                    onPress={() => Actions.mentorClassDetail({ classId: data._id })}
-                  >
-                    <View style={list.classList}>
-                      <Image source={IcLanguage} style={styles.classIcon} />
-                      <View style={list.classTextBox}>
-                        <Text style={list.classname}>{data.name}</Text>
-                        <View style={list.dateTimeBox}>
-                          <Icon
-                            type="FontAwesome"
-                            name="calendar"
-                            style={list.iconDateTime}
-                          />
-                          <Text style={list.dateTimeText}>{data.schedule}</Text>
-                        </View>
-                        <View style={list.dateTimeBox}>
-                          <Icon
-                            type="FontAwesome"
-                            name="clock-o"
-                            style={list.iconDateTime}
-                          />
-                          <Text style={list.dateTimeText}>
-                            {data.durationInMinutes} minutes
-                          </Text>
-                        </View>
+              return (
+                <TouchableOpacity
+                  key={data._id}
+                  onPress={() =>
+                    Actions.mentorClassDetail({ classId: data._id })
+                  }
+                >
+                  <View style={list.classList}>
+                    <Image source={IcLanguage} style={styles.classIcon} />
+                    <View style={list.classTextBox}>
+                      <Text style={list.classname}>{data.name}</Text>
+                      <View style={list.dateTimeBox}>
+                        <Icon
+                          type="FontAwesome"
+                          name="calendar"
+                          style={list.iconDateTime}
+                        />
+                        <Text style={list.dateTimeText}>{data.schedule}</Text>
                       </View>
-                      <Icon
-                        type="MaterialIcons"
-                        name="navigate-next"
-                        style={{ position: "absolute", right: 0 }}
-                      />
+                      <View style={list.dateTimeBox}>
+                        <Icon
+                          type="FontAwesome"
+                          name="clock-o"
+                          style={list.iconDateTime}
+                        />
+                        <Text style={list.dateTimeText}>
+                          {data.durationInMinutes} minutes
+                        </Text>
+                      </View>
                     </View>
-                  </TouchableOpacity>
-                );
-              })}
+                    <Icon
+                      type="MaterialIcons"
+                      name="navigate-next"
+                      style={{ position: "absolute", right: 0 }}
+                    />
+                  </View>
+                </TouchableOpacity>
+              );
+            })}
           </View>
         </ScrollView>
       </View>
@@ -82,7 +84,7 @@ class MentorClassList extends Component {
 
 const mapStateToProps = state => ({
   classData: state.mentor,
-  mentor: state.auth,
+  mentor: state.auth
 });
 
 const mapDispatchToProps = dispatch => {

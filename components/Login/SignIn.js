@@ -56,8 +56,8 @@ class SignIn extends Component {
         <ScrollView>
           <View style={login.topContainer}>
             <Icon
-              type="FontAwesome"
-              name="arrow-left"
+              type="Ionicons"
+              name="md-arrow-back"
               style={{ color: "#fafafa" }}
               onPress={() => Actions.pop()}
             />

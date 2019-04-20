@@ -16,8 +16,8 @@ class StudentCart extends Component {
       <View style={styles.container}>
         <View style={styles.header}>
           <Icon
-            type="FontAwesome"
-            name="arrow-left"
+            type="Ionicons"
+            name="md-arrow-back"
             style={{ color: "#fafafa" }}
             onPress={() => Actions.pop()}
           />
@@ -43,7 +43,7 @@ class StudentCart extends Component {
                             Actions.studentPayment({
                               paymentId: list._id,
                               classId: list.class._id,
-                              imageId: data.image,
+                              imageId: data.image
                             })
                           }
                         >

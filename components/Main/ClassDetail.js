@@ -41,8 +41,8 @@ class ClassDetail extends Component {
                   />
                   <View style={detail.bannerBox}>
                     <Icon
-                      type="FontAwesome"
-                      name="arrow-left"
+                      type="Ionicons"
+                      name="md-arrow-back"
                       style={{ color: "#fafafa" }}
                       onPress={() => Actions.pop()}
                     />
@@ -94,7 +94,10 @@ class ClassDetail extends Component {
             );
           })}
 
-        <TouchableOpacity style={detail.buttonPosition} onPress={this.handleEnrollClass}>
+        <TouchableOpacity
+          style={detail.buttonPosition}
+          onPress={this.handleEnrollClass}
+        >
           <Text style={styles.button}>ENROLL</Text>
         </TouchableOpacity>
       </View>

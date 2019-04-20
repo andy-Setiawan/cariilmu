@@ -19,6 +19,8 @@ import MentorClassList from "./components/Mentor/MentorClassList";
 import MentorClassDetails from "./components/Mentor/MentorClassDetails";
 import StudentCart from "./components/Student/StudentCart";
 import StudentPayment from "./components/Student/StudentPayment";
+import Search from "./components/Main/Search";
+import StudentClassDetail from "./components/Student/StudentClassDetail";
 
 const instructions = Platform.select({
   ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
@@ -46,8 +48,10 @@ export default class App extends Component {
             <Scene key="studentProfile" component={StudentProfile} />
             <Scene key="studentDrawer" component={StudentDrawer} />
             <Scene key="studentCart" component={StudentCart} />
+            <Scene key="studentClassDetail" component={StudentClassDetail} />
             <Scene key="mentorClassList" component={MentorClassList} />
             <Scene key="mentorClassDetail" component={MentorClassDetails} />
+            <Scene key="search" component={Search} />
           </Scene>
         </Router>
       </Provider>

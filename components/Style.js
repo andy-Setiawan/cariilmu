@@ -87,7 +87,6 @@ export const home = StyleSheet.create({
 
   midText: {
     fontSize: RF(2),
-    textAlign: "justify",
     fontFamily: fontType
   },
 
@@ -109,6 +108,12 @@ export const home = StyleSheet.create({
     flexDirection:"column",
     flexWrap: "wrap",
     height: height * 0.45,
+  },
+
+  mentorBox: {
+    flexDirection:"column",
+    flexWrap: "wrap",
+    height: height * 0.3,
   },
 
   categoryPosition: {
@@ -817,5 +822,39 @@ export const confirm = StyleSheet.create({
     marginTop:15,
     width:width*0.8,
     height:width*0.8
+  }
+})
+
+export const search = StyleSheet.create({
+  searchInput:{
+    color: textColor,
+    backgroundColor:"#fafafa",
+    width: width * 0.8,
+    fontFamily:fontType,
+    fontSize: RF(2.5),
+    paddingLeft:10,
+  },
+
+  listContainer:{
+    paddingVertical:20,
+  },
+
+  listBox:{
+    paddingHorizontal:15,
+    paddingVertical:10,
+    flexDirection:"row"
+  },
+  
+  listIcon:{
+    width:width * 0.05,
+    fontSize:RF(2.5),
+    color:styles.header.backgroundColor
+  },
+
+  listText:{
+    fontFamily:fontType,
+    fontSize:RF(2.5),
+    color:textColor,
+    marginLeft:15
   }
 })

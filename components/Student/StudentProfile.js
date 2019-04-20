@@ -12,7 +12,7 @@ export class StudentProfile extends Component {
   state = {
     isModalVisible: false,
     title: "",
-    bio: this.props.profileData.profile.bio,
+    bio: this.props.profileData.profile.bio
   };
 
   _toggleCancel = () =>
@@ -51,8 +51,8 @@ export class StudentProfile extends Component {
       <View style={styles.container}>
         <View style={styles.header}>
           <Icon
-            type="FontAwesome"
-            name="arrow-left"
+            type="Ionicons"
+            name="md-arrow-back"
             style={{ color: "#fafafa" }}
             onPress={() => Actions.pop()}
           />
@@ -72,7 +72,7 @@ export class StudentProfile extends Component {
               />
             ) : (
               <Image
-                source={{uri : this.props.profileData.profile.image}}
+                source={{ uri: this.props.profileData.profile.image }}
                 style={styles.classIcon}
               />
             )}

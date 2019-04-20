@@ -3,7 +3,7 @@ import { Text, View, ScrollView, Image, TouchableOpacity } from "react-native";
 import { styles, home } from "../Style.js";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
-import { Get_Open_Class, Get_Category } from "../Action/pubActions";
+import { Get_HomeData } from "../Action/pubActions";
 import { Set_Token } from "../Action/authActions";
 import { getProfileStudent } from "../Action/studentActions";
 import { getProfileMentor } from "../Action/mentorActions";
@@ -28,11 +28,11 @@ class Home extends Component {
         ? (this.props.Set_Token(value), this.props.getProfileStudent(value))
         : console.log("no");
     }),
-      this.props.Get_Open_Class(),
-      this.props.Get_Category();
+      this.props.Get_HomeData();
   }
 
   render() {
+    console.log(this.props);
     return (
       <Drawer ref={ref => (this._drawer = ref)} content={<StudentDrawer />}>
         <View style={styles.container}>
@@ -45,9 +45,10 @@ class Home extends Component {
             />
             <Image source={require("../../assets/images/home_logo.png")} />
             <Icon
-              type="FontAwesome"
-              name="search"
+              type="Ionicons"
+              name="md-search"
               style={{ color: "#fafafa" }}
+              onPress={()=> Actions.search()}
             />
           </View>
           <ScrollView style={styles.container}>
@@ -80,7 +81,7 @@ class Home extends Component {
                           Actions.classList({
                             className: list.name,
                             classId: list._id,
-                            imageUrl:list.photo
+                            imageUrl: list.photo
                           })
                         }
                       >
@@ -99,6 +100,38 @@ class Home extends Component {
                   })}
                 </View>
               </ScrollView>
+              <Text style={home.categoryText}>MENTOR LIST</Text>
+              <ScrollView horizontal>
+                <View horizontal style={home.mentorBox}>
+                  {this.props.classData.mentor
+                    .filter(data => data.verified === true)
+                    .map((list, i) => {
+                      return (
+                        <TouchableOpacity
+                          key={list._id}
+                          onPress={() =>
+                            Actions.classList({
+                              className: list.name,
+                              classId: list._id,
+                              imageUrl: list.photo
+                            })
+                          }
+                        >
+                          <View style={home.categoryPosition}>
+                            <Image
+                              source={{ uri: list.photo }}
+                              alt=""
+                              style={home.categoryIcon}
+                            />
+                            <Text style={home.categoryListText}>
+                              {list.name.toUpperCase()}
+                            </Text>
+                          </View>
+                        </TouchableOpacity>
+                      );
+                    })}
+                </View>
+              </ScrollView>
               <Text style={home.categoryText}>NEW CLASSES</Text>
               {this.props.classData.openClass.slice(0, 5).map(list => {
                 return (
@@ -109,7 +142,7 @@ class Home extends Component {
                     <View style={home.classBox}>
                       <Image
                         source={{ uri: list.image }}
-                        style={{...home.categoryIcon, marginLeft:10}}
+                        style={{ ...home.categoryIcon, marginLeft: 10 }}
                       />
                       <View style={home.classText}>
                         <Text style={home.classnameText}>{list.name}</Text>
@@ -142,11 +175,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    Get_Open_Class: () => {
-      dispatch(Get_Open_Class());
-    },
-    Get_Category: () => {
-      dispatch(Get_Category());
+    Get_HomeData: () => {
+      dispatch(Get_HomeData());
     },
     Set_Token: token => {
       dispatch(Set_Token(token));

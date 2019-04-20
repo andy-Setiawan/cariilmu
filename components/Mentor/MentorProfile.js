@@ -11,8 +11,8 @@ export class MentorProfile extends Component {
       <View style={styles.container}>
         <View style={styles.header}>
           <Icon
-            type="FontAwesome"
-            name="arrow-left"
+            type="Ionicons"
+            name="md-arrow-back"
             style={{ color: "#fafafa" }}
             onPress={() => Actions.pop()}
           />
@@ -24,9 +24,14 @@ export class MentorProfile extends Component {
           />
         </View>
         <View style={profile.topProfile}>
-          <Image style={profile.imageProfile} source={this.props.profileData.image} />
+          <Image
+            style={profile.imageProfile}
+            source={this.props.profileData.image}
+          />
           <View style={profile.nameBox}>
-            <Text style={profile.nameText}>{this.props.profileData.profile.name}</Text>
+            <Text style={profile.nameText}>
+              {this.props.profileData.profile.name}
+            </Text>
             <Text style={profile.statusText}>Online</Text>
           </View>
         </View>
@@ -37,15 +42,21 @@ export class MentorProfile extends Component {
             <Text style={profile.editText}>Tap to change phonenumber</Text>
           </View>
           <View style={profile.profileBox}>
-            <Text style={profile.profileText}>@{this.props.profileData.profile.username}</Text>
+            <Text style={profile.profileText}>
+              @{this.props.profileData.profile.username}
+            </Text>
             <Text style={profile.editText}>Tap to change your username</Text>
           </View>
           <View style={profile.profileBox}>
-            <Text style={profile.profileText}>{this.props.profileData.profile.email}</Text>
+            <Text style={profile.profileText}>
+              {this.props.profileData.profile.email}
+            </Text>
             <Text style={profile.editText}>Tap to change your email</Text>
           </View>
           <View style={profile.profileBox}>
-            <Text style={profile.profileText}>{this.props.profileData.profile.bio}</Text>
+            <Text style={profile.profileText}>
+              {this.props.profileData.profile.bio}
+            </Text>
             <Text style={profile.editText}>Add a few words about yourself</Text>
           </View>
         </View>
@@ -55,7 +66,7 @@ export class MentorProfile extends Component {
 }
 
 const mapStateToProps = state => ({
-  profileData:state.profileReducer
+  profileData: state.profileReducer
 });
 
 export default connect(mapStateToProps)(MentorProfile);

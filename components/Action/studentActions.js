@@ -2,7 +2,8 @@ import {
   GET_PROFILE,
   GET_PAYMENT_STATUS,
   GET_STUDENT_CLASS,
-  SEND_ALERT
+  SEND_ALERT,
+  MENTOR_RATING
 } from "../Type/ActionType";
 import axios from "axios";
 
@@ -149,6 +150,25 @@ export const setProfileImage = (token, image) => {
       .then(response => {
         dispatch({ type: GET_PROFILE, payload: response.data.data });
       })
+      .catch(err => console.log("GAGAL UPLOAD"));
+  };
+};
+
+export const rateMentor = (token, classId, mentorId, star) => {
+  return dispatch => {
+    axios({
+      method: "post",
+      url: `${url}/student/class/${classId}/rating`,
+      headers: {
+        Authorization: token
+      },
+      data: {
+        mentorid : mentorId,
+        rating : rating,
+        feedback : 'everything gonna be alright'
+      }
+    })
+      .then(response => console.log('okok'))
       .catch(err => console.log("GAGAL UPLOAD"));
   };
 };

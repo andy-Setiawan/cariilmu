@@ -104,8 +104,8 @@ class SignUp extends Component {
       <View style={styles.container}>
         <View style={styles.header}>
           <Icon
-            type="FontAwesome"
-            name="arrow-left"
+            type="Ionicons"
+            name="md-arrow-back"
             style={{ color: "#fafafa" }}
             onPress={() => Actions.pop()}
           />

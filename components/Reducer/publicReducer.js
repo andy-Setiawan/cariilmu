@@ -5,6 +5,7 @@ import {
   GET_CATEGORY,
   GET_CLASS_LIST,
   GET_PROFILE,
+  GET_PUBLIC_MENTOR,
   SEND_ALERT
 } from "../Type/ActionType";
 
@@ -14,6 +15,7 @@ const initialState = {
   category: [],
   classList: [],
   profile: [],
+  mentor: [],
   alertMessage: "",
   progressStatus: false,
   alertStatus: false,
@@ -34,8 +36,15 @@ export default (state = initialState, action) => {
       return { ...state, classList: action.payload };
     case GET_PROFILE:
       return { ...state, profile: action.payload };
+    case GET_PUBLIC_MENTOR:
+      return { ...state, mentor: action.payload };
     case SEND_ALERT:
-      return { ...state, alertMessage:action.message, progressStatus:action.progress ,alertStatus:action.visible };
+      return {
+        ...state,
+        alertMessage: action.message,
+        progressStatus: action.progress,
+        alertStatus: action.visible
+      };
     default:
       return state;
   }
