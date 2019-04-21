@@ -46,7 +46,7 @@ class StudentPayment extends Component {
             style={{ color: "#fafafa" }}
             onPress={() => Actions.pop()}
           />
-          <Text style={styles.headerText}>PAYMENT CONFIRMATION</Text>
+          <Text style={styles.headerText}>Payment Confirmation</Text>
           <Icon
             type="MaterialCommunityIcons"
             name="account-circle"

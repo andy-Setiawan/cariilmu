@@ -137,7 +137,7 @@ export const home = StyleSheet.create({
     margin: (10, 10),
     alignItems: "center",
     justifyContent: "center",
-    elevation: 1,
+    elevation: 1
   },
 
   categoryIcon: {
@@ -153,7 +153,6 @@ export const home = StyleSheet.create({
     fontFamily: fontType
   },
 
-
   ratingIcon: {
     width: width * 0.25,
     height: width * 0.25,
@@ -166,7 +165,6 @@ export const home = StyleSheet.create({
     fontWeight: "700",
     fontFamily: fontType
   },
-
 
   classBox: {
     marginTop: 5,
@@ -885,33 +883,33 @@ export const search = StyleSheet.create({
 
 export const studentDetail = StyleSheet.create({
   topContainer: {
-    marginTop:20,
+    marginTop: 20,
     alignItems: "center"
   },
 
   bannerImage: {
     height: height * 0.3,
     width: width * 0.9,
-    borderRadius: 10,
+    borderRadius: 10
   },
 
-  bannerBox:{
-    padding:15,
+  bannerBox: {
+    padding: 15
   },
 
-  classBox:{
-    flexDirection:"row",
-    alignItems:"center",
+  classBox: {
+    flexDirection: "row",
+    alignItems: "center"
   },
 
-  category:{
-    marginLeft:10,
-    padding:(5,10),
-    color:"#fafafa",
-    backgroundColor:styles.header.backgroundColor,
-    fontFamily:fontType,
-    fontSize:RF(2),
-    borderRadius:10
+  category: {
+    marginLeft: 10,
+    padding: (5, 10),
+    color: "#fafafa",
+    backgroundColor: styles.header.backgroundColor,
+    fontFamily: fontType,
+    fontSize: RF(2),
+    borderRadius: 10
   },
 
   bannerClass: {
@@ -919,11 +917,11 @@ export const studentDetail = StyleSheet.create({
     color: styles.header.backgroundColor,
     fontSize: RF(3),
     fontWeight: "400",
-    fontFamily: fontType,
+    fontFamily: fontType
   },
 
   bannerMentor: {
-    marginTop:10,
+    marginTop: 10,
     color: textColor,
     fontSize: RF(2),
     fontWeight: "800",
@@ -945,36 +943,134 @@ export const studentDetail = StyleSheet.create({
     marginLeft: 20
   },
 
-  star:{
-    flexDirection:"row",
-    marginTop:10,
-    width:width*0.5,
+  star: {
+    flexDirection: "row",
+    marginTop: 10,
+    width: width * 0.5
   },
 
-  icon:{
-    fontSize:RF(3),
-    color:textColor
+  icon: {
+    fontSize: RF(3),
+    color: textColor
   },
 
-  ratingBox:{
-    backgroundColor:styles.container.backgroundColor,
-    width:width *0.8,
+  ratingBox: {
+    backgroundColor: styles.container.backgroundColor,
+    width: width * 0.8,
     height: height * 0.3,
-    padding:20,
-    justifyContent:"center",
-    alignItems:"center"
+    padding: 20,
+    justifyContent: "center",
+    alignItems: "center"
   },
 
-  rateText:{
-    fontFamily:fontType,
-    color:styles.header.backgroundColor,
-    fontSize:RF(2.5)
+  rateText: {
+    fontFamily: fontType,
+    color: styles.header.backgroundColor,
+    fontSize: RF(2.5)
   },
 
-  starBox:{
-    width:width *0.3,
-    marginTop:15
+  starBox: {
+    width: width * 0.3,
+    marginTop: 15
+  }
+});
+
+export const mentorDetail = StyleSheet.create({
+  topContainer: {
+    marginTop: 20,
+    justifyContent: "center",
+    alignItems: "center"
   },
 
-  
+  image: {
+    height: width * 0.4,
+    width: width * 0.4,
+    borderRadius: 100
+  },
+
+  icon: {
+    fontSize: RF(2.5),
+    color: submitColor
+  },
+
+  iconText: {
+    fontSize: RF(2),
+    fontFamily: fontType,
+    color: submitColor,
+    marginLeft: 5
+  },
+  name: {
+    marginTop: 10,
+    color: styles.header.backgroundColor,
+    fontSize: RF(3),
+    fontWeight: "700",
+    fontFamily: fontType
+  },
+
+  iconQuote: {
+    color: styles.header.backgroundColor,
+    fontSize: RF(3),
+    position: "absolute",
+    marginTop: -12.5,
+    marginLeft: 10
+  },
+
+  bioBox: {
+    margin:10,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#eee"
+  },
+
+  bioText: {
+    fontSize: RF(2),
+    fontFamily: fontType
+  },
+
+  classTextBox: {
+    paddingHorizontal: 20,
+    paddingTop: 10,
+    paddingBottom: 20
+  },
+
+  classname: {
+    fontFamily: fontType,
+    color: styles.header.backgroundColor,
+    fontSize: RF(2),
+    fontWeight: "700"
+  },
+
+  classContainer: {
+    paddingHorizontal: 10
+  },
+
+  classList: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#eee",
+    marginTop: 5
+  },
+
+  classTextBox: {
+    marginLeft: 10
+  },
+
+  dateTimeBox: {
+    flexDirection: "row",
+    alignItems: "center"
+  },
+
+  iconDateTime: {
+    color: styles.header.backgroundColor,
+    fontSize: RF(2.5)
+  },
+
+  dateTimeText: {
+    fontFamily: fontType,
+    color: textColor,
+    fontSize: RF(2),
+    marginLeft: 10
+  }
 });

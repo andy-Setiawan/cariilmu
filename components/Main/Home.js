@@ -109,12 +109,10 @@ class Home extends Component {
                     .map((list, i) => {
                       return (
                         <TouchableOpacity
-                          key={list._id}
+                          key={i}
                           onPress={() =>
-                            Actions.classList({
-                              className: list.name,
-                              classId: list._id,
-                              imageUrl: list.photo
+                            Actions.mentorDetail({
+                              mentorId: list._id
                             })
                           }
                         >
@@ -135,9 +133,6 @@ class Home extends Component {
                               iconSet={"Ionicons"}
                               maxStars={5}
                               rating={list.avgRating}
-                              selectedStar={rating =>
-                                this.onStarRatingPress(rating)
-                              }
                               fullStarColor={"#4f9da6"}
                               halfStarColor={"#4f9da6"}
                               starSize={15}

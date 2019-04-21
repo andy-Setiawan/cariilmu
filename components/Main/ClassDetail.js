@@ -8,10 +8,10 @@ import {
 } from "react-native";
 import { Icon } from "native-base";
 import { styles, detail } from "../Style.js";
-import ClassBanner from "../../assets/images/languageClass.png";
 import { enrollclass } from "../Action/studentActions";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
+import moment from "moment";
 
 class ClassDetail extends Component {
   handleEnrollClass = () => {
@@ -66,26 +66,30 @@ class ClassDetail extends Component {
                   <View style={detail.dateBox}>
                     <Icon
                       style={{ fontSize: 20 }}
-                      type="FontAwesome"
+                      type="Ionicons"
                       name="calendar"
                     />
-                    <Text style={detail.dateText}>{list.schedule}</Text>
-                  </View>
-                  <View style={detail.dateBox}>
-                    <Icon
-                      style={{ fontSize: 20 }}
-                      type="FontAwesome"
-                      name="clock-o"
-                    />
                     <Text style={detail.dateText}>
-                      {list.durationInMinutes} Minutes
+                      {moment(list.schedule).format("dddd, MMMM Do YYYY")}
                     </Text>
                   </View>
                   <View style={detail.dateBox}>
                     <Icon
                       style={{ fontSize: 20 }}
-                      type="MaterialIcons"
-                      name="location-on"
+                      type="Ionicons"
+                      name="md-time"
+                    />
+                    <Text style={detail.dateText}>
+                      {moment(Date(list.startTime)).format("hh:mm")}
+                      {" - "}
+                      {moment(Date(list.endTime)).format("hh:mm")}
+                    </Text>
+                  </View>
+                  <View style={detail.dateBox}>
+                    <Icon
+                      style={{ fontSize: 20 }}
+                      type="Ionicons"
+                      name="md-map"
                     />
                     <Text style={detail.dateText}>{list.city}</Text>
                   </View>

@@ -11,7 +11,7 @@ class Search extends Component {
 
     this.state = {
       search: "+"
-    }
+    };
   }
 
   componentDidMount() {
@@ -46,33 +46,40 @@ class Search extends Component {
             )
             .map((list, i) => {
               return (
-                <View style={search.listBox} key={i}>
-                  <Icon
-                    type="FontAwesome5"
-                    name="user-circle"
-                    style={search.listIcon}
-                  />
-                  <Text style={search.listText}>{list.name}</Text>
-                </View>
+                <TouchableOpacity
+                  key={i}
+                  onPress={() => Actions.mentorDetail({ mentorId: list._id })}
+                >
+                  <View style={search.listBox}>
+                    <Icon
+                      type="FontAwesome5"
+                      name="user-circle"
+                      style={search.listIcon}
+                    />
+                    <Text style={search.listText}>{list.name}</Text>
+                  </View>
+                </TouchableOpacity>
               );
             })}
           {this.props.classData
-            .filter(
-              data =>
-                data.name
-                  .toLowerCase()
-                  .includes(this.state.search.toLowerCase()) 
+            .filter(data =>
+              data.name.toLowerCase().includes(this.state.search.toLowerCase())
             )
             .map((list, i) => {
               return (
-                <View style={search.listBox} key={i}>
-                  <Icon
-                    type="Ionicons"
-                    name="md-school"
-                    style={search.listIcon}
-                  />
-                  <Text style={search.listText}>{list.name}</Text>
-                </View>
+                <TouchableOpacity
+                  key={i}
+                  onPress={() => Actions.classDetail({ classId: list._id })}
+                >
+                  <View style={search.listBox}>
+                    <Icon
+                      type="Ionicons"
+                      name="md-school"
+                      style={search.listIcon}
+                    />
+                    <Text style={search.listText}>{list.name}</Text>
+                  </View>
+                </TouchableOpacity>
               );
             })}
         </ScrollView>

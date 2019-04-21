@@ -22,7 +22,7 @@ class StudentSchedule extends Component {
             style={{ color: "#fafafa" }}
             onPress={() => Actions.pop()}
           />
-          <Text style={styles.headerText}>MY SCHEDULES</Text>
+          <Text style={styles.headerText}>My Schedules</Text>
           <Icon
             type="MaterialCommunityIcons"
             name="account-circle"

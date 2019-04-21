@@ -23,7 +23,7 @@ class ClassList extends Component {
             onPress={() => Actions.pop()}
           />
           <Text style={styles.headerText}>
-            {this.props.className.toUpperCase()}
+            {this.props.className}
           </Text>
           <Icon
             type="Ionicons"

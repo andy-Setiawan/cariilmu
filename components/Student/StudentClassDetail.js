@@ -51,7 +51,7 @@ class StudentClassDetail extends Component {
             style={{ color: "#fafafa" }}
             onPress={() => Actions.pop()}
           />
-          <Text style={styles.headerText}>SCHEDULE DETAILS</Text>
+          <Text style={styles.headerText}>Schedule Details</Text>
           <Icon
             type="MaterialCommunityIcons"
             name="account-circle"

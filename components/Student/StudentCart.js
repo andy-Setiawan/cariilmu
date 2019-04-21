@@ -21,7 +21,7 @@ class StudentCart extends Component {
             style={{ color: "#fafafa" }}
             onPress={() => Actions.pop()}
           />
-          <Text style={styles.headerText}>PAYMENT STATUS</Text>
+          <Text style={styles.headerText}>Payment Status</Text>
           <Icon
             type="MaterialCommunityIcons"
             name="account-circle"

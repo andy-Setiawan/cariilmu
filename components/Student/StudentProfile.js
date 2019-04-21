@@ -56,7 +56,7 @@ export class StudentProfile extends Component {
             style={{ color: "#fafafa" }}
             onPress={() => Actions.pop()}
           />
-          <Text style={styles.headerText}>PROFILE</Text>
+          <Text style={styles.headerText}>Profile</Text>
           <Icon
             type="MaterialCommunityIcons"
             name="account-circle"
