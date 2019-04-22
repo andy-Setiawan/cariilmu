@@ -11,14 +11,19 @@ import { styles, detail } from "../Style.js";
 import { enrollclass } from "../Action/studentActions";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
+import AwesomeAlert from "react-native-awesome-alerts";
 import moment from "moment";
+import { closeAlert } from "../Action/pubActions";
 
 class ClassDetail extends Component {
   handleEnrollClass = () => {
     !this.props.token
       ? Actions.signin()
-      : (this.props.enrollclass(this.props.token, this.props.classId),
-        Actions.home());
+      : (this.props.enrollclass(this.props.token, this.props.classId))
+  };
+
+  closeMsg = () => {
+    this.props.closeAlert();
   };
 
   render() {
@@ -100,21 +105,37 @@ class ClassDetail extends Component {
         >
           <Text style={styles.button}>ENROLL</Text>
         </TouchableOpacity>
+
+        <AwesomeAlert
+          show={this.props.visible}
+          showProgress={this.props.progress}
+          message={this.props.message}
+          messageStyle={styles.alertMessage}
+          closeOnTouchOutside={false}
+          closeOnHardwareBackPress={false}
+          showConfirmButton={this.props.button}
+          progressSize={100}
+          confirmText="OK"
+          onConfirmPressed={this.closeMsg}
+        />
       </View>
     );
   }
 }
 
 const mapStateToProps = state => ({
+  message: state.public.alertMessage,
+  progress: state.public.progressStatus,
+  visible: state.public.alertStatus,
+  button: state.public.buttonStatus,
   classDetails: state.public,
   token: state.auth.token
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    enrollclass: (tokens, classId) => {
-      dispatch(enrollclass(tokens, classId));
-    }
+    enrollclass: (tokens, classId) => dispatch(enrollclass(tokens, classId)),
+    closeAlert: () => dispatch(closeAlert())
   };
 };
 

@@ -12,45 +12,64 @@ const url = "http://cari-ilmu-test.herokuapp.com";
 
 export const Get_HomeData = () => {
   return dispatch => {
+    dispatch({
+      type: SEND_ALERT,
+      message: "",
+      progress: true,
+      visible: true,
+      button: false
+    });
     axios
       .get(`${url}/category`)
       .then(response => {
         dispatch({
           type: GET_CATEGORY,
           payload: response.data.data
-        });
+        }),
+          axios
+            .get(`${url}/public/mentor`)
+            .then(response => {
+              dispatch({
+                type: GET_PUBLIC_MENTOR,
+                payload: response.data.data
+              }),
+                axios
+                  .get(`${url}/class/open`)
+                  .then(response => {
+                    dispatch({
+                      type: GET_OPEN_CLASS,
+                      payload: response.data.data
+                    }),
+                      axios
+                        .get(`${url}/class`)
+                        .then(response => {
+                          dispatch({
+                            type: GET_ALL_CLASS,
+                            payload: response.data.data
+                          }),
+                            dispatch({
+                              type: SEND_ALERT,
+                              message: "",
+                              progress: false,
+                              visible: false,
+                              button: false
+                            });
+                        })
+                        .catch(() => {
+                          dispatch({
+                            type: SEND_ALERT,
+                            message: "FAILED TO GET DATA",
+                            progress: false,
+                            visible: true,
+                            button: false
+                          });
+                        });
+                  })
+                  .catch(err => console.log("no open class"));
+            })
+            .catch(err => console.log("no public mentor"));
       })
       .catch(err => console.log("no get category"));
-      
-    axios
-      .get(`${url}/class/open`)
-      .then(response => {
-        dispatch({
-          type: GET_OPEN_CLASS,
-          payload: response.data.data
-        });
-      })
-      .catch(err => console.log("no open class"));
-
-    axios
-      .get(`${url}/class`)
-      .then(response => {
-        dispatch({
-          type: GET_ALL_CLASS,
-          payload: response.data.data
-        });
-      })
-      .catch(err => console.log("no all class"));
-
-    axios
-      .get(`${url}/public/mentor`)
-      .then(response => {
-        dispatch({
-          type: GET_PUBLIC_MENTOR,
-          payload: response.data.data
-        });
-      })
-      .catch(err => console.log("no public mentor"));
   };
 };
 

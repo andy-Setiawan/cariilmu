@@ -2,8 +2,7 @@ import {
   GET_PROFILE,
   GET_PAYMENT_STATUS,
   GET_STUDENT_CLASS,
-  SEND_ALERT,
-  MENTOR_RATING
+  SEND_ALERT
 } from "../Type/ActionType";
 import axios from "axios";
 
@@ -63,6 +62,13 @@ export const getPaymentStatus = token => {
 
 export const enrollclass = (token, classId) => {
   return dispatch => {
+    dispatch({
+      type: SEND_ALERT,
+      message: "",
+      progress: true,
+      visible: true,
+      button: false
+    });
     axios({
       method: "put",
       url: `${url}/student/class/${classId}/enroll`,
@@ -71,9 +77,23 @@ export const enrollclass = (token, classId) => {
       }
     })
       .then(response => {
-        console.log("ENROLL SUCCESS", response.data);
+        dispatch({
+          type: SEND_ALERT,
+          message: "ENROLL SUCCESS, YOU CAN CHECK IN YOUR CART",
+          progress: false,
+          visible: true,
+          button: true
+        });
       })
-      .catch(err => console.log("no enroll yet"));
+      .catch(err => {
+        dispatch({
+          type: SEND_ALERT,
+          message: "YOU HAVE ALREADY ENROLLED THIS CLASS",
+          progress: false,
+          visible: true,
+          button: true
+        });
+      });
   };
 };
 
@@ -102,6 +122,13 @@ export const uploadImage = (token, paymentId, photo) => {
     name: photo.fileName
   });
   return dispatch => {
+    dispatch({
+      type: SEND_ALERT,
+      message: "",
+      progress: true,
+      visible: true,
+      button:false,
+    });
     axios({
       method: "put",
       url: `${url}/student/payment/${paymentId}/confirm`,
@@ -115,7 +142,8 @@ export const uploadImage = (token, paymentId, photo) => {
           type: SEND_ALERT,
           message: "UPLOAD SUCCESS",
           progress: false,
-          visible: true
+          visible: true,
+          button:true
         })
       )
       .catch(err => console.log("GAGAL UPLOAD"));
@@ -139,6 +167,13 @@ export const setProfileImage = (token, image) => {
     name: image.fileName
   });
   return dispatch => {
+    dispatch({
+      type: SEND_ALERT,
+      message: "",
+      progress: true,
+      visible: true,
+      button: false
+    });
     axios({
       method: "put",
       url: `${url}/student/`,
@@ -148,9 +183,16 @@ export const setProfileImage = (token, image) => {
       data: bodyFormData
     })
       .then(response => {
-        dispatch({ type: GET_PROFILE, payload: response.data.data });
+        dispatch({ type: GET_PROFILE, payload: response.data.data }),
+          dispatch({
+            type: SEND_ALERT,
+            message: "",
+            progress: false,
+            visible: false,
+            button: false
+          });
       })
-      .catch(err => console.log("GAGAL UPLOAD"));
+      .catch(err => err);
   };
 };
 
@@ -163,12 +205,12 @@ export const rateMentor = (token, classId, mentorId, star, feedback) => {
         Authorization: token
       },
       data: {
-        mentorid : mentorId,
-        rating : star,
-        feedback : feedback
+        mentorid: mentorId,
+        rating: star,
+        feedback: feedback
       }
     })
-      .then(response => console.log('okok'))
+      .then(response => console.log("okok"))
       .catch(err => console.log("GAGAL UPLOAD"));
   };
 };

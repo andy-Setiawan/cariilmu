@@ -32,13 +32,13 @@ class StudentCart extends Component {
           <View style={payment.classBox}>
             {this.props.status.map((list, i) => {
               return list.class !== null ? (
-                <View>
+                <View key={i}>
                   {this.props.class
                     .filter(id => id._id == list.class._id)
                     .map((data, index) => {
                       return (
                         <TouchableOpacity
-                          key={i}
+                          key={index}
                           onPress={() =>
                             Actions.studentPayment({
                               paymentId: list._id,
@@ -53,6 +53,7 @@ class StudentCart extends Component {
                                 ...home.categoryIcon,
                                 backgroundColor: "black"
                               }}
+                              source={{uri:data.image}}
                             />
                             <View style={payment.dataBox}>
                               <Text style={payment.classnameText}>
@@ -84,7 +85,7 @@ class StudentCart extends Component {
                             </View>
                             <View style={{ position: "absolute", right: 20 }}>
                               {list.status == "pending" ? (
-                                <Text style={payment.paidText}>PENDING</Text>
+                                <Text style={payment.pendingText}>PENDING</Text>
                               ) : list.status == "paid" ? (
                                 <Text style={payment.paidText}>PAID</Text>
                               ) : (

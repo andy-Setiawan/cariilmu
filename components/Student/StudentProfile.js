@@ -7,6 +7,7 @@ import { Actions } from "react-native-router-flux";
 import Modal from "react-native-modal";
 import { updateProfile, setProfileImage } from "../Action/studentActions";
 import ImagePicker from "react-native-image-picker";
+import AwesomeAlert from "react-native-awesome-alerts";
 
 export class StudentProfile extends Component {
   state = {
@@ -65,7 +66,7 @@ export class StudentProfile extends Component {
         </View>
         <View style={profile.topProfile}>
           <TouchableOpacity onPress={this.handleChoosePhoto}>
-            {this.props.profileData.profile.image === null ? (
+            {this.props.profileData.profile.image === undefined ? (
               <Image
                 source={this.props.profileData.image}
                 style={styles.classIcon}
@@ -134,6 +135,13 @@ export class StudentProfile extends Component {
             </View>
           </Modal>
         </View>
+        <AwesomeAlert
+          show={this.props.visible}
+          showProgress={this.props.progress}
+          progressSize={100}
+          closeOnTouchOutside={false}
+          closeOnHardwareBackPress={false}
+        />
       </View>
     );
   }
@@ -141,7 +149,9 @@ export class StudentProfile extends Component {
 
 const mapStateToProps = state => ({
   profileData: state.public,
-  token: state.auth.token
+  token: state.auth.token,
+  progress: state.public.progressStatus,
+  visible: state.public.alertStatus,
 });
 
 const mapDispatchToProps = dispatch => {

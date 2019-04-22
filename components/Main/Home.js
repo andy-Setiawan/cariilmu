@@ -13,6 +13,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import moment from "moment";
 import StarRating from "react-native-star-rating";
 import MentorDrawer from "../Mentor/MentorDrawer.js";
+import AwesomeAlert from "react-native-awesome-alerts";
 
 class Home extends Component {
   componentDidMount() {
@@ -190,6 +191,13 @@ class Home extends Component {
             </View>
           </ScrollView>
         </View>
+        <AwesomeAlert
+          show={this.props.visible}
+          showProgress={this.props.progress}
+          progressSize={100}
+          closeOnTouchOutside={false}
+          closeOnHardwareBackPress={false}
+        />
       </Drawer>
     );
   }
@@ -198,7 +206,8 @@ class Home extends Component {
 const mapStateToProps = state => ({
   classData: state.public,
   auth: state.auth,
-  role: state.public
+  progress: state.public.progressStatus,
+  visible: state.public.alertStatus
 });
 
 const mapDispatchToProps = dispatch => {

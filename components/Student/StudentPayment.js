@@ -78,44 +78,74 @@ class StudentPayment extends Component {
                   </View>
                   <View style={confirm.detailBox}>
                     <Text style={{ ...confirm.text, fontWeight: "700" }}>
-                      BANK CODE
+                      BANK
                     </Text>
                     <Text style={{ ...confirm.text, textAlign: "right" }}>
-                      BANK CODE
+                      {pay.bank}
                     </Text>
                   </View>
                   <View style={confirm.detailBox}>
                     <Text style={{ ...confirm.text, fontWeight: "700" }}>
-                      FEE
+                      RECEIVER
                     </Text>
                     <Text style={{ ...confirm.text, textAlign: "right" }}>
-                      Rp.{" "}
-                      {pay.class.fee
-                        .toString()
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                      {pay.beneficiaryBank}
                     </Text>
                   </View>
                   <View style={confirm.detailBox}>
                     <Text style={{ ...confirm.text, fontWeight: "700" }}>
-                      UPLOAD
+                      ACCOUNT NUMBER
                     </Text>
-                    <TouchableOpacity onPress={this.handleChoosePhoto}>
-                      <Text style={{ ...confirm.text, textAlign: "right" }}>
-                        UPLOAD IMAGE
-                      </Text>
-                    </TouchableOpacity>
+                    <Text style={{ ...confirm.text, textAlign: "right" }}>
+                      {pay.accountNumber}
+                    </Text>
                   </View>
-                  <View style={confirm.uploadBox}>
-                    {photo && (
+
+                  {pay.status == "paid" ? (
+                    <View style={confirm.uploadBox}>
                       <Image
-                        source={{ uri: photo.uri }}
+                        source={{ uri: pay.receipt }}
                         style={confirm.upload}
                       />
-                    )}
-                  </View>
-                  <TouchableOpacity onPress={this.confirmPayment}>
-                    <Text style={{...styles.button, marginTop:10}}>CONFIRM</Text>
-                  </TouchableOpacity>
+                    </View>
+                  ) : (
+                    <View>
+                      <View style={confirm.detailBox}>
+                        <Text style={{ ...confirm.text, fontWeight: "700" }}>
+                          FEE
+                        </Text>
+                        <Text style={{ ...confirm.text, textAlign: "right" }}>
+                          Rp.{" "}
+                          {pay.class.fee
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                        </Text>
+                      </View>
+                      <View style={confirm.detailBox}>
+                        <Text style={{ ...confirm.text, fontWeight: "700" }}>
+                          RECEIPT
+                        </Text>
+                        <TouchableOpacity onPress={this.handleChoosePhoto}>
+                          <Text style={{ ...confirm.text, textAlign: "right" }}>
+                            PICK IMAGE
+                          </Text>
+                        </TouchableOpacity>
+                      </View>
+                      <View style={confirm.uploadBox}>
+                        {photo && (
+                          <Image
+                            source={{ uri: photo.uri }}
+                            style={confirm.upload}
+                          />
+                        )}
+                      </View>
+                      <TouchableOpacity onPress={this.confirmPayment}>
+                        <Text style={{ ...styles.button, marginTop: 10 }}>
+                          CONFIRM
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  )}
                 </View>
               );
             })}
@@ -123,10 +153,12 @@ class StudentPayment extends Component {
         <AwesomeAlert
           show={this.props.visible}
           message={this.props.message}
+          showProgress={this.props.progress}
           messageStyle={styles.alertMessage}
           closeOnTouchOutside={false}
           closeOnHardwareBackPress={false}
-          showConfirmButton={true}
+          showConfirmButton={this.props.button}
+          progressSize={100}
           confirmText="OK"
           onConfirmPressed={() => {
             this.props.closeAlert();
@@ -142,7 +174,9 @@ const mapStateToProps = state => ({
   data: state.public.openClass,
   message: state.public.alertMessage,
   visible: state.public.alertStatus,
-  payment: state.student.paymentStatus
+  payment: state.student.paymentStatus,
+  progress : state.public.progressStatus,
+  button: state.public.buttonStatus
 });
 
 const mapDispatchToProps = dispatch => {

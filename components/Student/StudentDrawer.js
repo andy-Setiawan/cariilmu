@@ -15,7 +15,7 @@ class StudentDrawer extends Component {
     return (
       <View style={styles.container}>
         <View style={drawer.topContainer}>
-          {this.props.profileData.profile.image === null ? (
+          {this.props.profileData.profile.image === undefined ? (
             <Image
               source={this.props.profileData.image}
               style={styles.classIcon}

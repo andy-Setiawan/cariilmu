@@ -6,6 +6,7 @@ const textColor = "#000";
 const fontType = "Lato";
 const submitColor = "#00e640";
 const cancelColor = "#f64747";
+const pendingColor = "#ffcb05"
 
 export const styles = StyleSheet.create({
   container: {
@@ -661,12 +662,12 @@ export const schedule = StyleSheet.create({
 
   okIcon: {
     color: submitColor,
-    fontSize: RF(8)
+    fontSize: RF(7)
   },
 
   cancelIcon: {
     color: cancelColor,
-    fontSize: RF(8)
+    fontSize: RF(7)
   }
 });
 
@@ -715,6 +716,16 @@ export const payment = StyleSheet.create({
 
   paidText: {
     backgroundColor: submitColor,
+    color: styles.container.backgroundColor,
+    borderRadius: 10,
+    fontSize: RF(1.5),
+    padding: (10, 10),
+    fontWeight: "800",
+    fontFamily: fontType
+  },
+
+  pendingText: {
+    backgroundColor: pendingColor,
     color: styles.container.backgroundColor,
     borderRadius: 10,
     fontSize: RF(1.5),
@@ -997,7 +1008,7 @@ export const mentorDetail = StyleSheet.create({
 
   icon: {
     fontSize: RF(2.5),
-    color: submitColor
+    color:submitColor
   },
 
   iconText: {
@@ -1070,7 +1081,6 @@ export const mentorDetail = StyleSheet.create({
   },
 
   iconDateTime: {
-    color: styles.header.backgroundColor,
     fontSize: RF(2.5)
   },
 
