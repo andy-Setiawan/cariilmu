@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import StarRating from "react-native-star-rating";
 import { rateMentor } from "../Action/studentActions";
 import { styles, studentDetail } from "../Style.js";
-import { Icon } from "native-base";
+import { Icon, Item, Input } from "native-base";
 import moment from "moment";
 import { Actions } from "react-native-router-flux";
 import Modal from "react-native-modal";
@@ -14,7 +14,8 @@ class StudentClassDetail extends Component {
     super(props);
     this.state = {
       starCount: 0,
-      isModalVisible: false
+      isModalVisible: false,
+      feedback: ""
     };
   }
 
@@ -29,12 +30,17 @@ class StudentClassDetail extends Component {
       this.props.token,
       this.props.classId,
       this.props.mentorId,
-      this.state.starCount
+      this.state.starCount,
+      this.state.feedback
     );
+    this.setState({ isModalVisible: false });
   };
 
   componentDidMount() {
-    this.props.status == "finished"
+    this.props.rating.length == 0
+      ? this.setState({ starCount: 0 })
+      : this.setState({ starCount: this.props.rating[0].rating });
+    this.props.status == "finished" && this.props.rating.length == 0
       ? this.setState({ isModalVisible: true })
       : this.setState({ isModalVisible: false });
 
@@ -94,9 +100,6 @@ class StudentClassDetail extends Component {
                       halfStarColor={"#4f9da6"}
                       starSize={20}
                     />
-                    <Text style={studentDetail.bannerMentor}>
-                      {this.props.rating}
-                    </Text>
                   </View>
                 </View>
                 <View style={studentDetail.dateContainer}>
@@ -155,10 +158,19 @@ class StudentClassDetail extends Component {
                 halfStarColor={"#4f9da6"}
               />
             </View>
-            <TouchableOpacity onPress={this.uploadRating}>
-              <Text>Submit Feedback</Text>
-            </TouchableOpacity>
+            <Item style={studentDetail.feedbackBox}>
+              <Icon type="Ionicons" name="md-clipboard" />
+              <Input
+                placeholder="Give Your Feedback ..."
+                onChangeText={feedback => this.setState({ feedback })}
+              />
+            </Item>
           </View>
+          <TouchableOpacity onPress={this.uploadRating}>
+            <Text style={{ ...styles.button, marginTop: 10 }}>
+              Submit Feedback
+            </Text>
+          </TouchableOpacity>
         </Modal>
       </View>
     );
@@ -172,8 +184,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    rateMentor: (token, classId, mentorId, rating) => {
-      dispatch(rateMentor(token, classId, mentorId, rating));
+    rateMentor: (token, classId, mentorId, rating, feedback) => {
+      dispatch(rateMentor(token, classId, mentorId, rating, feedback));
     }
   };
 };

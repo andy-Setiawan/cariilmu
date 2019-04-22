@@ -41,7 +41,6 @@ export const styles = StyleSheet.create({
     color: "#fafafa",
     fontWeight: "500",
     fontFamily: fontType,
-    marginTop: 60,
     borderRadius: 10,
     paddingVertical: 10,
     textAlign: "center"
@@ -956,21 +955,29 @@ export const studentDetail = StyleSheet.create({
 
   ratingBox: {
     backgroundColor: styles.container.backgroundColor,
-    width: width * 0.8,
-    height: height * 0.3,
     padding: 20,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    borderRadius:10,
   },
 
   rateText: {
+    marginTop:15,
     fontFamily: fontType,
     color: styles.header.backgroundColor,
-    fontSize: RF(2.5)
+    fontSize: RF(2.5),
+    fontWeight:"700"
+  },
+
+  feedbackBox:{
+    marginTop:15,
+    color:textColor,
+    paddingLeft: 10,
+    backgroundColor:"#EEE",
+    borderRadius:10,
   },
 
   starBox: {
-    width: width * 0.3,
     marginTop: 15
   }
 });

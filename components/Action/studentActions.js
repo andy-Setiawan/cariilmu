@@ -154,7 +154,7 @@ export const setProfileImage = (token, image) => {
   };
 };
 
-export const rateMentor = (token, classId, mentorId, star) => {
+export const rateMentor = (token, classId, mentorId, star, feedback) => {
   return dispatch => {
     axios({
       method: "post",
@@ -164,8 +164,8 @@ export const rateMentor = (token, classId, mentorId, star) => {
       },
       data: {
         mentorid : mentorId,
-        rating : rating,
-        feedback : 'everything gonna be alright'
+        rating : star,
+        feedback : feedback
       }
     })
       .then(response => console.log('okok'))

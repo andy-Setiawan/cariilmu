@@ -6,6 +6,12 @@ const url = "http://cari-ilmu-test.herokuapp.com";
 
 export const Sign_In_Student = (username, password) => {
   return dispatch => {
+    dispatch({
+      type: SEND_ALERT,
+      message: "",
+      progress: true,
+      visible: true
+    });
     axios
       .post(`${url}/student/sign-in`, {
         username: username,
@@ -14,22 +20,19 @@ export const Sign_In_Student = (username, password) => {
       .then(response => {
         AsyncStorage.setItem("token", response.data.data.token);
         AsyncStorage.setItem("role", response.data.data.role);
-        dispatch({
-          type: SEND_ALERT,
-          message: "SIGN IN SUCCESS",
-          progress: true,
-          visible: true
-        });
+        
         dispatch({ type: SIGN_IN, payload: response.data.data.token });
         axios({
           method: "get",
-          url: `${url}/student/profile`,
+          url: `${url}/student`,
           headers: {
             Authorization: response.data.data.token
           }
         })
           .then(res => dispatch({ type: GET_PROFILE, payload: res.data.data }))
           .catch(err => console.log("no student"));
+
+
       })
       .catch(() =>
         dispatch({
