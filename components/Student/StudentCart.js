@@ -75,7 +75,10 @@ class StudentCart extends Component {
                                   style={payment.iconDateTime}
                                 />
                                 <Text style={payment.dateTimeText}>
-                                  Rp. {data.fee.toLocaleString("ar-EG")}
+                                  Rp.{" "}
+                                  {data.fee
+                                    .toString()
+                                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                                 </Text>
                               </View>
                             </View>

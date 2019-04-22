@@ -89,7 +89,10 @@ class StudentPayment extends Component {
                       FEE
                     </Text>
                     <Text style={{ ...confirm.text, textAlign: "right" }}>
-                      Rp. {pay.class.fee}
+                      Rp.{" "}
+                      {pay.class.fee
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                     </Text>
                   </View>
                   <View style={confirm.detailBox}>
@@ -111,7 +114,7 @@ class StudentPayment extends Component {
                     )}
                   </View>
                   <TouchableOpacity onPress={this.confirmPayment}>
-                    <Text style={styles.button}>CONFIRM</Text>
+                    <Text style={{...styles.button, marginTop:10}}>CONFIRM</Text>
                   </TouchableOpacity>
                 </View>
               );

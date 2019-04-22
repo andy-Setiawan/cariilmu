@@ -15,14 +15,10 @@ import moment from "moment";
 
 class ClassDetail extends Component {
   handleEnrollClass = () => {
-    {
-      !this.props.token && Actions.signin();
-    }
-    {
-      this.props.token &&
-        this.props.enrollclass(this.props.token, this.props.classId);
-      Actions.home();
-    }
+    !this.props.token
+      ? Actions.signin()
+      : (this.props.enrollclass(this.props.token, this.props.classId),
+        Actions.home());
   };
 
   render() {

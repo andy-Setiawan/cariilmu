@@ -7,6 +7,10 @@ import { connect } from "react-redux";
 import { Sign_Out } from "../Action/authActions";
 
 class StudentDrawer extends Component {
+  signOutStudent = () => {
+    this.props.closeDrawer();
+    this.props.Sign_Out();
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -18,7 +22,7 @@ class StudentDrawer extends Component {
             />
           ) : (
             <Image
-              source={{uri : this.props.profileData.profile.image}}
+              source={{ uri: this.props.profileData.profile.image }}
               style={styles.classIcon}
             />
           )}
@@ -44,11 +48,7 @@ class StudentDrawer extends Component {
           </View>
           <View style={drawer.listBox}>
             <View style={drawer.iconBox}>
-              <Icon
-                type="Ionicons"
-                name="md-cart"
-                style={drawer.icon}
-              />
+              <Icon type="Ionicons" name="md-cart" style={drawer.icon} />
             </View>
             <Text style={drawer.listText} onPress={() => Actions.studentCart()}>
               Cart
@@ -68,11 +68,7 @@ class StudentDrawer extends Component {
         <View style={drawer.middleContainer}>
           <View style={drawer.listBox}>
             <View style={drawer.iconBox}>
-              <Icon
-                type="Ionicons"
-                name="md-person"
-                style={drawer.icon}
-              />
+              <Icon type="Ionicons" name="md-person" style={drawer.icon} />
             </View>
             <Text
               style={drawer.listText}
@@ -83,23 +79,15 @@ class StudentDrawer extends Component {
           </View>
           <View style={drawer.listBox}>
             <View style={drawer.iconBox}>
-              <Icon
-                type="Ionicons"
-                name="md-settings"
-                style={drawer.icon}
-              />
+              <Icon type="Ionicons" name="md-settings" style={drawer.icon} />
             </View>
             <Text style={drawer.listText}>Setting</Text>
           </View>
           <View style={drawer.listBox}>
             <View style={drawer.iconBox}>
-              <Icon
-                type="Ionicons"
-                name="md-log-out"
-                style={drawer.icon}
-              />
+              <Icon type="Ionicons" name="md-log-out" style={drawer.icon} />
             </View>
-            <Text style={drawer.listText} onPress={() => this.props.Sign_Out()}>
+            <Text style={drawer.listText} onPress={this.signOutStudent}>
               Sign Out
             </Text>
           </View>

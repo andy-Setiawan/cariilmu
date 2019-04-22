@@ -496,7 +496,7 @@ export const list = StyleSheet.create({
   },
 
   iconDateTime: {
-    fontSize: RF(2)
+    fontSize: RF(3)
   },
 
   dateTimeText: {

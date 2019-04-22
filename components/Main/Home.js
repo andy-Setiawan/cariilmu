@@ -4,7 +4,7 @@ import { styles, home } from "../Style.js";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
 import { Get_HomeData } from "../Action/pubActions";
-import { Set_Token } from "../Action/authActions";
+import { Set_Token, Set_Role } from "../Action/authActions";
 import { getProfileStudent } from "../Action/studentActions";
 import { getProfileMentor } from "../Action/mentorActions";
 import { Icon, Drawer } from "native-base";
@@ -15,6 +15,17 @@ import StarRating from "react-native-star-rating";
 import MentorDrawer from "../Mentor/MentorDrawer.js";
 
 class Home extends Component {
+  componentDidMount() {
+    AsyncStorage.getItem("token").then(value => {
+      value
+        ? (this.props.Set_Token(value), this.props.getProfileStudent(value))
+        : console.log("no");
+    }),
+      AsyncStorage.getItem("role").then(value => {
+        value ? this.props.Set_Role(value) : console.log("no");
+      }),
+      this.props.Get_HomeData();
+  }
   openDrawer() {
     {
       !this.props.auth.token && Actions.signin();
@@ -24,18 +35,22 @@ class Home extends Component {
     }
   }
 
-  componentDidMount() {
-    AsyncStorage.getItem("token").then(value => {
-      value
-        ? (this.props.Set_Token(value), this.props.getProfileStudent(value))
-        : console.log("no");
-    }),
-      this.props.Get_HomeData();
-  }
+  closeDrawer = () => {
+    this.props.auth.token && this._drawer._root.close();
+  };
 
   render() {
     return (
-      <Drawer ref={ref => (this._drawer = ref)} content={<StudentDrawer />}>
+      <Drawer
+        ref={ref => (this._drawer = ref)}
+        content={
+          this.props.auth.role == "student" ? (
+            <StudentDrawer closeDrawer={this.closeDrawer} />
+          ) : (
+            <MentorDrawer closeDrawer={this.closeDrawer} />
+          )
+        }
+      >
         <View style={styles.container}>
           <View style={styles.header}>
             <Icon
@@ -188,18 +203,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    Get_HomeData: () => {
-      dispatch(Get_HomeData());
-    },
-    Set_Token: token => {
-      dispatch(Set_Token(token));
-    },
-    getProfileStudent: token => {
-      dispatch(getProfileStudent(token));
-    },
-    getProfileMentor: token => {
-      dispatch(getProfileMentor(token));
-    }
+    Get_HomeData: () => dispatch(Get_HomeData()),
+    Set_Token: token => dispatch(Set_Token(token)),
+    Set_Role: role => dispatch(Set_Role(role)),
+    getProfileStudent: token => dispatch(getProfileStudent(token)),
+    getProfileMentor: token => dispatch(getProfileMentor(token))
   };
 };
 

@@ -19,6 +19,7 @@ const initialState = {
   alertMessage: "",
   progressStatus: false,
   alertStatus: false,
+  buttonStatus: false,
   image: require("../../assets/images/login_image.png")
 };
 
@@ -43,7 +44,8 @@ export default (state = initialState, action) => {
         ...state,
         alertMessage: action.message,
         progressStatus: action.progress,
-        alertStatus: action.visible
+        alertStatus: action.visible,
+        buttonStatus : action.button
       };
     default:
       return state;

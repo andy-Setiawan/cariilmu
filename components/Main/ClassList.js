@@ -5,6 +5,7 @@ import { styles, list, home } from "../Style.js";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
 import { Get_Class_List } from "../Action/pubActions";
+import moment from "moment";
 
 class ClassList extends Component {
   componentDidMount() {
@@ -22,9 +23,7 @@ class ClassList extends Component {
             style={{ color: "#fafafa" }}
             onPress={() => Actions.pop()}
           />
-          <Text style={styles.headerText}>
-            {this.props.className}
-          </Text>
+          <Text style={styles.headerText}>{this.props.className}</Text>
           <Icon
             type="Ionicons"
             name="md-search"
@@ -53,22 +52,24 @@ class ClassList extends Component {
                         <Text style={list.mentorname}>{data.mentor.name}</Text>
                         <View style={list.dateTimeBox}>
                           <Icon
-                            type="FontAwesome"
+                            type="Ionicons"
                             name="calendar"
                             style={list.iconDateTime}
                           />
                           <Text style={list.dateTimeText}>
-                            {data.schedule.substring(0, 15)}
+                            {moment(data.schedule).format("dddd, MMMM Do YYYY")}
                           </Text>
                         </View>
                         <View style={list.dateTimeBox}>
                           <Icon
-                            type="FontAwesome"
-                            name="clock-o"
+                            type="Ionicons"
+                            name="md-time"
                             style={list.iconDateTime}
                           />
                           <Text style={list.dateTimeText}>
-                            {data.durationInMinutes} minutes
+                            {moment(Date(data.startTime)).format("hh:mm")}
+                            {" - "}
+                            {moment(Date(data.endTime)).format("hh:mm")}
                           </Text>
                         </View>
                       </View>

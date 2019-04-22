@@ -31,7 +31,7 @@ class SignIn extends Component {
     const { username, password } = this.state;
     switch (this.state.role) {
       case "STUDENT": {
-        this.props.Sign_In_Student(username, password);
+        this.props.Sign_In_Student(username, password)
         break;
       }
       case "MENTOR": {
@@ -46,10 +46,9 @@ class SignIn extends Component {
   };
 
   closeMsg = () => {
-    this.props.auth.token
-      ? (Actions.pop(), this.props.closeAlert())
-      : this.props.closeAlert();
+    this.props.closeAlert();
   };
+
   render() {
     return (
       <View style={{ ...styles.container, backgroundColor: "#eee" }}>
@@ -112,7 +111,8 @@ class SignIn extends Component {
           messageStyle={styles.alertMessage}
           closeOnTouchOutside={false}
           closeOnHardwareBackPress={false}
-          showConfirmButton={true}
+          showConfirmButton={this.props.button}
+          progressSize={100}
           confirmText="OK"
           onConfirmPressed={this.closeMsg}
         />
@@ -125,7 +125,8 @@ const mapStateToProps = state => ({
   auth: state.auth,
   message: state.public.alertMessage,
   progress: state.public.progressStatus,
-  visible: state.public.alertStatus
+  visible: state.public.alertStatus,
+  button: state.public.buttonStatus
 });
 
 const mapDispatchToProps = dispatch => {

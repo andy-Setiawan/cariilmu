@@ -1,5 +1,7 @@
 export const SIGN_IN = "SIGN_IN"
 export const SIGN_OUT = "SIGN_OUT"
+export const SET_TOKEN = "SET_TOKEN"
+export const SET_ROLE = "SET_ROLE"
 
 export const GET_CATEGORY = "GET_CATEGORY"
 export const GET_OPEN_CLASS = "GET_OPEN_CLASS"
