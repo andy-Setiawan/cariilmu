@@ -1,7 +1,14 @@
 import axios from "axios";
 import AsyncStorage from "@react-native-community/async-storage";
 import { Actions } from "react-native-router-flux";
-import { SIGN_IN, GET_PROFILE, SIGN_OUT, SEND_ALERT, SET_ROLE, SET_TOKEN } from "../Type/ActionType";
+import {
+  SIGN_IN,
+  GET_PROFILE,
+  SIGN_OUT,
+  SEND_ALERT,
+  SET_ROLE,
+  SET_TOKEN
+} from "../Type/ActionType";
 
 const url = "http://cari-ilmu-test.herokuapp.com";
 
@@ -113,7 +120,12 @@ export const Sign_In_Mentor = (username, password) => {
       })
       .then(response => {
         AsyncStorage.setItem("token", response.data.data.token);
-        dispatch({ type: SIGN_IN, payload: response.data.data.token });
+        AsyncStorage.setItem("role", response.data.data.role);
+        dispatch({
+          type: SIGN_IN,
+          token: response.data.data.token,
+          role: response.data.data.role
+        });
         axios({
           method: "get",
           url: `${url}/mentor`,

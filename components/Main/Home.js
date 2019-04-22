@@ -17,13 +17,16 @@ import AwesomeAlert from "react-native-awesome-alerts";
 
 class Home extends Component {
   componentDidMount() {
-    AsyncStorage.getItem("token").then(value => {
-      value
-        ? (this.props.Set_Token(value), this.props.getProfileStudent(value))
-        : console.log("no");
+    AsyncStorage.getItem("role").then(value => {
+      value ? this.props.Set_Role(value) : console.log("no");
     }),
-      AsyncStorage.getItem("role").then(value => {
-        value ? this.props.Set_Role(value) : console.log("no");
+      AsyncStorage.getItem("token").then(value => {
+        value
+          ? (this.props.Set_Token(value),
+            this.props.role == "student"
+              ? this.props.getProfileStudent(value)
+              : this.props.getProfileMentor(value))
+          : console.log("no");
       }),
       this.props.Get_HomeData();
   }

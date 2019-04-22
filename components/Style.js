@@ -6,7 +6,7 @@ const textColor = "#000";
 const fontType = "Lato";
 const submitColor = "#00e640";
 const cancelColor = "#f64747";
-const pendingColor = "#ffcb05"
+const pendingColor = "#ffcb05";
 
 export const styles = StyleSheet.create({
   container: {
@@ -208,14 +208,14 @@ export const register = StyleSheet.create({
 
   roleText: {
     color: "#fafafa",
-    fontSize: 30,
+    fontSize: RF(3.5),
     fontWeight: "700",
     fontFamily: fontType
   },
 
   rolePick: {
     color: "#fafafa",
-    fontSize: 20,
+    fontSize: RF(3.5),
     fontWeight: "700",
     textAlign: "center",
     marginTop: 10,
@@ -282,6 +282,25 @@ export const login = StyleSheet.create({
     paddingTop: 20,
     height: height * 0.4,
     borderRadius: 5
+  },
+
+  roleBox: {
+    marginTop:10,
+    flexDirection: "row",
+    alignItems: "center"
+  },
+
+  roleText: {
+    fontFamily: fontType,
+    fontWeight: "700",
+    color: styles.header.backgroundColor
+  },
+
+  role: {
+    marginLeft: 20,
+    width: width * 0.1,
+    height: width * 0.1,
+    borderRadius: 100
   },
 
   loginButton: {
@@ -969,23 +988,23 @@ export const studentDetail = StyleSheet.create({
     padding: 20,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius:10,
+    borderRadius: 10
   },
 
   rateText: {
-    marginTop:15,
+    marginTop: 15,
     fontFamily: fontType,
     color: styles.header.backgroundColor,
     fontSize: RF(2.5),
-    fontWeight:"700"
+    fontWeight: "700"
   },
 
-  feedbackBox:{
-    marginTop:15,
-    color:textColor,
+  feedbackBox: {
+    marginTop: 15,
+    color: textColor,
     paddingLeft: 10,
-    backgroundColor:"#EEE",
-    borderRadius:10,
+    backgroundColor: "#EEE",
+    borderRadius: 10
   },
 
   starBox: {
@@ -1008,7 +1027,7 @@ export const mentorDetail = StyleSheet.create({
 
   icon: {
     fontSize: RF(2.5),
-    color:submitColor
+    color: submitColor
   },
 
   iconText: {
@@ -1034,7 +1053,7 @@ export const mentorDetail = StyleSheet.create({
   },
 
   bioBox: {
-    margin:10,
+    margin: 10,
     padding: 10,
     borderWidth: 1,
     borderColor: "#eee"

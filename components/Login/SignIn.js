@@ -17,7 +17,7 @@ class SignIn extends Component {
     this.state = {
       username: "",
       password: "",
-      role: "STUDENT"
+      role: ""
     };
 
     this.signIn = this.signIn.bind(this);
@@ -31,7 +31,7 @@ class SignIn extends Component {
     const { username, password } = this.state;
     switch (this.state.role) {
       case "STUDENT": {
-        this.props.Sign_In_Student(username, password)
+        this.props.Sign_In_Student(username, password);
         break;
       }
       case "MENTOR": {
@@ -69,11 +69,11 @@ class SignIn extends Component {
             <View style={login.loginBox}>
               <Reinput
                 label="Username"
-                labelActiveColor="#4f9da6"
-                labelColor="#4f9da6"
+                labelActiveColor={styles.header.backgroundColor}
+                labelColor={styles.header.backgroundColor}
                 labelActiveScale={1}
-                underlineActiveColor="#4f9da6"
-                underlineColor="#4f9da6"
+                underlineActiveColor={styles.header.backgroundColor}
+                underlineColor={styles.header.backgroundColor}
                 returnKeyType="next"
                 onSubmitEditing={() => this.password.focus()}
                 autoCapitalize="none"
@@ -82,11 +82,11 @@ class SignIn extends Component {
               />
               <Reinput
                 label="Password"
-                labelActiveColor="#4f9da6"
-                labelColor="#4f9da6"
+                labelActiveColor={styles.header.backgroundColor}
+                labelColor={styles.header.backgroundColor}
                 labelActiveScale={1}
-                underlineActiveColor="#4f9da6"
-                underlineColor="#4f9da6"
+                underlineActiveColor={styles.header.backgroundColor}
+                underlineColor={styles.header.backgroundColor}
                 returnKeyType="done"
                 onSubmitEditing={this.signIn}
                 ref={input => (this.password = input)}
@@ -95,6 +95,28 @@ class SignIn extends Component {
                 secureTextEntry
                 onChangeText={password => this.setState({ password })}
               />
+              <View style={login.roleBox}>
+                <Text style={login.roleText}>
+                  {"SIGN IN AS "}
+                  {this.state.role}
+                </Text>
+                <TouchableOpacity
+                  onPress={role => this.setState({ role: "STUDENT" })}
+                >
+                  <Image
+                    source={require("../../assets/images/role_student.png")}
+                    style={login.role}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={role => this.setState({ role: "MENTOR" })}
+                >
+                  <Image
+                    source={require("../../assets/images/role_mentor.png")}
+                    style={login.role}
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
             <TouchableOpacity style={login.loginButton} onPress={this.signIn}>
               <Text style={{ ...styles.button }}>SIGN IN</Text>
@@ -133,6 +155,8 @@ const mapDispatchToProps = dispatch => {
   return {
     Sign_In_Student: (username, password) =>
       dispatch(Sign_In_Student(username, password)),
+    Sign_In_Mentor: (username, password) =>
+      dispatch(Sign_In_Mentor(username, password)),
     closeAlert: () => dispatch(closeAlert())
   };
 };

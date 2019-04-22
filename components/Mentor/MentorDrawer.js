@@ -7,17 +7,27 @@ import { connect } from "react-redux";
 import { Sign_Out } from "../Action/authActions";
 
 class MentorDrawer extends Component {
+  signOutMentor = () => {
+    this.props.closeDrawer();
+    this.props.Sign_Out();
+  };
   render() {
     return (
       <View style={styles.container}>
         <View style={drawer.topContainer}>
-          <Image
-            source={this.props.profileData.image}
-            style={styles.classIcon}
-          />
-          <Text
-            style={{ ...drawer.userText, fontWeight: "500", marginTop: 20 }}
-          >
+          {this.props.profileData.profile.image === undefined ? (
+            <Image
+              source={this.props.profileData.image}
+              style={styles.classIcon}
+            />
+          ) : (
+            <Image
+              source={{ uri: this.props.profileData.profile.image }}
+              style={styles.classIcon}
+            />
+          )}
+
+          <Text style={{ ...drawer.userText, fontWeight: "500" }}>
             {this.props.profileData.profile.name}
           </Text>
           <Text style={{ ...drawer.userText }}>
@@ -25,48 +35,49 @@ class MentorDrawer extends Component {
           </Text>
         </View>
         <View style={drawer.middleContainer}>
-          <View style={drawer.listIcon}>
-            <Icon type="FontAwesome" name="calendar" />
+          <View style={drawer.listBox}>
+            <View style={drawer.iconBox}>
+              <Icon type="Ionicons" name="calendar" style={drawer.icon} />
+            </View>
             <Text
               style={drawer.listText}
               onPress={() => Actions.studentSchedule()}
             >
-              {" "}
-              Schedule{" "}
+              Schedule
             </Text>
           </View>
-          <View style={drawer.listIcon}>
-            <Icon type="FontAwesome5" name="chalkboard" />
-            <Text
-              style={drawer.listText}
-              onPress={() => Actions.mentorClassList()}
-            >
-              {" "}
-              Class{" "}
+          <View style={drawer.listBox}>
+            <View style={drawer.iconBox}>
+              <Icon type="Ionicons" name="md-cart" style={drawer.icon} />
+            </View>
+            <Text style={drawer.listText} onPress={() => Actions.studentCart()}>
+              Cart
             </Text>
-          </View>
-          <View style={drawer.listIcon}>
-            <Icon type="MaterialIcons" name="notifications" />
-            <Text style={drawer.listText}> Notification </Text>
           </View>
         </View>
         <View style={drawer.middleContainer}>
-          <View style={drawer.listIcon}>
-            <Icon type="MaterialCommunityIcons" name="account-box" />
+          <View style={drawer.listBox}>
+            <View style={drawer.iconBox}>
+              <Icon type="Ionicons" name="md-person" style={drawer.icon} />
+            </View>
             <Text
               style={drawer.listText}
-              onPress={() => Actions.studentProfile()}
+              onPress={() => Actions.mentorProfile()}
             >
               Account
             </Text>
           </View>
-          <View style={drawer.listIcon}>
-            <Icon type="MaterialCommunityIcons" name="settings" />
-            <Text style={drawer.listText}> Setting </Text>
+          <View style={drawer.listBox}>
+            <View style={drawer.iconBox}>
+              <Icon type="Ionicons" name="md-settings" style={drawer.icon} />
+            </View>
+            <Text style={drawer.listText}>Setting</Text>
           </View>
-          <View style={drawer.listIcon}>
-            <Icon type="MaterialCommunityIcons" name="logout" />
-            <Text style={drawer.listText} onPress={() => this.props.Sign_Out()}>
+          <View style={drawer.listBox}>
+            <View style={drawer.iconBox}>
+              <Icon type="Ionicons" name="md-log-out" style={drawer.icon} />
+            </View>
+            <Text style={drawer.listText} onPress={this.signOutMentor}>
               Sign Out
             </Text>
           </View>
