@@ -1,43 +1,44 @@
 import React, { Component } from "react";
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  ImageBackground
-} from "react-native";
+import { Text, View, ScrollView, Image } from "react-native";
 import { Icon } from "native-base";
 import { styles, mntClassDetails } from "../Style.js";
-import ClassBanner from "../../assets/images/languageClass.png";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
+import moment from "moment";
 
 class MentorClassDetails extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <View style={styles.header}>
+          <Icon
+            type="Ionicons"
+            name="md-arrow-back"
+            style={{ color: "#fafafa" }}
+            onPress={() => Actions.pop()}
+          />
+          <Text style={styles.headerText}>CLASSES HISTORY</Text>
+          <Icon
+            type="MaterialCommunityIcons"
+            name="account-circle"
+            style={{ color: styles.header.backgroundColor }}
+          />
+        </View>
         {this.props.classData.allClass
           .filter(data => data._id == this.props.classId)
           .map(list => {
             return (
               <ScrollView key={list._id}>
-                <View style={mntClassDetails.bannerBox}>
-                  <ImageBackground alt="" style={mntClassDetails.bannerImage} />
-                  <Icon
-                    type="Ionicons"
-                    name="md-arrow-back"
-                    style={{ color: "#fafafa" }}
-                    onPress={() => Actions.pop()}
-                  />
-                </View>
+                <Image
+                  alt=""
+                  source={{ uri: list.image }}
+                  style={mntClassDetails.bannerImage}
+                />
                 <View style={mntClassDetails.topContainer}>
-                  <Text style={mntClassDetails.name}>{list.name}</Text>
                   <View style={mntClassDetails.categoryBox}>
+                    <Text style={mntClassDetails.name}>{list.name}</Text>
                     <Text style={mntClassDetails.category}>
                       {list.category.name.toUpperCase()}
-                    </Text>
-                    <Text style={mntClassDetails.category}>
-                      {list.durationInMinutes} MINUTES
                     </Text>
                   </View>
                   <View style={mntClassDetails.ratingContainer}>
@@ -60,6 +61,7 @@ class MentorClassDetails extends Component {
                     style={{
                       ...mntClassDetails.description,
                       borderBottomWidth: 1,
+                      borderBottomColor:"#eee",
                       paddingBottom: 20
                     }}
                   >
@@ -70,28 +72,30 @@ class MentorClassDetails extends Component {
                   <View style={mntClassDetails.dateBox}>
                     <Icon
                       style={{ fontSize: 20 }}
-                      type="FontAwesome"
+                      type="Ionicons"
                       name="calendar"
                     />
                     <Text style={mntClassDetails.dateText}>
-                      {list.schedule}
+                      {moment(list.schedule).format("dddd, MMMM Do YYYY")}
                     </Text>
                   </View>
                   <View style={mntClassDetails.dateBox}>
                     <Icon
                       style={{ fontSize: 20 }}
-                      type="FontAwesome"
-                      name="clock-o"
+                      type="Ionicons"
+                      name="md-time"
                     />
                     <Text style={mntClassDetails.dateText}>
-                      {list.durationInMinutes} Minutes
+                      {moment(Date(list.startTime)).format("hh:mm")}
+                      {" - "}
+                      {moment(Date(list.endTime)).format("hh:mm")}
                     </Text>
                   </View>
                   <View style={mntClassDetails.dateBox}>
                     <Icon
                       style={{ fontSize: 20 }}
-                      type="MaterialIcons"
-                      name="location-on"
+                      type="Ionicons"
+                      name="md-map"
                     />
                     <Text style={mntClassDetails.dateText}>
                       {list.location}, {list.city}

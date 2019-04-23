@@ -155,7 +155,8 @@ export const uploadFailed = () => {
     type: SEND_ALERT,
     message: "UPLOAD FAILED",
     progress: false,
-    visible: true
+    visible: true,
+    button: true,
   };
 };
 

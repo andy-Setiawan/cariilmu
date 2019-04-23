@@ -7,6 +7,7 @@ import {
   SEND_ALERT
 } from "../Type/ActionType";
 import axios from "axios";
+import SplashScreen from "react-native-splash-screen";
 
 const url = "http://cari-ilmu-test.herokuapp.com";
 
@@ -53,7 +54,8 @@ export const Get_HomeData = () => {
                               progress: false,
                               visible: false,
                               button: false
-                            });
+                            }),
+                            SplashScreen.hide();
                         })
                         .catch(() => {
                           dispatch({

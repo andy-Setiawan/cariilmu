@@ -21,7 +21,8 @@ import StudentPayment from "./components/Student/StudentPayment";
 import Search from "./components/Main/Search";
 import StudentClassDetail from "./components/Student/StudentClassDetail";
 import MentorDetail from "./components/Main/MentorDetail";
-import { MentorProfile } from "./components/Mentor/MentorProfile";
+import MentorProfile from "./components/Mentor/MentorProfile";
+import MentorSchedule from "./components/Mentor/MentorSchedule";
 
 const instructions = Platform.select({
   ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
@@ -33,12 +34,13 @@ const instructions = Platform.select({
 const store = createStore(reducers, applyMiddleware(thunk));
 
 export default class App extends Component {
+  
   render() {
     return (
       <Provider store={store}>
         <Router>
           <Scene key="root" hideNavBar>
-            <Scene key="home" component={Home} />
+            <Scene key="home" component={Home} initial />
             <Scene key="signin" component={SignIn} />
             <Scene key="signup" component={SignUp} />
             <Scene key="classList" component={ClassList} />
@@ -54,6 +56,7 @@ export default class App extends Component {
             <Scene key="mentorClassList" component={MentorClassList} />
             <Scene key="mentorClassDetail" component={MentorClassDetails} />
             <Scene key="mentorDetail" component={MentorDetail} />
+            <Scene key="mentorSchedule" component={MentorSchedule} />
             <Scene key="search" component={Search} />
           </Scene>
         </Router>

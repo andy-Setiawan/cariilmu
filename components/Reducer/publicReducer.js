@@ -6,7 +6,8 @@ import {
   GET_CLASS_LIST,
   GET_PROFILE,
   GET_PUBLIC_MENTOR,
-  SEND_ALERT
+  SEND_ALERT,
+  SPLASH
 } from "../Type/ActionType";
 
 const initialState = {
@@ -20,6 +21,7 @@ const initialState = {
   progressStatus: false,
   alertStatus: false,
   buttonStatus: false,
+  splashStatus: true,
   image: require("../../assets/images/login_image.png")
 };
 
@@ -39,13 +41,15 @@ export default (state = initialState, action) => {
       return { ...state, profile: action.payload };
     case GET_PUBLIC_MENTOR:
       return { ...state, mentor: action.payload };
+    case SPLASH:
+      return { ...state, splashStatus: action.payload };
     case SEND_ALERT:
       return {
         ...state,
         alertMessage: action.message,
         progressStatus: action.progress,
         alertStatus: action.visible,
-        buttonStatus : action.button
+        buttonStatus: action.button
       };
     default:
       return state;

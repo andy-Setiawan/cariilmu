@@ -54,16 +54,6 @@ class StudentDrawer extends Component {
               Cart
             </Text>
           </View>
-          <View style={drawer.listBox}>
-            <View style={drawer.iconBox}>
-              <Icon
-                type="Ionicons"
-                name="md-notifications"
-                style={drawer.icon}
-              />
-            </View>
-            <Text style={drawer.listText}>Notification</Text>
-          </View>
         </View>
         <View style={drawer.middleContainer}>
           <View style={drawer.listBox}>
@@ -76,12 +66,6 @@ class StudentDrawer extends Component {
             >
               Account
             </Text>
-          </View>
-          <View style={drawer.listBox}>
-            <View style={drawer.iconBox}>
-              <Icon type="Ionicons" name="md-settings" style={drawer.icon} />
-            </View>
-            <Text style={drawer.listText}>Setting</Text>
           </View>
           <View style={drawer.listBox}>
             <View style={drawer.iconBox}>

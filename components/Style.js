@@ -285,7 +285,7 @@ export const login = StyleSheet.create({
   },
 
   roleBox: {
-    marginTop:10,
+    marginTop: 10,
     flexDirection: "row",
     alignItems: "center"
   },
@@ -495,7 +495,8 @@ export const list = StyleSheet.create({
   },
 
   classTextBox: {
-    marginLeft: 15
+    marginLeft: 10,
+    width:width * 0.55
   },
 
   classname: {
@@ -628,6 +629,32 @@ export const profile = StyleSheet.create({
     textAlign: "center",
     fontWeight: "700",
     padding: 10
+  },
+
+  yesIconText: {
+    width: width * 0.2,
+    marginTop: 5,
+    backgroundColor: submitColor,
+    color: styles.container.backgroundColor,
+    fontWeight: "700",
+    fontFamily: fontType,
+    fontSize: RF(2),
+    borderRadius: 50,
+    paddingVertical: 5,
+    textAlign:"center"
+  },
+
+  noIconText: {
+    width: width * 0.2,
+    marginTop: 5,
+    backgroundColor: cancelColor,
+    color: styles.container.backgroundColor,
+    fontWeight: "700",
+    fontFamily: fontType,
+    fontSize: RF(2),
+    borderRadius: 50,
+    paddingVertical: 5,
+    textAlign:"center"
   }
 });
 
@@ -766,24 +793,26 @@ export const payment = StyleSheet.create({
 
 export const mntClassDetails = StyleSheet.create({
   bannerImage: {
+    width,
     height: height * 0.3,
     backgroundColor: "black"
   },
 
   topContainer: {
-    padding: 20
+    paddingHorizontal: 20
   },
 
   name: {
-    fontSize: 25,
-    color: textColor,
+    fontSize: RF(2.5),
+    color: styles.header.backgroundColor,
     fontWeight: "700",
     fontFamily: fontType
   },
 
   categoryBox: {
     marginTop: 20,
-    flexDirection: "row"
+    flexDirection: "row",
+    alignItems:"center"
   },
 
   category: {
@@ -794,7 +823,7 @@ export const mntClassDetails = StyleSheet.create({
     padding: 5,
     paddingHorizontal: 20,
     borderRadius: 20,
-    marginRight: 15
+    marginLeft: 15
   },
 
   description: {
@@ -804,7 +833,7 @@ export const mntClassDetails = StyleSheet.create({
 
   ratingContainer: {
     flexDirection: "row",
-    marginTop: 20,
+    marginTop: 15,
     borderWidth: 1,
     borderRadius: 10,
     borderColor: "#eee"
@@ -855,7 +884,7 @@ export const confirm = StyleSheet.create({
     paddingVertical: 15,
     flexDirection: "row",
     justifyContent: "space-between",
-    borderBottomColor: "#eee",
+    borderBottomColor:"#eee",
     borderBottomWidth: 1
   },
 

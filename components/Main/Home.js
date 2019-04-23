@@ -23,12 +23,12 @@ class Home extends Component {
       AsyncStorage.getItem("token").then(value => {
         value
           ? (this.props.Set_Token(value),
-            this.props.role == "student"
+            this.props.auth.role == "student"
               ? this.props.getProfileStudent(value)
               : this.props.getProfileMentor(value))
           : console.log("no");
       }),
-      this.props.Get_HomeData();
+      this.props.Get_HomeData()
   }
   openDrawer() {
     {

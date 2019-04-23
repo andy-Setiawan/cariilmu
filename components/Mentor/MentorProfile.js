@@ -82,7 +82,13 @@ export class MentorProfile extends Component {
             <Text style={profile.nameText}>
               {this.props.profileData.profile.name}
             </Text>
-            <Text style={profile.statusText}>Online</Text>
+            <View>
+              {this.props.profileData.profile.verified ? (
+                <Text style={profile.yesIconText}>Verified</Text>
+              ) : (
+                <Text style={profile.noIconText}>Not verified</Text>
+              )}
+            </View>
           </View>
         </View>
         <View style={profile.bottomProfile}>

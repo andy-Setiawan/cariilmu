@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Text, View, Image } from "react-native";
-import { styles, drawer } from "../Style.js";
+import { styles, drawer, profile } from "../Style.js";
 import { Icon } from "native-base";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
@@ -30,9 +30,11 @@ class MentorDrawer extends Component {
           <Text style={{ ...drawer.userText, fontWeight: "500" }}>
             {this.props.profileData.profile.name}
           </Text>
-          <Text style={{ ...drawer.userText }}>
-            {this.props.profileData.profile.email}
-          </Text>
+          {this.props.profileData.profile.verified ? (
+            <Text style={profile.yesIconText}>Verified</Text>
+          ) : (
+            <Text style={profile.noIconText}>Not verified</Text>
+          )}
         </View>
         <View style={drawer.middleContainer}>
           <View style={drawer.listBox}>
@@ -41,17 +43,17 @@ class MentorDrawer extends Component {
             </View>
             <Text
               style={drawer.listText}
-              onPress={() => Actions.studentSchedule()}
+              onPress={() => Actions.mentorSchedule()}
             >
               Schedule
             </Text>
           </View>
           <View style={drawer.listBox}>
             <View style={drawer.iconBox}>
-              <Icon type="Ionicons" name="md-cart" style={drawer.icon} />
+              <Icon type="Ionicons" name="md-bookmarks" style={drawer.icon} />
             </View>
-            <Text style={drawer.listText} onPress={() => Actions.studentCart()}>
-              Cart
+            <Text style={drawer.listText} onPress={() => Actions.mentorClassList()}>
+              Class List
             </Text>
           </View>
         </View>
@@ -66,12 +68,6 @@ class MentorDrawer extends Component {
             >
               Account
             </Text>
-          </View>
-          <View style={drawer.listBox}>
-            <View style={drawer.iconBox}>
-              <Icon type="Ionicons" name="md-settings" style={drawer.icon} />
-            </View>
-            <Text style={drawer.listText}>Setting</Text>
           </View>
           <View style={drawer.listBox}>
             <View style={drawer.iconBox}>

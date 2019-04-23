@@ -16,5 +16,6 @@ export const GET_MENTOR_CLASS = "GET_MENTOR_CLASS"
 
 export const GET_PAYMENT_STATUS = "GET_PAYMENT_STATUS"
 export const SEND_ALERT = "SEND_ALERT"
+export const SPLASH = "SPLASH"
 
 export const MENTOR_RATING = "MENTOR_RATING"
