@@ -4,12 +4,12 @@ import { styles, schedule } from "../Style.js";
 import { Icon } from "native-base";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
-import { getStudentClass } from "../Action/studentActions";
+import { getClassListMentor } from "../Action/mentorActions";
 import moment from "moment";
 
 class StudentSchedule extends Component {
   componentDidMount() {
-    this.props.getStudentClass(this.props.token);
+    this.props.getClassListMentor(this.props.token);
   }
   render() {
     console.log(this.props);
@@ -30,9 +30,9 @@ class StudentSchedule extends Component {
           />
         </View>
         <ScrollView style={schedule.container}>
-          {this.props.schedule.class ? (
+          {this.props.schedule ? (
             <View style={schedule.classContainer}>
-              {this.props.schedule.class.map((list, i) => {
+              {this.props.schedule.map((list, i) => {
                 return (
                   <TouchableOpacity
                     key={i}
@@ -100,15 +100,13 @@ class StudentSchedule extends Component {
 }
 
 const mapStateToProps = state => ({
-  schedule: state.student.class,
+  schedule: state.mentor.allClass,
   token: state.auth.token
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    getStudentClass: token => {
-      dispatch(getStudentClass(token));
-    }
+    getClassListMentor: token => dispatch(getClassListMentor(token))
   };
 };
 

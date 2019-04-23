@@ -1,13 +1,8 @@
-import { GET_MENTOR_CLASS, GET_PROFILE } from "../Type/ActionType";
+import { GET_MENTOR_CLASS, GET_PROFILE, SEND_ALERT } from "../Type/ActionType";
 import axios from "axios";
-import AsyncStorage from "@react-native-community/async-storage";
-
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YzljZWFkYTAyODJjODM2MTJmZGNiOGMiLCJyb2xlIjoibWVudG9yIiwibmFtZSI6IkpvaG4gRG9lIiwidXNlcm5hbWUiOiJqb2huLmRvZSIsImVtYWlsIjoiam9obi5kb2VAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkZURxVk5Oejc2U1d4ZU91N1d4Z3RudVpQeHlCalkuSWtlZGM5bmJXY2VuYndjWURDU2N1Mi4iLCJpYXQiOjE1NTUwNDMzMDEsImV4cCI6MTU1NjI1MjkwMX0.0UcN9bmCzyZocfcTKaPsJ_VXwjm-FtCOPglDnSrNns4";
 const url = "http://cari-ilmu-test.herokuapp.com";
-// const token = AsyncStorage.getItem("token").then(value => value)
 
-export const getProfileMentor = tokens => {
+export const getProfileMentor = token => {
   return dispatch => {
     axios({
       method: "get",
@@ -23,7 +18,7 @@ export const getProfileMentor = tokens => {
   };
 };
 
-export const getClassListMentor = tokens => {
+export const getClassListMentor = token => {
   return dispatch => {
     axios({
       method: "get",
@@ -36,5 +31,59 @@ export const getClassListMentor = tokens => {
         dispatch({ type: GET_MENTOR_CLASS, payload: response.data.data })
       )
       .catch(err => console.log("no mentor class list"));
+  };
+};
+
+export const updateProfile = (token, bio) => {
+  return dispatch => {
+    axios({
+      method: "put",
+      url: `${url}/mentor/`,
+      headers: {
+        Authorization: token
+      },
+      data: { bio: bio }
+    })
+      .then(response => {
+        dispatch({ type: GET_PROFILE, payload: response.data.data });
+      })
+      .catch(err => console.log("no update yet"));
+  };
+};
+
+export const setProfileImage = (token, image) => {
+  let bodyFormData = new FormData();
+  bodyFormData.append("image", {
+    uri: image.uri,
+    type: image.type,
+    name: image.fileName
+  });
+  return dispatch => {
+    dispatch({
+      type: SEND_ALERT,
+      message: "",
+      progress: true,
+      visible: true,
+      button: false
+    });
+    axios({
+      method: "put",
+      url: `${url}/mentor/`,
+      headers: {
+        Authorization: token
+      },
+      data: bodyFormData
+    })
+      .then(response => {
+        dispatch({ type: GET_PROFILE, payload: response.data.data }),
+          dispatch({
+            type: SEND_ALERT,
+            message: "",
+            progress: false,
+            visible: false,
+            button: false
+          });
+      })
+      .catch(err => err);
   };
 };

@@ -1,72 +1,79 @@
 import React, { Component } from "react";
 import { Text, View, Image } from "react-native";
-import { styles, drawer } from "../Style.js";
+import { styles, drawer, profile } from "../Style.js";
 import { Icon } from "native-base";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
 import { Sign_Out } from "../Action/authActions";
 
 class MentorDrawer extends Component {
+  signOutMentor = () => {
+    this.props.closeDrawer();
+    this.props.Sign_Out();
+  };
   render() {
     return (
       <View style={styles.container}>
         <View style={drawer.topContainer}>
-          <Image
-            source={this.props.profileData.image}
-            style={styles.classIcon}
-          />
-          <Text
-            style={{ ...drawer.userText, fontWeight: "500", marginTop: 20 }}
-          >
+          {this.props.profileData.profile.image === undefined ? (
+            <Image
+              source={this.props.profileData.image}
+              style={styles.classIcon}
+            />
+          ) : (
+            <Image
+              source={{ uri: this.props.profileData.profile.image }}
+              style={styles.classIcon}
+            />
+          )}
+
+          <Text style={{ ...drawer.userText, fontWeight: "500" }}>
             {this.props.profileData.profile.name}
           </Text>
-          <Text style={{ ...drawer.userText }}>
-            {this.props.profileData.profile.email}
-          </Text>
+          {this.props.profileData.profile.verified ? (
+            <Text style={profile.yesIconText}>Verified</Text>
+          ) : (
+            <Text style={profile.noIconText}>Not verified</Text>
+          )}
         </View>
         <View style={drawer.middleContainer}>
-          <View style={drawer.listIcon}>
-            <Icon type="FontAwesome" name="calendar" />
+          <View style={drawer.listBox}>
+            <View style={drawer.iconBox}>
+              <Icon type="Ionicons" name="calendar" style={drawer.icon} />
+            </View>
             <Text
               style={drawer.listText}
-              onPress={() => Actions.studentSchedule()}
+              onPress={() => Actions.mentorSchedule()}
             >
-              {" "}
-              Schedule{" "}
+              Schedule
             </Text>
           </View>
-          <View style={drawer.listIcon}>
-            <Icon type="FontAwesome5" name="chalkboard" />
-            <Text
-              style={drawer.listText}
-              onPress={() => Actions.mentorClassList()}
-            >
-              {" "}
-              Class{" "}
+          <View style={drawer.listBox}>
+            <View style={drawer.iconBox}>
+              <Icon type="Ionicons" name="md-bookmarks" style={drawer.icon} />
+            </View>
+            <Text style={drawer.listText} onPress={() => Actions.mentorClassList()}>
+              Class List
             </Text>
-          </View>
-          <View style={drawer.listIcon}>
-            <Icon type="MaterialIcons" name="notifications" />
-            <Text style={drawer.listText}> Notification </Text>
           </View>
         </View>
         <View style={drawer.middleContainer}>
-          <View style={drawer.listIcon}>
-            <Icon type="MaterialCommunityIcons" name="account-box" />
+          <View style={drawer.listBox}>
+            <View style={drawer.iconBox}>
+              <Icon type="Ionicons" name="md-person" style={drawer.icon} />
+            </View>
             <Text
               style={drawer.listText}
-              onPress={() => Actions.studentProfile()}
+              onPress={() => Actions.mentorProfile()}
             >
               Account
             </Text>
           </View>
-          <View style={drawer.listIcon}>
-            <Icon type="MaterialCommunityIcons" name="settings" />
-            <Text style={drawer.listText}> Setting </Text>
-          </View>
-          <View style={drawer.listIcon}>
-            <Icon type="MaterialCommunityIcons" name="logout" />
-            <Text style={drawer.listText} onPress={() => this.props.Sign_Out()}>
+          <View style={drawer.listBox}>
+            <View style={drawer.iconBox}>
+              <Icon type="Ionicons" name="md-log-out" style={drawer.icon} />
+            </View>
+            <Text style={drawer.listText} onPress={this.signOutMentor}>
               Sign Out
             </Text>
           </View>

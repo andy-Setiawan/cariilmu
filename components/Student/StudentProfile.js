@@ -5,7 +5,9 @@ import { styles, profile } from "../Style.js";
 import { Icon } from "native-base";
 import { Actions } from "react-native-router-flux";
 import Modal from "react-native-modal";
-import { updateProfile } from "../Action/studentActions";
+import { updateProfile, setProfileImage } from "../Action/studentActions";
+import ImagePicker from "react-native-image-picker";
+import AwesomeAlert from "react-native-awesome-alerts";
 
 export class StudentProfile extends Component {
   state = {
@@ -17,7 +19,8 @@ export class StudentProfile extends Component {
   _toggleCancel = () =>
     this.setState({
       isModalVisible: !this.state.isModalVisible,
-      bio: this.props.profileData.profile.bio
+      bio: this.props.profileData.profile.bio,
+      image: this.props.profileData.profile.image
     });
 
   _toggleSubmit = () => {
@@ -33,17 +36,28 @@ export class StudentProfile extends Component {
       title: "BIO"
     });
 
+  handleChoosePhoto = () => {
+    const options = {
+      noData: true
+    };
+    ImagePicker.launchImageLibrary(options, response => {
+      if (response.uri) {
+        this.props.setProfileImage(this.props.token, response);
+      }
+    });
+  };
+
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
           <Icon
-            type="FontAwesome"
-            name="arrow-left"
+            type="Ionicons"
+            name="md-arrow-back"
             style={{ color: "#fafafa" }}
             onPress={() => Actions.pop()}
           />
-          <Text style={styles.headerText}>PROFILE</Text>
+          <Text style={styles.headerText}>Profile</Text>
           <Icon
             type="MaterialCommunityIcons"
             name="account-circle"
@@ -51,10 +65,19 @@ export class StudentProfile extends Component {
           />
         </View>
         <View style={profile.topProfile}>
-          <Image
-            style={profile.imageProfile}
-            source={this.props.profileData.image}
-          />
+          <TouchableOpacity onPress={this.handleChoosePhoto}>
+            {this.props.profileData.profile.image === undefined ? (
+              <Image
+                source={this.props.profileData.image}
+                style={styles.classIcon}
+              />
+            ) : (
+              <Image
+                source={{ uri: this.props.profileData.profile.image }}
+                style={styles.classIcon}
+              />
+            )}
+          </TouchableOpacity>
           <View style={profile.nameBox}>
             <Text style={profile.nameText}>
               {this.props.profileData.profile.name}
@@ -112,6 +135,13 @@ export class StudentProfile extends Component {
             </View>
           </Modal>
         </View>
+        <AwesomeAlert
+          show={this.props.visible}
+          showProgress={this.props.progress}
+          progressSize={100}
+          closeOnTouchOutside={false}
+          closeOnHardwareBackPress={false}
+        />
       </View>
     );
   }
@@ -119,14 +149,15 @@ export class StudentProfile extends Component {
 
 const mapStateToProps = state => ({
   profileData: state.public,
-  token: state.auth.token
+  token: state.auth.token,
+  progress: state.public.progressStatus,
+  visible: state.public.alertStatus,
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateProfile: (token, bio) => {
-      dispatch(updateProfile(token, bio));
-    }
+    updateProfile: (token, bio) => dispatch(updateProfile(token, bio)),
+    setProfileImage: (token, image) => dispatch(setProfileImage(token, image))
   };
 };
 

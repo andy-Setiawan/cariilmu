@@ -1,10 +1,12 @@
 import { StyleSheet, Dimensions } from "react-native";
+import RF from "react-native-responsive-fontsize";
 
 const { width, height } = Dimensions.get("window");
 const textColor = "#000";
 const fontType = "Lato";
-const submitColor = "#00e640"
-const cancelColor = "#f64747"
+const submitColor = "#00e640";
+const cancelColor = "#f64747";
+const pendingColor = "#ffcb05";
 
 export const styles = StyleSheet.create({
   container: {
@@ -23,14 +25,14 @@ export const styles = StyleSheet.create({
 
   headerText: {
     color: "#fafafa",
-    fontSize: 20,
+    fontSize: RF(3),
     fontWeight: "700",
     fontFamily: fontType
   },
 
   classIcon: {
-    height: width * 0.17,
-    width: width * 0.17,
+    height: width * 0.2,
+    width: width * 0.2,
     borderRadius: 100,
     marginLeft: 10
   },
@@ -40,11 +42,15 @@ export const styles = StyleSheet.create({
     color: "#fafafa",
     fontWeight: "500",
     fontFamily: fontType,
-    height: 50,
-    marginTop: 60,
     borderRadius: 10,
-    paddingVertical: 15,
+    paddingVertical: 10,
     textAlign: "center"
+  },
+
+  alertMessage: {
+    fontFamily: fontType,
+    fontSize: RF(2.5),
+    fontWeight: "700"
   }
 });
 
@@ -74,14 +80,13 @@ export const home = StyleSheet.create({
   },
 
   topText: {
-    fontSize: 15,
+    fontSize: RF(2),
     fontWeight: "600",
     fontFamily: fontType
   },
 
   midText: {
-    fontSize: 12,
-    textAlign: "justify",
+    fontSize: RF(2),
     fontFamily: fontType
   },
 
@@ -100,43 +105,74 @@ export const home = StyleSheet.create({
   },
 
   categoryBox: {
-    flexDirection:"column",
+    flexDirection: "column",
     flexWrap: "wrap",
-    height: height * 0.4,
+    height: height * 0.45
+  },
+
+  mentorBox: {
+    flexDirection: "column",
+    flexWrap: "wrap",
+    height: height * 0.3
   },
 
   categoryPosition: {
     padding: 5,
     backgroundColor: "#fafafa",
     borderRadius: 5,
-    width: width * 0.25,
-    height: width * 0.25,
+    width: width * 0.3,
+    height: width * 0.3,
     margin: (10, 10),
     alignItems: "center",
     justifyContent: "center",
-    elevation: 4
+    elevation: 1
+  },
+
+  ratingPosition: {
+    padding: 5,
+    backgroundColor: "#fafafa",
+    borderRadius: 5,
+    width: width * 0.4,
+    height: width * 0.4,
+    margin: (10, 10),
+    alignItems: "center",
+    justifyContent: "center",
+    elevation: 1
   },
 
   categoryIcon: {
     width: width * 0.2,
     height: width * 0.2,
-    borderRadius:10
+    borderRadius: 10
   },
 
   categoryListText: {
     marginTop: 5,
-    fontSize: 12,
+    fontSize: RF(1.5),
+    fontWeight: "700",
+    fontFamily: fontType
+  },
+
+  ratingIcon: {
+    width: width * 0.25,
+    height: width * 0.25,
+    borderRadius: 10
+  },
+
+  ratingListText: {
+    marginTop: 5,
+    fontSize: RF(1.5),
     fontWeight: "700",
     fontFamily: fontType
   },
 
   classBox: {
-    marginTop: 10,
+    marginTop: 5,
     borderRadius: 5,
     backgroundColor: "#fafafa",
     width: width * 0.9,
     height: height * 0.15,
-    elevation: 6,
+    elevation: 1,
     flexDirection: "row",
     flex: 1,
     alignItems: "center"
@@ -149,8 +185,13 @@ export const home = StyleSheet.create({
   classnameText: {
     color: styles.header.backgroundColor,
     fontWeight: "bold",
-    fontSize: 15,
+    fontSize: RF(2),
     fontFamily: fontType
+  },
+
+  text: {
+    fontFamily: fontType,
+    fontSize: RF(2)
   }
 });
 
@@ -167,14 +208,14 @@ export const register = StyleSheet.create({
 
   roleText: {
     color: "#fafafa",
-    fontSize: 30,
+    fontSize: RF(3.5),
     fontWeight: "700",
     fontFamily: fontType
   },
 
   rolePick: {
     color: "#fafafa",
-    fontSize: 20,
+    fontSize: RF(3.5),
     fontWeight: "700",
     textAlign: "center",
     marginTop: 10,
@@ -200,8 +241,8 @@ export const register = StyleSheet.create({
     borderRadius: 5
   },
 
-  error:{
-    color:cancelColor
+  error: {
+    color: cancelColor
   }
 });
 
@@ -243,6 +284,25 @@ export const login = StyleSheet.create({
     borderRadius: 5
   },
 
+  roleBox: {
+    marginTop: 10,
+    flexDirection: "row",
+    alignItems: "center"
+  },
+
+  roleText: {
+    fontFamily: fontType,
+    fontWeight: "700",
+    color: styles.header.backgroundColor
+  },
+
+  role: {
+    marginLeft: 20,
+    width: width * 0.1,
+    height: width * 0.1,
+    borderRadius: 100
+  },
+
   loginButton: {
     position: "absolute",
     bottom: height * 0.125,
@@ -279,16 +339,24 @@ export const drawer = StyleSheet.create({
     fontFamily: fontType
   },
 
-  listIcon: {
+  listBox: {
     flexDirection: "row",
     marginTop: 15,
     alignItems: "center"
   },
 
   listText: {
-    marginLeft: 20,
     fontWeight: "500",
+    fontSize: RF(2),
     fontFamily: fontType
+  },
+
+  iconBox: {
+    width: width * 0.075
+  },
+
+  icon: {
+    fontSize: RF(3)
   }
 });
 
@@ -307,14 +375,14 @@ export const detail = StyleSheet.create({
   bannerClass: {
     marginTop: height * 0.15,
     color: "#fafafa",
-    fontSize: 35,
+    fontSize: RF(4),
     fontWeight: "400",
     fontFamily: fontType
   },
 
   bannerFee: {
     color: "#fafafa",
-    fontSize: 20,
+    fontSize: RF(3),
     fontWeight: "600",
     lineHeight: 30,
     fontFamily: fontType
@@ -322,7 +390,7 @@ export const detail = StyleSheet.create({
 
   bannerMentor: {
     color: "#fafafa",
-    fontSize: 15,
+    fontSize: RF(3),
     fontWeight: "800",
     lineHeight: 30,
     fontFamily: fontType
@@ -335,6 +403,7 @@ export const detail = StyleSheet.create({
   },
 
   descriptionText: {
+    fontSize: RF(2),
     textAlign: "justify"
   },
 
@@ -350,7 +419,15 @@ export const detail = StyleSheet.create({
   },
 
   dateText: {
+    fontSize: RF(2),
     marginLeft: 20
+  },
+
+  buttonPosition: {
+    paddingHorizontal: 20,
+    width,
+    position: "absolute",
+    bottom: 10
   }
 });
 
@@ -418,27 +495,33 @@ export const list = StyleSheet.create({
   },
 
   classTextBox: {
-    marginLeft: 15
+    marginLeft: 10,
+    width:width * 0.55
   },
 
   classname: {
     color: styles.header.backgroundColor,
     fontWeight: "bold",
-    fontFamily: fontType
+    fontFamily: fontType,
+    fontSize: RF(2.5)
+  },
+
+  mentorname: {
+    fontSize: RF(2.5)
   },
 
   dateTimeBox: {
     flexDirection: "row",
-    fontSize: 12,
     marginTop: 5,
     fontFamily: fontType
   },
 
   iconDateTime: {
-    fontSize: 20
+    fontSize: RF(3)
   },
 
   dateTimeText: {
+    fontSize: RF(2),
     marginLeft: 10
   }
 });
@@ -502,51 +585,76 @@ export const profile = StyleSheet.create({
     marginTop: 5
   },
 
-  modalBox:{
-    backgroundColor:styles.container.backgroundColor,
-    padding:20,
+  modalBox: {
+    backgroundColor: styles.container.backgroundColor,
+    padding: 20
   },
 
   modalText: {
-    fontSize:20,
-    fontWeight:"700",
-    fontFamily:fontType,
-    color:styles.header.backgroundColor
+    fontSize: 20,
+    fontWeight: "700",
+    fontFamily: fontType,
+    color: styles.header.backgroundColor
   },
 
-  modalInput:{
-    marginTop:10,
-    borderWidth:1,
-    borderRadius:10,
-    borderColor:"#eee"
+  modalInput: {
+    marginTop: 10,
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: "#eee"
   },
 
-  handleBox:{
-    flexDirection:"row",
-    justifyContent:"flex-end",
-    marginTop:10
+  handleBox: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    marginTop: 10
   },
 
-  submit:{
-    backgroundColor:submitColor,
-    color:"#fafafa",
-    borderRadius:10,
-    borderColor:"#eee",
-    textAlign:"center",
-    fontWeight:"700",
-    padding:10,
-    marginLeft:5,
+  submit: {
+    backgroundColor: submitColor,
+    color: "#fafafa",
+    borderRadius: 10,
+    borderColor: "#eee",
+    textAlign: "center",
+    fontWeight: "700",
+    padding: 10,
+    marginLeft: 5
   },
 
+  cancel: {
+    backgroundColor: cancelColor,
+    color: "#fafafa",
+    borderRadius: 10,
+    borderColor: "#eee",
+    textAlign: "center",
+    fontWeight: "700",
+    padding: 10
+  },
 
-  cancel:{
-    backgroundColor:cancelColor,
-    color:"#fafafa",
-    borderRadius:10,
-    borderColor:"#eee",
-    textAlign:"center",
-    fontWeight:"700",
-    padding:10
+  yesIconText: {
+    width: width * 0.2,
+    marginTop: 5,
+    backgroundColor: submitColor,
+    color: styles.container.backgroundColor,
+    fontWeight: "700",
+    fontFamily: fontType,
+    fontSize: RF(2),
+    borderRadius: 50,
+    paddingVertical: 5,
+    textAlign:"center"
+  },
+
+  noIconText: {
+    width: width * 0.2,
+    marginTop: 5,
+    backgroundColor: cancelColor,
+    color: styles.container.backgroundColor,
+    fontWeight: "700",
+    fontFamily: fontType,
+    fontSize: RF(2),
+    borderRadius: 50,
+    paddingVertical: 5,
+    textAlign:"center"
   }
 });
 
@@ -556,21 +664,18 @@ export const schedule = StyleSheet.create({
   },
 
   classBox: {
-    flexDirection: "column",
-    marginTop: 10
+    flexDirection: "row",
+    padding: 10,
+    width,
+    alignItems: "center",
+    borderBottomWidth: 1,
+    borderColor: "#EEE"
   },
 
   classList: {
-    marginTop: 10,
     backgroundColor: styles.container.backgroundColor,
-    width,
-    height: height * 0.125,
-    borderBottomWidth: 1,
-    borderColor: "#EEE",
-    flexDirection: "row",
-    flex: 1,
-    alignItems: "center",
-    flexWrap: "wrap"
+    flexDirection: "column",
+    width: width * 0.75
   },
 
   classText: {
@@ -579,44 +684,46 @@ export const schedule = StyleSheet.create({
 
   classnameText: {
     fontWeight: "800",
-    fontSize: 15,
     color: textColor,
-    fontFamily: fontType
+    fontFamily: fontType,
+    fontSize: RF(2),
+    color: styles.header.backgroundColor
   },
 
   dateTimeBox: {
+    paddingTop: 5,
     width,
-    flexDirection: "row",
-    fontSize: 12,
-    marginTop: 15,
-    fontFamily: fontType
-  },
-
-  locationBox: {
-    flexDirection: "row",
-    fontSize: 12,
-    marginTop: 5,
-    alignItems: "stretch",
-    fontFamily: fontType
+    flexDirection: "row"
   },
 
   iconDateTime: {
-    fontSize: 20,
-    
+    fontSize: RF(2.5)
   },
 
   dateTimeText: {
-    marginLeft:20
+    fontSize: RF(2),
+    fontFamily: fontType,
+    marginLeft: 15
   },
+
+  okIcon: {
+    color: submitColor,
+    fontSize: RF(7)
+  },
+
+  cancelIcon: {
+    color: cancelColor,
+    fontSize: RF(7)
+  }
 });
 
 export const payment = StyleSheet.create({
   classBox: {
-    flexDirection: "column",
+    flexDirection: "column"
   },
 
   classList: {
-    padding : (10,20),
+    padding: (10, 20),
     backgroundColor: styles.container.backgroundColor,
     width,
     borderBottomWidth: 1,
@@ -629,13 +736,13 @@ export const payment = StyleSheet.create({
 
   classnameText: {
     fontWeight: "800",
-    fontSize: 20,
+    fontSize: RF(2),
     color: styles.header.backgroundColor,
     fontFamily: fontType
   },
 
-  dataBox:{
-    marginLeft:20,
+  dataBox: {
+    marginLeft: 20
   },
 
   dateTimeBox: {
@@ -645,18 +752,30 @@ export const payment = StyleSheet.create({
   },
 
   iconDateTime: {
-    fontSize: 20,
+    fontSize: RF(3)
   },
 
   dateTimeText: {
-    marginLeft:20
+    marginLeft: 10,
+    fontSize: RF(2)
   },
 
   paidText: {
     backgroundColor: submitColor,
     color: styles.container.backgroundColor,
     borderRadius: 10,
-    padding:(15,15),
+    fontSize: RF(1.5),
+    padding: (10, 10),
+    fontWeight: "800",
+    fontFamily: fontType
+  },
+
+  pendingText: {
+    backgroundColor: pendingColor,
+    color: styles.container.backgroundColor,
+    borderRadius: 10,
+    fontSize: RF(1.5),
+    padding: (10, 10),
     fontWeight: "800",
     fontFamily: fontType
   },
@@ -665,7 +784,8 @@ export const payment = StyleSheet.create({
     backgroundColor: cancelColor,
     color: styles.container.backgroundColor,
     borderRadius: 10,
-    padding:(15,15),
+    fontSize: RF(1.5),
+    padding: (10, 10),
     fontWeight: "800",
     fontFamily: fontType
   }
@@ -673,24 +793,26 @@ export const payment = StyleSheet.create({
 
 export const mntClassDetails = StyleSheet.create({
   bannerImage: {
+    width,
     height: height * 0.3,
     backgroundColor: "black"
   },
 
   topContainer: {
-    padding: 20,
+    paddingHorizontal: 20
   },
 
   name: {
-    fontSize: 25,
-    color: textColor,
+    fontSize: RF(2.5),
+    color: styles.header.backgroundColor,
     fontWeight: "700",
     fontFamily: fontType
   },
 
   categoryBox: {
     marginTop: 20,
-    flexDirection: "row"
+    flexDirection: "row",
+    alignItems:"center"
   },
 
   category: {
@@ -701,7 +823,7 @@ export const mntClassDetails = StyleSheet.create({
     padding: 5,
     paddingHorizontal: 20,
     borderRadius: 20,
-    marginRight: 15
+    marginLeft: 15
   },
 
   description: {
@@ -711,7 +833,7 @@ export const mntClassDetails = StyleSheet.create({
 
   ratingContainer: {
     flexDirection: "row",
-    marginTop: 20,
+    marginTop: 15,
     borderWidth: 1,
     borderRadius: 10,
     borderColor: "#eee"
@@ -721,7 +843,7 @@ export const mntClassDetails = StyleSheet.create({
     padding: 10,
     justifyContent: "center",
     flex: 1,
-    flexDirection: "column",
+    flexDirection: "column"
   },
 
   rating: {
@@ -731,19 +853,289 @@ export const mntClassDetails = StyleSheet.create({
     fontWeight: "800"
   },
 
-  bottomContainer:{
-    flexDirection:"column",
-    paddingHorizontal:20,
+  bottomContainer: {
+    flexDirection: "column",
+    paddingHorizontal: 20
   },
 
-  dateBox:{
-    flexDirection:"row",
-    marginTop:15
+  dateBox: {
+    flexDirection: "row",
+    marginTop: 15
   },
 
-  dateText:{
-    fontFamily:fontType,
-    marginLeft:15,
+  dateText: {
+    fontFamily: fontType,
+    marginLeft: 15
   }
+});
 
+export const confirm = StyleSheet.create({
+  image: {
+    width,
+    height: height * 0.3,
+    backgroundColor: "black"
+  },
+
+  detailContainer: {
+    padding: 20
+  },
+
+  detailBox: {
+    paddingVertical: 15,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    borderBottomColor:"#eee",
+    borderBottomWidth: 1
+  },
+
+  text: {
+    fontSize: RF(2),
+    fontFamily: fontType,
+    color: styles.header.backgroundColor
+  },
+
+  uploadBox: {
+    alignItems: "center"
+  },
+
+  upload: {
+    marginTop: 15,
+    width: width * 0.8,
+    height: width * 0.8
+  }
+});
+
+export const search = StyleSheet.create({
+  searchInput: {
+    color: textColor,
+    backgroundColor: "#fafafa",
+    width: width * 0.8,
+    fontFamily: fontType,
+    fontSize: RF(2.5),
+    paddingLeft: 10
+  },
+
+  listContainer: {
+    paddingVertical: 20
+  },
+
+  listBox: {
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    flexDirection: "row"
+  },
+
+  listIcon: {
+    width: width * 0.05,
+    fontSize: RF(3),
+    color: styles.header.backgroundColor
+  },
+
+  listText: {
+    fontFamily: fontType,
+    fontSize: RF(2.5),
+    color: textColor,
+    marginLeft: 15
+  }
+});
+
+export const studentDetail = StyleSheet.create({
+  topContainer: {
+    marginTop: 20,
+    alignItems: "center"
+  },
+
+  bannerImage: {
+    height: height * 0.3,
+    width: width * 0.9,
+    borderRadius: 10
+  },
+
+  bannerBox: {
+    padding: 15
+  },
+
+  classBox: {
+    flexDirection: "row",
+    alignItems: "center"
+  },
+
+  category: {
+    marginLeft: 10,
+    padding: (5, 10),
+    color: "#fafafa",
+    backgroundColor: styles.header.backgroundColor,
+    fontFamily: fontType,
+    fontSize: RF(2),
+    borderRadius: 10
+  },
+
+  bannerClass: {
+    marginTop: 10,
+    color: styles.header.backgroundColor,
+    fontSize: RF(3),
+    fontWeight: "400",
+    fontFamily: fontType
+  },
+
+  bannerMentor: {
+    marginTop: 10,
+    color: textColor,
+    fontSize: RF(2),
+    fontWeight: "800",
+    fontFamily: fontType
+  },
+
+  dateContainer: {
+    paddingHorizontal: 20,
+    paddingBottom: 20
+  },
+
+  dateBox: {
+    marginTop: 10,
+    flexDirection: "row"
+  },
+
+  dateText: {
+    fontSize: RF(2),
+    marginLeft: 20
+  },
+
+  star: {
+    flexDirection: "row",
+    marginTop: 10,
+    width: width * 0.5
+  },
+
+  icon: {
+    fontSize: RF(3),
+    color: textColor
+  },
+
+  ratingBox: {
+    backgroundColor: styles.container.backgroundColor,
+    padding: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10
+  },
+
+  rateText: {
+    marginTop: 15,
+    fontFamily: fontType,
+    color: styles.header.backgroundColor,
+    fontSize: RF(2.5),
+    fontWeight: "700"
+  },
+
+  feedbackBox: {
+    marginTop: 15,
+    color: textColor,
+    paddingLeft: 10,
+    backgroundColor: "#EEE",
+    borderRadius: 10
+  },
+
+  starBox: {
+    marginTop: 15
+  }
+});
+
+export const mentorDetail = StyleSheet.create({
+  topContainer: {
+    marginTop: 20,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+
+  image: {
+    height: width * 0.4,
+    width: width * 0.4,
+    borderRadius: 100
+  },
+
+  icon: {
+    fontSize: RF(2.5),
+    color: submitColor
+  },
+
+  iconText: {
+    fontSize: RF(2),
+    fontFamily: fontType,
+    color: submitColor,
+    marginLeft: 5
+  },
+  name: {
+    marginTop: 10,
+    color: styles.header.backgroundColor,
+    fontSize: RF(3),
+    fontWeight: "700",
+    fontFamily: fontType
+  },
+
+  iconQuote: {
+    color: styles.header.backgroundColor,
+    fontSize: RF(3),
+    position: "absolute",
+    marginTop: -12.5,
+    marginLeft: 10
+  },
+
+  bioBox: {
+    margin: 10,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#eee"
+  },
+
+  bioText: {
+    fontSize: RF(2),
+    fontFamily: fontType
+  },
+
+  classTextBox: {
+    paddingHorizontal: 20,
+    paddingTop: 10,
+    paddingBottom: 20
+  },
+
+  classname: {
+    fontFamily: fontType,
+    color: styles.header.backgroundColor,
+    fontSize: RF(2),
+    fontWeight: "700"
+  },
+
+  classContainer: {
+    paddingHorizontal: 10
+  },
+
+  classList: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#eee",
+    marginTop: 5
+  },
+
+  classTextBox: {
+    marginLeft: 10
+  },
+
+  dateTimeBox: {
+    flexDirection: "row",
+    alignItems: "center"
+  },
+
+  iconDateTime: {
+    fontSize: RF(2.5)
+  },
+
+  dateTimeText: {
+    fontFamily: fontType,
+    color: textColor,
+    fontSize: RF(2),
+    marginLeft: 10
+  }
 });

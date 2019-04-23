@@ -5,7 +5,9 @@ import { Icon } from "native-base";
 import Reinput from "reinput";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
-import { Sign_Up_Student, Sign_Up_Mentor } from "../Action/authActions";
+import { Sign_Up_Student, Sign_Up_Mentor, chooseRole } from "../Action/authActions";
+import { closeAlert } from "../Action/pubActions";
+import AwesomeAlert from "react-native-awesome-alerts";
 
 class SignUp extends Component {
   constructor(props) {
@@ -33,6 +35,10 @@ class SignUp extends Component {
     };
   }
 
+  closeMsg = () => {
+    this.props.closeAlert();
+  };
+
   signUp = () => {
     const { name, username, email, password } = this.state;
     this.validation();
@@ -46,7 +52,7 @@ class SignUp extends Component {
         break;
       }
       default: {
-        console.log("CHOOSE YOUR ROLE");
+        this.props.chooseRole()
         break;
       }
     }
@@ -104,8 +110,8 @@ class SignUp extends Component {
       <View style={styles.container}>
         <View style={styles.header}>
           <Icon
-            type="FontAwesome"
-            name="arrow-left"
+            type="Ionicons"
+            name="md-arrow-back"
             style={{ color: "#fafafa" }}
             onPress={() => Actions.pop()}
           />
@@ -235,10 +241,29 @@ class SignUp extends Component {
             </View>
           </View>
         </ScrollView>
+        <AwesomeAlert
+          show={this.props.visible}
+          showProgress={this.props.progress}
+          message={this.props.message}
+          messageStyle={styles.alertMessage}
+          closeOnTouchOutside={false}
+          closeOnHardwareBackPress={false}
+          showConfirmButton={this.props.button}
+          progressSize={100}
+          confirmText="OK"
+          onConfirmPressed={this.closeMsg}
+        />
       </View>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  message: state.public.alertMessage,
+  progress: state.public.progressStatus,
+  visible: state.public.alertStatus,
+  button: state.public.buttonStatus
+});
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -246,11 +271,13 @@ const mapDispatchToProps = dispatch => {
       dispatch(Sign_Up_Student(name, username, email, password)),
 
     Sign_Up_Mentor: (name, username, email, password) =>
-      dispatch(Sign_Up_Mentor(name, username, email, password))
+      dispatch(Sign_Up_Mentor(name, username, email, password)),
+    closeAlert: () => dispatch(closeAlert()),
+    chooseRole: () => dispatch(chooseRole())
   };
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(SignUp);
