@@ -23,7 +23,7 @@ export const Sign_In_Student = (username, password) => {
     });
     axios
       .post(`${url}/student/sign-in`, {
-        username: username,
+        email: username,
         password: password
       })
       .then(response => {
@@ -115,7 +115,7 @@ export const Sign_In_Mentor = (username, password) => {
     });
     axios
       .post(`${url}/mentor/sign-in`, {
-        username: username,
+        email: username,
         password: password
       })
       .then(response => {

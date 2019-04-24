@@ -52,8 +52,22 @@ class MentorDrawer extends Component {
             <View style={drawer.iconBox}>
               <Icon type="Ionicons" name="md-bookmarks" style={drawer.icon} />
             </View>
-            <Text style={drawer.listText} onPress={() => Actions.mentorClassList()}>
+            <Text
+              style={drawer.listText}
+              onPress={() => Actions.mentorClassList()}
+            >
               Class List
+            </Text>
+          </View>
+          <View style={drawer.listBox}>
+            <View style={drawer.iconBox}>
+              <Icon type="Ionicons" name="ios-card" style={drawer.icon} />
+            </View>
+            <Text
+              style={drawer.listText}
+              onPress={() => Actions.mentorWallet()}
+            >
+              Transaction
             </Text>
           </View>
         </View>

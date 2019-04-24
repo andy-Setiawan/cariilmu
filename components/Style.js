@@ -4,9 +4,9 @@ import RF from "react-native-responsive-fontsize";
 const { width, height } = Dimensions.get("window");
 const textColor = "#000";
 const fontType = "Lato";
-const submitColor = "#00e640";
-const cancelColor = "#f64747";
-const pendingColor = "#ffcb05";
+const submitColor = "#3DC851";
+const cancelColor = "#FE3D46";
+const pendingColor = "#FFBB33";
 
 export const styles = StyleSheet.create({
   container: {
@@ -51,6 +51,18 @@ export const styles = StyleSheet.create({
     fontFamily: fontType,
     fontSize: RF(2.5),
     fontWeight: "700"
+  },
+
+  none:{
+    flex:1,
+    alignItems:"center",
+    justifyContent:"center",
+    backgroundColor:"#fafafa"
+  },
+
+  noneText:{
+    color:"#4f9da6",
+    fontSize:RF(2.5)
   }
 });
 
@@ -1139,3 +1151,35 @@ export const mentorDetail = StyleSheet.create({
     marginLeft: 10
   }
 });
+
+export const wallet = StyleSheet.create({
+  box:{
+    width,
+    padding:20,
+    borderWidth:1,
+    borderColor:"#eee"
+  },
+
+  titleBox:{
+    flexDirection:"row"
+  },
+
+  title:{
+    fontFamily:fontType,
+    color:styles.header.backgroundColor,
+    fontSize:RF(3),
+    marginLeft:10
+  },
+
+  icon:{
+    fontFamily:fontType,
+    color:styles.header.backgroundColor,
+    fontSize:RF(3),
+  },
+
+  text:{
+    fontFamily:fontType,
+    color:textColor,
+    fontSize:RF(3),
+  }
+})

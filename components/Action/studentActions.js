@@ -127,7 +127,7 @@ export const uploadImage = (token, paymentId, photo) => {
       message: "",
       progress: true,
       visible: true,
-      button:false,
+      button: false
     });
     axios({
       method: "put",
@@ -137,15 +137,30 @@ export const uploadImage = (token, paymentId, photo) => {
       },
       data: bodyFormData
     })
-      .then(() =>
+      .then(() => {
         dispatch({
           type: SEND_ALERT,
           message: "UPLOAD SUCCESS",
           progress: false,
           visible: true,
-          button:true
-        })
-      )
+          button: true
+        }),
+          axios({
+            method: "get",
+            url: `${url}/student/payment`,
+            headers: {
+              Authorization: token
+            }
+          })
+            .then(response => {
+              console.log(response.data);
+              dispatch({
+                type: GET_PAYMENT_STATUS,
+                payload: response.data.data
+              });
+            })
+            .catch(err => console.log("no payment detected"));
+      })
       .catch(err => console.log("GAGAL UPLOAD"));
   };
 };
@@ -156,7 +171,7 @@ export const uploadFailed = () => {
     message: "UPLOAD FAILED",
     progress: false,
     visible: true,
-    button: true,
+    button: true
   };
 };
 

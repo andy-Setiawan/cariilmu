@@ -12,7 +12,6 @@ class StudentSchedule extends Component {
     this.props.getStudentClass(this.props.token);
   }
   render() {
-    console.log(this.props);
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -29,8 +28,8 @@ class StudentSchedule extends Component {
             style={{ color: styles.header.backgroundColor }}
           />
         </View>
-        <ScrollView style={schedule.container}>
-          {this.props.schedule.class ? (
+        {this.props.schedule.class ? (
+          <ScrollView style={schedule.container}>
             <View style={schedule.classContainer}>
               {this.props.schedule.class.map((list, i) => {
                 return (
@@ -90,10 +89,14 @@ class StudentSchedule extends Component {
                 );
               })}
             </View>
-          ) : (
-            console.log("NONO")
-          )}
-        </ScrollView>
+          </ScrollView>
+        ) : (
+          <View style={styles.none}>
+            <Text style={styles.noneText}>
+              You haven't enrolled to any class yet
+            </Text>
+          </View>
+        )}
       </View>
     );
   }

@@ -19,3 +19,5 @@ export const SEND_ALERT = "SEND_ALERT"
 export const SPLASH = "SPLASH"
 
 export const MENTOR_RATING = "MENTOR_RATING"
+export const MENTOR_WALLET = "MENTOR_WALLET"
+export const TRANSACTION_HISTORY = "TRANSACTION_HISTORY"
