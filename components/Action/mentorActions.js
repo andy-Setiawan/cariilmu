@@ -1,4 +1,4 @@
-import { GET_MENTOR_CLASS, GET_PROFILE, SEND_ALERT } from "../Type/ActionType";
+import { GET_MENTOR_CLASS, GET_PROFILE, SEND_ALERT, MENTOR_WALLET, TRANSACTION_HISTORY } from "../Type/ActionType";
 import axios from "axios";
 const url = "http://cari-ilmu-test.herokuapp.com";
 
@@ -87,3 +87,22 @@ export const setProfileImage = (token, image) => {
       .catch(err => err);
   };
 };
+
+export const getMentorWallet = token => {
+  return dispatch => {
+    axios({
+      method: "get",
+      url: `${url}/mentor/balance`,
+      headers: {
+        Authorization: token
+      }
+    })
+      .then(response =>{
+        dispatch({ type: MENTOR_WALLET, payload: response.data.data.summary }),
+        dispatch({ type: TRANSACTION_HISTORY, payload: response.data.data.payment })
+      }
+      )
+      .catch(err => err);
+  };
+};
+

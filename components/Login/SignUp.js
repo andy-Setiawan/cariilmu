@@ -5,7 +5,11 @@ import { Icon } from "native-base";
 import Reinput from "reinput";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
-import { Sign_Up_Student, Sign_Up_Mentor, chooseRole } from "../Action/authActions";
+import {
+  Sign_Up_Student,
+  Sign_Up_Mentor,
+  chooseRole
+} from "../Action/authActions";
 import { closeAlert } from "../Action/pubActions";
 import AwesomeAlert from "react-native-awesome-alerts";
 
@@ -42,19 +46,23 @@ class SignUp extends Component {
   signUp = () => {
     const { name, username, email, password } = this.state;
     this.validation();
-    switch (this.state.role) {
-      case "STUDENT": {
-        this.props.Sign_Up_Student(name, username, email, password);
-        break;
+    if (password === this.state.confirm) {
+      switch (this.state.role) {
+        case "STUDENT": {
+          this.props.Sign_Up_Student(name, username, email, password);
+          break;
+        }
+        case "MENTOR": {
+          this.props.Sign_Up_Mentor(name, username, email, password);
+          break;
+        }
+        default: {
+          this.props.chooseRole();
+          break;
+        }
       }
-      case "MENTOR": {
-        this.props.Sign_Up_Mentor(name, username, email, password);
-        break;
-      }
-      default: {
-        this.props.chooseRole()
-        break;
-      }
+    } else {
+      this.props.Sign_Up_Mentor("", "", "", "");
     }
   };
 
@@ -182,7 +190,7 @@ class SignUp extends Component {
                 <Text style={register.error}>{this.state.errorUser}</Text>
               )}
               <Reinput
-                label="E-Mail"
+                label="Email"
                 labelActiveColor="#4f9da6"
                 labelColor="#4f9da6"
                 labelActiveScale={1}
@@ -269,7 +277,6 @@ const mapDispatchToProps = dispatch => {
   return {
     Sign_Up_Student: (name, username, email, password) =>
       dispatch(Sign_Up_Student(name, username, email, password)),
-
     Sign_Up_Mentor: (name, username, email, password) =>
       dispatch(Sign_Up_Mentor(name, username, email, password)),
     closeAlert: () => dispatch(closeAlert()),

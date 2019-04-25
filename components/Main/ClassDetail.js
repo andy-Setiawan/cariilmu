@@ -19,7 +19,7 @@ class ClassDetail extends Component {
   handleEnrollClass = () => {
     !this.props.token
       ? Actions.signin()
-      : (this.props.enrollclass(this.props.token, this.props.classId))
+      : this.props.enrollclass(this.props.token, this.props.classId);
   };
 
   closeMsg = () => {
@@ -64,6 +64,16 @@ class ClassDetail extends Component {
                   <Text style={detail.descriptionText}>{list.info}</Text>
                 </View>
                 <View style={detail.dateContainer}>
+                <View style={detail.dateBox}>
+                    <Icon
+                      style={{ fontSize: 20 }}
+                      type="Ionicons"
+                      name="ios-people"
+                    />
+                    <Text style={detail.dateText}>
+                      {list.seatsAvailable}{" seats available"}
+                    </Text>
+                    </View>
                   <View style={detail.dateBox}>
                     <Icon
                       style={{ fontSize: 20 }}
@@ -99,12 +109,16 @@ class ClassDetail extends Component {
             );
           })}
 
-        <TouchableOpacity
-          style={detail.buttonPosition}
-          onPress={this.handleEnrollClass}
-        >
-          <Text style={styles.button}>ENROLL</Text>
-        </TouchableOpacity>
+        {this.props.role == "mentor" ? (
+          <Text />
+        ) : (
+          <TouchableOpacity
+            style={detail.buttonPosition}
+            onPress={this.handleEnrollClass}
+          >
+            <Text style={styles.button}>ENROLL</Text>
+          </TouchableOpacity>
+        )}
 
         <AwesomeAlert
           show={this.props.visible}
@@ -129,7 +143,8 @@ const mapStateToProps = state => ({
   visible: state.public.alertStatus,
   button: state.public.buttonStatus,
   classDetails: state.public,
-  token: state.auth.token
+  token: state.auth.token,
+  role: state.auth.role
 });
 
 const mapDispatchToProps = dispatch => {

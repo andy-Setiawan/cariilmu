@@ -54,7 +54,7 @@ class MentorClassDetails extends Component {
                     </View>
                     <View style={mntClassDetails.ratingBox}>
                       <Text style={mntClassDetails.rating}>Rating</Text>
-                      <Text>Star</Text>
+                      <Text>{list.rating.length} </Text>
                     </View>
                   </View>
                   <Text

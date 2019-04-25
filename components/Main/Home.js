@@ -17,6 +17,9 @@ import AwesomeAlert from "react-native-awesome-alerts";
 
 class Home extends Component {
   componentDidMount() {
+    AsyncStorage.getItem("board").then(value => {
+      value == "start" ? console.log('ok') : Actions.onboarding();
+    }),
     AsyncStorage.getItem("role").then(value => {
       value ? this.props.Set_Role(value) : console.log("no");
     }),

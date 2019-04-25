@@ -36,15 +36,6 @@ class StudentSchedule extends Component {
                 return (
                   <TouchableOpacity
                     key={i}
-                    onPress={() =>
-                      Actions.studentClassDetail({
-                        classId: list._id,
-                        mentorId: list.mentor,
-                        location: list.location,
-                        rating: list.rating,
-                        status: list.status
-                      })
-                    }
                   >
                     <View style={schedule.classBox}>
                       <View style={schedule.classList}>

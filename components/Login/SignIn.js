@@ -6,7 +6,11 @@ import Logo from "../../assets/images/cariilmu_light.png";
 import Reinput from "reinput";
 import { Icon } from "native-base";
 import { Actions } from "react-native-router-flux";
-import { Sign_In_Student, Sign_In_Mentor } from "../Action/authActions";
+import {
+  Sign_In_Student,
+  Sign_In_Mentor,
+  chooseRole
+} from "../Action/authActions";
 import { closeAlert } from "../Action/pubActions";
 import AwesomeAlert from "react-native-awesome-alerts";
 
@@ -39,7 +43,7 @@ class SignIn extends Component {
         break;
       }
       default: {
-        console.log("CHOOSE YOUR ROLE");
+        this.props.chooseRole();
         break;
       }
     }
@@ -68,13 +72,14 @@ class SignIn extends Component {
           <View style={login.bottomContainer}>
             <View style={login.loginBox}>
               <Reinput
-                label="Username"
+                label="Email"
                 labelActiveColor={styles.header.backgroundColor}
                 labelColor={styles.header.backgroundColor}
                 labelActiveScale={1}
                 underlineActiveColor={styles.header.backgroundColor}
                 underlineColor={styles.header.backgroundColor}
                 returnKeyType="next"
+                keyboardType="email-address"
                 onSubmitEditing={() => this.password.focus()}
                 autoCapitalize="none"
                 autoCorrect={false}
@@ -121,9 +126,14 @@ class SignIn extends Component {
             <TouchableOpacity style={login.loginButton} onPress={this.signIn}>
               <Text style={{ ...styles.button }}>SIGN IN</Text>
             </TouchableOpacity>
-            <Text style={login.signupText} onPress={() => Actions.signup()}>
-              SIGN UP
-            </Text>
+            <View style={{flexDirection:"row", justifyContent:"center"}}>
+              <Text style={login.signupText} onPress={() => Actions.signup()}>{"Doesn't have an account? "}</Text>
+              <Text
+                style={{
+                  ...login.signupText,
+                  color: styles.header.backgroundColor
+                }}>{"SIGN UP"}</Text>
+            </View>
           </View>
         </ScrollView>
         <AwesomeAlert
@@ -157,7 +167,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(Sign_In_Student(username, password)),
     Sign_In_Mentor: (username, password) =>
       dispatch(Sign_In_Mentor(username, password)),
-    closeAlert: () => dispatch(closeAlert())
+    closeAlert: () => dispatch(closeAlert()),
+    chooseRole: () => dispatch(chooseRole())
   };
 };
 
