@@ -1,14 +1,9 @@
 import axios from "axios";
 import AsyncStorage from "@react-native-community/async-storage";
 import { Actions } from "react-native-router-flux";
-import {
-  SIGN_IN,
-  GET_PROFILE,
-  SIGN_OUT,
-  SEND_ALERT,
-  SET_ROLE,
-  SET_TOKEN
-} from "../Type/ActionType";
+import { getProfileStudent } from "./studentActions";
+import { getProfileMentor } from "./studentActions";
+import { SEND_ALERT, SIGN_IN, SIGN_OUT, SET_ROLE } from "../Type/ActionType";
 
 const url = "http://cari-ilmu-test.herokuapp.com";
 
@@ -34,25 +29,15 @@ export const Sign_In_Student = (username, password) => {
           token: response.data.data.token,
           role: response.data.data.role
         });
-        axios({
-          method: "get",
-          url: `${url}/student`,
-          headers: {
-            Authorization: response.data.data.token
-          }
-        })
-          .then(
-            res => dispatch({ type: GET_PROFILE, payload: res.data.data }),
-            dispatch({
-              type: SEND_ALERT,
-              message: "",
-              progress: false,
-              visible: false,
-              button: false
-            }),
-            Actions.pop()
-          )
-          .catch(err => err);
+        dispatch(getProfileStudent(response.data.data.token));
+        dispatch({
+          type: SEND_ALERT,
+          message: "",
+          progress: false,
+          visible: false,
+          button: false
+        }),
+          Actions.pop();
       })
       .catch(() =>
         dispatch({
@@ -126,25 +111,15 @@ export const Sign_In_Mentor = (username, password) => {
           token: response.data.data.token,
           role: response.data.data.role
         });
-        axios({
-          method: "get",
-          url: `${url}/mentor`,
-          headers: {
-            Authorization: response.data.data.token
-          }
-        })
-          .then(
-            res => dispatch({ type: GET_PROFILE, payload: res.data.data }),
-            dispatch({
-              type: SEND_ALERT,
-              message: "",
-              progress: false,
-              visible: false,
-              button: false
-            }),
-            Actions.pop()
-          )
-          .catch(err => err);
+        dispatch(getProfileMentor(response.data.data.token));
+        dispatch({
+          type: SEND_ALERT,
+          message: "",
+          progress: false,
+          visible: false,
+          button: false
+        }),
+          Actions.pop();
       })
       .catch(err =>
         dispatch({
@@ -205,6 +180,7 @@ export const Set_Role = role => {
 
 export const Sign_Out = () => {
   AsyncStorage.removeItem("token");
+  AsyncStorage.removeItem("role");
   return { type: SIGN_OUT, payload: "" };
 };
 

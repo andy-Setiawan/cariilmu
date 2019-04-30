@@ -145,23 +145,9 @@ export const uploadImage = (token, paymentId, photo) => {
           visible: true,
           button: true
         }),
-          axios({
-            method: "get",
-            url: `${url}/student/payment`,
-            headers: {
-              Authorization: token
-            }
-          })
-            .then(response => {
-              console.log(response.data);
-              dispatch({
-                type: GET_PAYMENT_STATUS,
-                payload: response.data.data
-              });
-            })
-            .catch(err => console.log("no payment detected"));
+        dispatch(getPaymentStatus(token))
       })
-      .catch(err => console.log("GAGAL UPLOAD"));
+      .catch(() => dispatch(uploadFailed()) );
   };
 };
 
