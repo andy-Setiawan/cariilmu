@@ -19,6 +19,7 @@
     "react-native-drawer": "^2.5.1",
     "react-native-fcm": "^16.2.4",
     "react-native-image-picker": "^0.28.1",
+    "react-native-indicators": "^0.13.0",
     "react-native-modal": "^9.0.0",
     "react-native-responsive-fontsize": "^0.1.8",
     "react-native-router-flux": "^4.0.6",

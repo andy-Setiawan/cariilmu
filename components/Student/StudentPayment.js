@@ -1,26 +1,53 @@
 import React, { Component } from "react";
 import { View, Image, TouchableOpacity, ScrollView } from "react-native";
 import { connect } from "react-redux";
-import { styles, confirm } from "../Style.js";
+import { styles, confirm, profile } from "../Style.js";
 import { Text, Icon } from "native-base";
 import ImagePicker from "react-native-image-picker";
 import { uploadImage, uploadFailed } from "../Action/studentActions";
 import { closeAlert } from "../Action/pubActions";
 import { Actions } from "react-native-router-flux";
 import AwesomeAlert from "react-native-awesome-alerts";
+import Modal from "react-native-modal";
 
 class StudentPayment extends Component {
   state = {
-    photo: null
+    isModalVisible: false,
+    photo: null,
+    title: ""
   };
 
   handleChoosePhoto = () => {
+    this.setState({
+      isModalVisible: !this.state.isModalVisible,
+      title: "Select a Photo"
+    });
+  };
+
+  handleTakePhoto = () => {
+    const options = {
+      noData: true
+    };
+    ImagePicker.launchCamera(options, response => {
+      if (response.uri) {
+        this.setState({
+          photo: response,
+          isModalVisible: !this.state.isModalVisible
+        });
+      }
+    });
+  };
+
+  handleImageGallery = () => {
     const options = {
       noData: true
     };
     ImagePicker.launchImageLibrary(options, response => {
       if (response.uri) {
-        this.setState({ photo: response });
+        this.setState({
+          photo: response,
+          isModalVisible: !this.state.isModalVisible
+        });
       }
     });
   };
@@ -150,6 +177,33 @@ class StudentPayment extends Component {
               );
             })}
         </ScrollView>
+        <Modal isVisible={this.state.isModalVisible}>
+          <View style={profile.modalBox}>
+            <Text style={profile.modalText}>{this.state.title}</Text>
+            <View style={profile.cameraContainer}>
+              <TouchableOpacity onPress={() => this.handleTakePhoto()}>
+                <View style={profile.cameraBox}>
+                  <Icon
+                    style={profile.cameraIcon}
+                    type="Ionicons"
+                    name="md-camera"
+                  />
+                  <Text style={profile.cameraText}>Take Photo</Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => this.handleImageGallery()}>
+                <View style={profile.cameraBox}>
+                  <Icon
+                    style={profile.cameraIcon}
+                    type="Ionicons"
+                    name="md-images"
+                  />
+                  <Text style={profile.cameraText}>Upload from gallery</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
         <AwesomeAlert
           show={this.props.visible}
           message={this.props.message}
@@ -158,7 +212,7 @@ class StudentPayment extends Component {
           closeOnTouchOutside={false}
           closeOnHardwareBackPress={false}
           showConfirmButton={this.props.button}
-          progressSize={100}
+          progressSize={50}
           confirmText="OK"
           onConfirmPressed={() => {
             this.props.closeAlert();
@@ -175,7 +229,7 @@ const mapStateToProps = state => ({
   message: state.public.alertMessage,
   visible: state.public.alertStatus,
   payment: state.student.paymentStatus,
-  progress : state.public.progressStatus,
+  progress: state.public.progressStatus,
   button: state.public.buttonStatus
 });
 

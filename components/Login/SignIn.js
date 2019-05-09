@@ -126,13 +126,19 @@ class SignIn extends Component {
             <TouchableOpacity style={login.loginButton} onPress={this.signIn}>
               <Text style={{ ...styles.button }}>SIGN IN</Text>
             </TouchableOpacity>
-            <View style={{flexDirection:"row", justifyContent:"center"}}>
-              <Text style={login.signupText} onPress={() => Actions.signup()}>{"Doesn't have an account? "}</Text>
+            <View style={{ flexDirection: "row", justifyContent: "center" }}>
+              <Text style={login.signupText}>
+                {"Doesn't have an account? "}
+              </Text>
               <Text
                 style={{
                   ...login.signupText,
                   color: styles.header.backgroundColor
-                }}>{"SIGN UP"}</Text>
+                }}
+                onPress={() => Actions.signup()}
+              >
+                {"SIGN UP"}
+              </Text>
             </View>
           </View>
         </ScrollView>
@@ -144,7 +150,7 @@ class SignIn extends Component {
           closeOnTouchOutside={false}
           closeOnHardwareBackPress={false}
           showConfirmButton={this.props.button}
-          progressSize={100}
+          progressSize={50}
           confirmText="OK"
           onConfirmPressed={this.closeMsg}
         />

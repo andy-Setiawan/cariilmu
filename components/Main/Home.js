@@ -8,21 +8,21 @@ import { Set_Token, Set_Role } from "../Action/authActions";
 import { getProfileStudent } from "../Action/studentActions";
 import { getProfileMentor } from "../Action/mentorActions";
 import { Icon, Drawer } from "native-base";
-import StudentDrawer from "../Student/StudentDrawer";
 import AsyncStorage from "@react-native-community/async-storage";
 import moment from "moment";
 import StarRating from "react-native-star-rating";
+import StudentDrawer from "../Student/StudentDrawer";
 import MentorDrawer from "../Mentor/MentorDrawer.js";
 import AwesomeAlert from "react-native-awesome-alerts";
 
 class Home extends Component {
   componentDidMount() {
     AsyncStorage.getItem("board").then(value => {
-      value == "start" ? console.log('ok') : Actions.onboarding();
+      value == "start" ? console.log("ok") : Actions.onboarding();
     }),
-    AsyncStorage.getItem("role").then(value => {
-      value ? this.props.Set_Role(value) : console.log("no");
-    }),
+      AsyncStorage.getItem("role").then(value => {
+        value ? this.props.Set_Role(value) : console.log("no");
+      }),
       AsyncStorage.getItem("token").then(value => {
         value
           ? (this.props.Set_Token(value),
@@ -31,7 +31,7 @@ class Home extends Component {
               : this.props.getProfileMentor(value))
           : console.log("no");
       }),
-      this.props.Get_HomeData()
+      this.props.Get_HomeData();
   }
   openDrawer() {
     {
@@ -66,7 +66,11 @@ class Home extends Component {
               style={{ color: "#fafafa" }}
               onPress={() => this.openDrawer()}
             />
-            <Image source={require("../../assets/images/home_logo.png")} />
+            <Image
+              style={styles.headerLogo}
+              resizeMode="contain"
+              source={require("../../assets/images/home_logo.png")}
+            />
             <Icon
               type="Ionicons"
               name="md-search"
@@ -139,11 +143,18 @@ class Home extends Component {
                           }
                         >
                           <View style={home.ratingPosition}>
-                            <Image
-                              source={{ uri: list.photo }}
-                              alt=""
-                              style={home.ratingIcon}
-                            />
+                            {list.photo === undefined ? (
+                              <Image
+                                source={this.props.classData.image}
+                                style={home.ratingIcon}
+                              />
+                            ) : (
+                              <Image
+                                source={{ uri: list.photo }}
+                                alt=""
+                                style={home.ratingIcon}
+                              />
+                            )}
                             <Text style={home.ratingListText}>
                               {list.name.toUpperCase()}
                             </Text>
@@ -173,10 +184,18 @@ class Home extends Component {
                     onPress={() => Actions.classDetail({ classId: list._id })}
                   >
                     <View style={home.classBox}>
-                      <Image
-                        source={{ uri: list.image }}
-                        style={{ ...home.categoryIcon, marginLeft: 10 }}
-                      />
+                      {list.image === "null" || list.image === "undefined" ? (
+                        <Image
+                          source={this.props.classData.defaultClass}
+                          style={{ ...home.categoryIcon, marginLeft: 10 }}
+                        />
+                      ) : (
+                        <Image
+                          source={{ uri: list.image }}
+                          style={{ ...home.categoryIcon, marginLeft: 10 }}
+                        />
+                      )}
+
                       <View style={home.classText}>
                         <Text style={home.classnameText}>{list.name}</Text>
                         <Text style={home.text}>{list.mentor.name}</Text>
@@ -200,7 +219,7 @@ class Home extends Component {
         <AwesomeAlert
           show={this.props.visible}
           showProgress={this.props.progress}
-          progressSize={100}
+          progressSize={50}
           closeOnTouchOutside={false}
           closeOnHardwareBackPress={false}
         />

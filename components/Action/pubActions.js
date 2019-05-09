@@ -13,13 +13,7 @@ const url = "http://cari-ilmu-test.herokuapp.com";
 
 export const Get_HomeData = () => {
   return dispatch => {
-    dispatch({
-      type: SEND_ALERT,
-      message: "",
-      progress: true,
-      visible: true,
-      button: false
-    });
+    dispatch(sendAlert("", true, true, false));
     axios
       .get(`${url}/category`)
       .then(response => {
@@ -48,23 +42,13 @@ export const Get_HomeData = () => {
                             type: GET_ALL_CLASS,
                             payload: response.data.data
                           }),
-                            dispatch({
-                              type: SEND_ALERT,
-                              message: "",
-                              progress: false,
-                              visible: false,
-                              button: false
-                            }),
+                            dispatch(closeAlert()),
                             SplashScreen.hide();
                         })
                         .catch(() => {
-                          dispatch({
-                            type: SEND_ALERT,
-                            message: "FAILED TO GET DATA",
-                            progress: false,
-                            visible: true,
-                            button: false
-                          });
+                          dispatch(
+                            sendAlert("FAILED TO GET DATA", false, true, false)
+                          );
                         });
                   })
                   .catch(err => console.log("no open class"));
@@ -77,18 +61,36 @@ export const Get_HomeData = () => {
 
 export const Get_Class_List = classId => {
   return dispatch => {
-    axios
-      .get(`${url}/category/${classId}/class`)
-      .then(response => {
-        dispatch({
-          type: GET_CLASS_LIST,
-          payload: response.data.data
-        });
-      })
-      .catch(err => console.log("no class list"));
+    dispatch(sendAlert("", true, true, false)),
+      axios
+        .get(`${url}/category/${classId}/class`)
+        .then(response => {
+          dispatch({
+            type: GET_CLASS_LIST,
+            payload: response.data.data
+          }),
+            dispatch(closeAlert());
+        })
+        .catch(err => console.log("no class list"));
+  };
+};
+
+export const sendAlert = (message, progress, visible, button) => {
+  return {
+    type: SEND_ALERT,
+    message: message,
+    progress: progress,
+    visible: visible,
+    button: button
   };
 };
 
 export const closeAlert = () => {
-  return { type: SEND_ALERT, message: "", progress: false, visible: false };
+  return {
+    type: SEND_ALERT,
+    message: "",
+    progress: false,
+    visible: false,
+    button: false
+  };
 };

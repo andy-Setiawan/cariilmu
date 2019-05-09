@@ -67,8 +67,16 @@ class MentorDetail extends Component {
                   />
                 </View>
                 <View style={mentorDetail.bioBox}>
-                  <Icon type="Ionicons" name="md-quote" style={mentorDetail.iconQuote}/>
-                  <Text style={mentorDetail.bioText}>{list.bio}</Text>
+                  <Icon
+                    type="Ionicons"
+                    name="md-quote"
+                    style={mentorDetail.iconQuote}
+                  />
+                  <Text style={mentorDetail.bioText}>
+                    {list.bio === "undefined" || list.bio === undefined || list.bio === null
+                      ? "No Info Provided"
+                      : list.bio}
+                  </Text>
                 </View>
                 <View style={mentorDetail.classContainer}>
                   {list.class.map(list => {

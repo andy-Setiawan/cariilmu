@@ -22,7 +22,8 @@ const initialState = {
   alertStatus: false,
   buttonStatus: false,
   splashStatus: true,
-  image: require("../../assets/images/login_image.png")
+  image: require("../../assets/images/login_image.png"),
+  defaultClass : require("../../assets/images/default_class.png")
 };
 
 export default (state = initialState, action) => {

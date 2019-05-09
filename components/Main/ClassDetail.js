@@ -35,11 +35,19 @@ class ClassDetail extends Component {
             return (
               <ScrollView key={list._id}>
                 <View>
-                  <ImageBackground
-                    source={{ uri: list.image }}
-                    alt=""
-                    style={detail.bannerImage}
-                  />
+                  {list.image === "null" || list.image === "undefined" ? (
+                    <ImageBackground
+                      source={this.props.classDetails.defaultClass}
+                      alt=""
+                      style={detail.bannerImage}
+                    />
+                  ) : (
+                    <ImageBackground
+                      source={{ uri: list.image }}
+                      alt=""
+                      style={detail.bannerImage}
+                    />
+                  )}
                   <View style={detail.bannerBox}>
                     <Icon
                       type="Ionicons"
@@ -64,16 +72,17 @@ class ClassDetail extends Component {
                   <Text style={detail.descriptionText}>{list.info}</Text>
                 </View>
                 <View style={detail.dateContainer}>
-                <View style={detail.dateBox}>
+                  <View style={detail.dateBox}>
                     <Icon
                       style={{ fontSize: 20 }}
                       type="Ionicons"
                       name="ios-people"
                     />
                     <Text style={detail.dateText}>
-                      {list.seatsAvailable}{" seats available"}
+                      {list.seatsAvailable}
+                      {" seats available"}
                     </Text>
-                    </View>
+                  </View>
                   <View style={detail.dateBox}>
                     <Icon
                       style={{ fontSize: 20 }}
@@ -128,7 +137,7 @@ class ClassDetail extends Component {
           closeOnTouchOutside={false}
           closeOnHardwareBackPress={false}
           showConfirmButton={this.props.button}
-          progressSize={100}
+          progressSize={50}
           confirmText="OK"
           onConfirmPressed={this.closeMsg}
         />

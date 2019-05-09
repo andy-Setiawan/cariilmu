@@ -1,21 +1,16 @@
 import axios from "axios";
 import AsyncStorage from "@react-native-community/async-storage";
 import { Actions } from "react-native-router-flux";
+import { sendAlert, closeAlert } from "./pubActions";
 import { getProfileStudent } from "./studentActions";
 import { getProfileMentor } from "./studentActions";
-import { SEND_ALERT, SIGN_IN, SIGN_OUT, SET_ROLE } from "../Type/ActionType";
+import { SEND_ALERT, SIGN_IN, SIGN_OUT, SET_ROLE, SET_TOKEN } from "../Type/ActionType";
 
 const url = "http://cari-ilmu-test.herokuapp.com";
 
 export const Sign_In_Student = (username, password) => {
   return dispatch => {
-    dispatch({
-      type: SEND_ALERT,
-      message: "",
-      progress: true,
-      visible: true,
-      button: false
-    });
+    dispatch(sendAlert("", true, true, false));
     axios
       .post(`${url}/student/sign-in`, {
         email: username,
@@ -30,36 +25,17 @@ export const Sign_In_Student = (username, password) => {
           role: response.data.data.role
         });
         dispatch(getProfileStudent(response.data.data.token));
-        dispatch({
-          type: SEND_ALERT,
-          message: "",
-          progress: false,
-          visible: false,
-          button: false
-        }),
-          Actions.pop();
+        dispatch(closeAlert()), Actions.pop();
       })
-      .catch(() =>
-        dispatch({
-          type: SEND_ALERT,
-          message: "SIGN IN FAILED",
-          progress: false,
-          visible: true,
-          button: true
-        })
-      );
+      .catch(() => {
+        dispatch(sendAlert("SIGN IN FAILED", false, true, true));
+      });
   };
 };
 
 export const Sign_Up_Student = (name, username, email, password) => {
   return dispatch => {
-    dispatch({
-      type: SEND_ALERT,
-      message: "",
-      progress: true,
-      visible: true,
-      button: false
-    });
+    dispatch(sendAlert("", true, true, false));
     axios
       .post(`${url}/student/sign-up`, {
         name: name,
@@ -67,37 +43,18 @@ export const Sign_Up_Student = (name, username, email, password) => {
         email: email,
         password: password
       })
-
       .then(() => {
-        dispatch({
-          type: SEND_ALERT,
-          message: "SIGN UP SUCCESS",
-          progress: false,
-          visible: true,
-          button: true
-        });
+        dispatch(sendAlert("SIGN UP SUCCESS", false, true, true));
       })
       .catch(() => {
-        dispatch({
-          type: SEND_ALERT,
-          message: "SIGN UP FAILED",
-          progress: false,
-          visible: true,
-          button: true
-        });
+        dispatch(sendAlert("SIGN UP FAILED", false, true, true));
       });
   };
 };
 
 export const Sign_In_Mentor = (username, password) => {
   return dispatch => {
-    dispatch({
-      type: SEND_ALERT,
-      message: "",
-      progress: true,
-      visible: true,
-      button: false
-    });
+    dispatch(sendAlert("", true, true, false));
     axios
       .post(`${url}/mentor/sign-in`, {
         email: username,
@@ -112,36 +69,17 @@ export const Sign_In_Mentor = (username, password) => {
           role: response.data.data.role
         });
         dispatch(getProfileMentor(response.data.data.token));
-        dispatch({
-          type: SEND_ALERT,
-          message: "",
-          progress: false,
-          visible: false,
-          button: false
-        }),
-          Actions.pop();
+        dispatch(closeAlert()), Actions.pop();
       })
-      .catch(err =>
-        dispatch({
-          type: SEND_ALERT,
-          message: "SIGN IN FAILED",
-          progress: false,
-          visible: true,
-          button: true
-        })
-      );
+      .catch(err => {
+        dispatch(sendAlert("SIGN IN FAILED", false, true, true));
+      });
   };
 };
 
 export const Sign_Up_Mentor = (name, username, email, password) => {
   return dispatch => {
-    dispatch({
-      type: SEND_ALERT,
-      message: "",
-      progress: true,
-      visible: true,
-      button: false
-    });
+    dispatch(sendAlert("", true, true, false));
     axios
       .post(`${url}/mentor/sign-up`, {
         name: name,
@@ -150,22 +88,10 @@ export const Sign_Up_Mentor = (name, username, email, password) => {
         password: password
       })
       .then(() => {
-        dispatch({
-          type: SEND_ALERT,
-          message: "SIGN UP SUCCESS",
-          progress: false,
-          visible: true,
-          button: true
-        });
+        dispatch(sendAlert("SIGN UP SUCCESS", false, true, true));
       })
       .catch(() => {
-        dispatch({
-          type: SEND_ALERT,
-          message: "SIGN UP FAILED",
-          progress: false,
-          visible: true,
-          button: true
-        });
+        dispatch(sendAlert("SIGN UP FAILED", false, true, true));
       });
   };
 };

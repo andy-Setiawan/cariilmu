@@ -78,10 +78,12 @@ class StudentClassDetail extends Component {
                 </View>
                 <View style={studentDetail.bannerBox}>
                   <View style={studentDetail.classBox}>
-                    <Text style={studentDetail.bannerClass}>{list.name}</Text>
                     <Text style={studentDetail.category}>
                       {list.category.name.toUpperCase()}
                     </Text>
+                  </View>
+                  <View style={studentDetail.classBox}>
+                    <Text style={studentDetail.bannerClass}>{list.name}</Text>
                   </View>
                   <Text style={studentDetail.bannerMentor}>
                     By: {list.mentor.name}
@@ -132,8 +134,9 @@ class StudentClassDetail extends Component {
                       name="md-map"
                     />
                     <Text style={studentDetail.dateText}>
-                      {this.props.location}
-                      {", "}
+                      {this.props.location == ""
+                        ? null
+                        : this.props.location + ", "}
                       {list.city}
                     </Text>
                   </View>

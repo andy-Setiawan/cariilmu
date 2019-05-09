@@ -13,6 +13,7 @@ export class StudentProfile extends Component {
   state = {
     isModalVisible: false,
     title: "",
+    image: this.props.profileData.profile.image,
     bio: this.props.profileData.profile.bio
   };
 
@@ -24,10 +25,23 @@ export class StudentProfile extends Component {
     });
 
   _toggleSubmit = () => {
-    this.setState({
-      isModalVisible: !this.state.isModalVisible
-    });
-    this.props.updateProfile(this.props.token, this.state.bio);
+    switch (this.state.title) {
+      case "BIO":
+        this.setState({
+          isModalVisible: !this.state.isModalVisible
+        });
+        this.props.updateProfile(this.props.token, this.state.bio);
+        break;
+      case "Select a Photo":
+        this.setState({
+          isModalVisible: !this.state.isModalVisible
+        });
+        this.props.setProfileImage(this.props.token, this.state.image);
+        break;
+      default:
+        null;
+        break;
+    }
   };
 
   _toggleBio = () =>
@@ -37,12 +51,30 @@ export class StudentProfile extends Component {
     });
 
   handleChoosePhoto = () => {
+    this.setState({
+      isModalVisible: !this.state.isModalVisible,
+      title: "Select a Photo"
+    });
+  };
+
+  handleTakePhoto = () => {
+    const options = {
+      noData: true
+    };
+    ImagePicker.launchCamera(options, response => {
+      if (response.uri) {
+        this.setState({ image: response });
+      }
+    });
+  };
+
+  handleImageGallery = () => {
     const options = {
       noData: true
     };
     ImagePicker.launchImageLibrary(options, response => {
       if (response.uri) {
-        this.props.setProfileImage(this.props.token, response);
+        this.setState({ image: response });
       }
     });
   };
@@ -121,9 +153,31 @@ export class StudentProfile extends Component {
                   {this.state.bio}
                 </TextInput>
               ) : (
-                <Text />
+                <View style={profile.cameraContainer}>
+                  <TouchableOpacity onPress={() => this.handleTakePhoto()}>
+                    <View style={profile.cameraBox}>
+                      <Icon
+                        style={profile.cameraIcon}
+                        type="Ionicons"
+                        name="md-camera"
+                      />
+                      <Text style={profile.cameraText}>Take Photo</Text>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => this.handleImageGallery()}>
+                    <View style={profile.cameraBox}>
+                      <Icon
+                        style={profile.cameraIcon}
+                        type="Ionicons"
+                        name="md-images"
+                      />
+                      <Text style={profile.cameraText}>
+                        Upload from gallery
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
               )}
-
               <View style={profile.handleBox}>
                 <TouchableOpacity onPress={this._toggleCancel}>
                   <Text style={profile.cancel}>CANCEL</Text>
@@ -138,7 +192,7 @@ export class StudentProfile extends Component {
         <AwesomeAlert
           show={this.props.visible}
           showProgress={this.props.progress}
-          progressSize={100}
+          progressSize={50}
           closeOnTouchOutside={false}
           closeOnHardwareBackPress={false}
         />
@@ -151,7 +205,7 @@ const mapStateToProps = state => ({
   profileData: state.public,
   token: state.auth.token,
   progress: state.public.progressStatus,
-  visible: state.public.alertStatus,
+  visible: state.public.alertStatus
 });
 
 const mapDispatchToProps = dispatch => {

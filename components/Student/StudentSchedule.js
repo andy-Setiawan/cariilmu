@@ -28,10 +28,18 @@ class StudentSchedule extends Component {
             style={{ color: styles.header.backgroundColor }}
           />
         </View>
-        {this.props.schedule.class ? (
+        {this.props.schedule === null ||
+        this.props.schedule === undefined ||
+        this.props.schedule.length == 0 ? (
+          <View style={styles.none}>
+            <Text style={styles.noneText}>
+              You haven't enrolled to any class yet
+            </Text>
+          </View>
+        ) : (
           <ScrollView style={schedule.container}>
             <View style={schedule.classContainer}>
-              {this.props.schedule.class.map((list, i) => {
+              {this.props.schedule.map((list, i) => {
                 return (
                   <TouchableOpacity
                     key={i}
@@ -90,12 +98,6 @@ class StudentSchedule extends Component {
               })}
             </View>
           </ScrollView>
-        ) : (
-          <View style={styles.none}>
-            <Text style={styles.noneText}>
-              You haven't enrolled to any class yet
-            </Text>
-          </View>
         )}
       </View>
     );

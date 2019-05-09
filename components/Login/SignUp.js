@@ -257,7 +257,7 @@ class SignUp extends Component {
           closeOnTouchOutside={false}
           closeOnHardwareBackPress={false}
           showConfirmButton={this.props.button}
-          progressSize={100}
+          progressSize={50}
           confirmText="OK"
           onConfirmPressed={this.closeMsg}
         />

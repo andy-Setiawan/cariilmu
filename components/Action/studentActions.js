@@ -4,6 +4,7 @@ import {
   GET_STUDENT_CLASS,
   SEND_ALERT
 } from "../Type/ActionType";
+import { sendAlert, closeAlert } from "./pubActions";
 import axios from "axios";
 
 const url = "http://cari-ilmu-test.herokuapp.com";
@@ -34,7 +35,7 @@ export const getStudentClass = token => {
       }
     })
       .then(response =>
-        dispatch({ type: GET_STUDENT_CLASS, payload: response.data.data })
+        dispatch({ type: GET_STUDENT_CLASS, payload: response.data.data.class })
       )
       .catch(err => console.log("no student class"));
   };
@@ -62,13 +63,7 @@ export const getPaymentStatus = token => {
 
 export const enrollclass = (token, classId) => {
   return dispatch => {
-    dispatch({
-      type: SEND_ALERT,
-      message: "",
-      progress: true,
-      visible: true,
-      button: false
-    });
+    dispatch(sendAlert("", true, true, false));
     axios({
       method: "put",
       url: `${url}/student/class/${classId}/enroll`,
@@ -77,22 +72,14 @@ export const enrollclass = (token, classId) => {
       }
     })
       .then(response => {
-        dispatch({
-          type: SEND_ALERT,
-          message: "ENROLL SUCCESS, YOU CAN CHECK IN YOUR CART",
-          progress: false,
-          visible: true,
-          button: true
-        });
+        dispatch(
+          sendAlert("ENROLL SUCCESS, CHECK YOUR CART", false, true, true)
+        );
       })
       .catch(err => {
-        dispatch({
-          type: SEND_ALERT,
-          message: "YOU HAVE ALREADY ENROLLED THIS CLASS",
-          progress: false,
-          visible: true,
-          button: true
-        });
+        dispatch(
+          sendAlert("YOU HAVE ALREADY ENROLLED THIS CLASS", false, true, true)
+        );
       });
   };
 };
@@ -138,16 +125,10 @@ export const uploadImage = (token, paymentId, photo) => {
       data: bodyFormData
     })
       .then(() => {
-        dispatch({
-          type: SEND_ALERT,
-          message: "UPLOAD SUCCESS",
-          progress: false,
-          visible: true,
-          button: true
-        }),
-        dispatch(getPaymentStatus(token))
+        dispatch(sendAlert("UPLOAD SUCCESS", false, true, true)),
+          dispatch(getPaymentStatus(token));
       })
-      .catch(() => dispatch(uploadFailed()) );
+      .catch(() => dispatch(uploadFailed()));
   };
 };
 
@@ -169,13 +150,7 @@ export const setProfileImage = (token, image) => {
     name: image.fileName
   });
   return dispatch => {
-    dispatch({
-      type: SEND_ALERT,
-      message: "",
-      progress: true,
-      visible: true,
-      button: false
-    });
+    dispatch(sendAlert("", true, true, false));
     axios({
       method: "put",
       url: `${url}/student/`,
@@ -186,13 +161,7 @@ export const setProfileImage = (token, image) => {
     })
       .then(response => {
         dispatch({ type: GET_PROFILE, payload: response.data.data }),
-          dispatch({
-            type: SEND_ALERT,
-            message: "",
-            progress: false,
-            visible: false,
-            button: false
-          });
+          dispatch(closeAlert());
       })
       .catch(err => err);
   };
@@ -212,7 +181,7 @@ export const rateMentor = (token, classId, mentorId, star, feedback) => {
         feedback: feedback
       }
     })
-      .then(response => console.log("okok"))
-      .catch(err => console.log("GAGAL UPLOAD"));
+      .then(response => console.log("ok"))
+      .catch(err => console.log("rating failed"));
   };
 };

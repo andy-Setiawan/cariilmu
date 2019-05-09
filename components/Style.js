@@ -30,6 +30,11 @@ export const styles = StyleSheet.create({
     fontFamily: fontType
   },
 
+  headerLogo:{
+    width:width*0.6,
+    height: height * 0.04
+  },
+
   classIcon: {
     height: width * 0.2,
     width: width * 0.2,
@@ -63,7 +68,7 @@ export const styles = StyleSheet.create({
   noneText:{
     color:"#4f9da6",
     fontSize:RF(2.5)
-  }
+  },
 });
 
 export const home = StyleSheet.create({
@@ -616,6 +621,26 @@ export const profile = StyleSheet.create({
     borderColor: "#eee"
   },
 
+  cameraContainer:{
+    marginTop:10,
+    flexDirection:"column"
+  },
+
+  cameraBox:{
+    paddingVertical:10,
+    flexDirection:"row",
+    alignItems:"center"
+  },
+
+  cameraIcon:{
+    fontSize:20,
+  },
+
+  cameraText:{
+    marginLeft:10,
+    fontFamily:fontType,
+  },
+
   handleBox: {
     flexDirection: "row",
     justifyContent: "flex-end",
@@ -928,7 +953,6 @@ export const search = StyleSheet.create({
   },
 
   listContainer: {
-    paddingVertical: 20
   },
 
   listBox: {
@@ -973,7 +997,6 @@ export const studentDetail = StyleSheet.create({
   },
 
   category: {
-    marginLeft: 10,
     padding: (5, 10),
     color: "#fafafa",
     backgroundColor: styles.header.backgroundColor,
