@@ -37,6 +37,7 @@ class ClassDetail extends Component {
                 <View>
                   {list.image === "null" || list.image === "undefined" ? (
                     <ImageBackground
+                      resizeMode="stretch"
                       source={this.props.classDetails.defaultClass}
                       alt=""
                       style={detail.bannerImage}

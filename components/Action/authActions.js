@@ -4,7 +4,13 @@ import { Actions } from "react-native-router-flux";
 import { sendAlert, closeAlert } from "./pubActions";
 import { getProfileStudent } from "./studentActions";
 import { getProfileMentor } from "./studentActions";
-import { SEND_ALERT, SIGN_IN, SIGN_OUT, SET_ROLE, SET_TOKEN } from "../Type/ActionType";
+import {
+  SEND_ALERT,
+  SIGN_IN,
+  SIGN_OUT,
+  SET_ROLE,
+  SET_TOKEN
+} from "../Type/ActionType";
 
 const url = "http://cari-ilmu-test.herokuapp.com";
 
@@ -117,5 +123,48 @@ export const chooseRole = () => {
     progress: false,
     visible: true,
     button: true
+  };
+};
+
+export const Sign_Up_Google = (name, username, email, password) => {
+  return dispatch => {
+    dispatch(sendAlert("", true, true, false));
+    axios
+      .post(`${url}/student/sign-up`, {
+        name: name,
+        username: username,
+        email: email,
+        password: password
+      })
+      .then(() => {
+        dispatch(Sign_In_Google(email, password));
+      })
+      .catch(() => {
+        dispatch(Sign_In_Google(email, password));
+      });
+  };
+};
+
+export const Sign_In_Google = (username, password) => {
+  return dispatch => {
+    axios
+      .post(`${url}/student/sign-in`, {
+        email: username,
+        password: password
+      })
+      .then(response => {
+        AsyncStorage.setItem("token", response.data.data.token);
+        AsyncStorage.setItem("role", response.data.data.role);
+        dispatch({
+          type: SIGN_IN,
+          token: response.data.data.token,
+          role: response.data.data.role
+        });
+        dispatch(getProfileStudent(response.data.data.token));
+        dispatch(closeAlert()), Actions.pop();
+      })
+      .catch(() => {
+        dispatch(sendAlert("SIGN IN FAILED", false, true, true));
+      });
   };
 };

@@ -5,12 +5,16 @@ import { Icon } from "native-base";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
 import { Sign_Out } from "../Action/authActions";
+import { GoogleSignin } from "react-native-google-signin";
 
 class StudentDrawer extends Component {
   signOutStudent = () => {
-    this.props.closeDrawer();
+    GoogleSignin.revokeAccess();
+    GoogleSignin.signOut();
     this.props.Sign_Out();
+    this.props.closeDrawer();
   };
+
   render() {
     return (
       <View style={styles.container}>

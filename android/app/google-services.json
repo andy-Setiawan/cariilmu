@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "853961405965",
+    "firebase_url": "https://cariilmu-c1fc5.firebaseio.com",
+    "project_id": "cariilmu-c1fc5",
+    "storage_bucket": "cariilmu-c1fc5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:853961405965:android:0972271a2d0b51b6",
+        "android_client_info": {
+          "package_name": "com.educity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "853961405965-co1tnaqmf2gpsp5e7s1k5nir5fcusv1i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.educity",
+            "certificate_hash": "268cb944b13c0e3faba1eec2b66c30f1fdc56a30"
+          }
+        },
+        {
+          "client_id": "853961405965-o9a790irof42k4an2fnpo2bae667tau1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBrL9dsRF6jEuFJFum9QdG6xQVPpJOOco"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "853961405965-o9a790irof42k4an2fnpo2bae667tau1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

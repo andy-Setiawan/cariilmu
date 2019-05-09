@@ -321,14 +321,11 @@ export const login = StyleSheet.create({
   },
 
   loginButton: {
-    position: "absolute",
-    bottom: height * 0.125,
     width: width * 0.75,
-    right: width * 0.125
   },
 
   signupText: {
-    marginTop: height * 0.125,
+    marginTop:20,
     textAlign: "center",
     fontWeight: "500",
     fontFamily: fontType

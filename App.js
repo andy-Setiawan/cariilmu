@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Platform } from "react-native";
-import { Router, Scene } from "react-native-router-flux";
+import { Platform, BackHandler, ToastAndroid } from "react-native";
+import { Router, Scene, Actions } from "react-native-router-flux";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import reducers from "./components/Reducer/";
@@ -24,6 +24,7 @@ import MentorDetail from "./components/Main/MentorDetail";
 import MentorProfile from "./components/Mentor/MentorProfile";
 import MentorSchedule from "./components/Mentor/MentorSchedule";
 import MentorWallet from "./components/Mentor/MentorWallet";
+import { GoogleSignin } from "react-native-google-signin";
 
 const instructions = Platform.select({
   ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
@@ -31,15 +32,58 @@ const instructions = Platform.select({
     "Double tap R on your keyboard to reload,\n" +
     "Shake or press menu button for dev menu"
 });
+var backButtonPressedOnceToExit = false;
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
 export default class App extends Component {
-  
+  componentDidMount() {
+    GoogleSignin.configure({
+      webClientId:
+        "853961405965-o9a790irof42k4an2fnpo2bae667tau1.apps.googleusercontent.com",
+      offlineAccess: false
+    });
+  }
+
+  componentWillMount() {
+    BackHandler.addEventListener(
+      "hardwareBackPress",
+      this.onBackPress.bind(this)
+    );
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener(
+      "hardwareBackPress",
+      this.onBackPress.bind(this)
+    );
+  }
+
+  onBackPress() {
+    if (backButtonPressedOnceToExit) {
+      BackHandler.exitApp();
+    } else {
+      if (Actions.currentScene !== "home") {
+        Actions.pop();
+        return true;
+      } else {
+        backButtonPressedOnceToExit = true;
+        ToastAndroid.show(
+          "Press Back Button again to exit",
+          ToastAndroid.SHORT
+        );
+        setTimeout(() => {
+          backButtonPressedOnceToExit = false;
+        }, 2000);
+        return true;
+      }
+    }
+  }
+
   render() {
     return (
       <Provider store={store}>
-        <Router>
+        <Router backAndroidHandler={this.onBackPress}>
           <Scene key="root" hideNavBar>
             <Scene key="home" component={Home} initial />
             <Scene key="signin" component={SignIn} />

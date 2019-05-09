@@ -9,10 +9,16 @@ import { Actions } from "react-native-router-flux";
 import {
   Sign_In_Student,
   Sign_In_Mentor,
+  Sign_Up_Google,
   chooseRole
 } from "../Action/authActions";
 import { closeAlert } from "../Action/pubActions";
 import AwesomeAlert from "react-native-awesome-alerts";
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes
+} from "react-native-google-signin";
 
 class SignIn extends Component {
   constructor(props) {
@@ -21,15 +27,40 @@ class SignIn extends Component {
     this.state = {
       username: "",
       password: "",
-      role: ""
+      role: "",
+      userInfo: ""
     };
 
     this.signIn = this.signIn.bind(this);
   }
 
   componentDidMount() {
+    GoogleSignin.configure({
+      webClientId:
+        "853961405965-o9a790irof42k4an2fnpo2bae667tau1.apps.googleusercontent.com",
+      offlineAccess: false
+    });
     this.props.auth.token && Actions.pop();
   }
+
+  _signIn = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      await this.props.Sign_Up_Google(
+        userInfo.user.givenName + " " + userInfo.user.familyName,
+        userInfo.user.id,
+        userInfo.user.email,
+        userInfo.user.id.toString(0, 5)
+      );
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+      } else {
+      }
+    }
+  };
 
   signIn = () => {
     const { username, password } = this.state;
@@ -123,22 +154,30 @@ class SignIn extends Component {
                 </TouchableOpacity>
               </View>
             </View>
-            <TouchableOpacity style={login.loginButton} onPress={this.signIn}>
-              <Text style={{ ...styles.button }}>SIGN IN</Text>
-            </TouchableOpacity>
-            <View style={{ flexDirection: "row", justifyContent: "center" }}>
-              <Text style={login.signupText}>
-                {"Doesn't have an account? "}
-              </Text>
-              <Text
-                style={{
-                  ...login.signupText,
-                  color: styles.header.backgroundColor
-                }}
-                onPress={() => Actions.signup()}
-              >
-                {"SIGN UP"}
-              </Text>
+            <View style={{alignItems:"center", marginTop:-20}}>
+              <TouchableOpacity style={login.loginButton} onPress={this.signIn}>
+                <Text style={{ ...styles.button }}>SIGN IN</Text>
+              </TouchableOpacity>
+              <GoogleSigninButton
+                style={{ width: 192, height: 48, marginTop:10 }}
+                size={GoogleSigninButton.Size.Wide}
+                color={GoogleSigninButton.Color.Dark}
+                onPress={this._signIn}
+              />
+              <View style={{ flexDirection: "row", justifyContent: "center" }}>
+                <Text style={login.signupText}>
+                  {"Doesn't have an account? "}
+                </Text>
+                <Text
+                  style={{
+                    ...login.signupText,
+                    color: styles.header.backgroundColor
+                  }}
+                  onPress={() => Actions.signup()}
+                >
+                  {"SIGN UP"}
+                </Text>
+              </View>
             </View>
           </View>
         </ScrollView>
@@ -173,6 +212,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(Sign_In_Student(username, password)),
     Sign_In_Mentor: (username, password) =>
       dispatch(Sign_In_Mentor(username, password)),
+    Sign_Up_Google: (name, username, email, password) =>
+      dispatch(Sign_Up_Google(name, username, email, password)),
     closeAlert: () => dispatch(closeAlert()),
     chooseRole: () => dispatch(chooseRole())
   };
